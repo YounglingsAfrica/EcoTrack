@@ -22,13 +22,13 @@ const Header = () => {
                 </div>
                 {/* logo end */}
                 {/* nav start */}
-                <ul className='flex-grow flex justify-center items-center space-x-8'>
+                <ul className='flex flex-grow justify-center items-center space-x-16'>
                     {navLinks.map((item) => {
                         return <li key={item.href}>
                             <a 
                                 onClick={''}
                                 href={item.href}
-                                className='text-white hover:text-primaryGreen font-[600]'
+                                className='text-white hover:text-primaryGreen font-[300]'
                             >
                                 {item.label}
                             </a>
@@ -37,10 +37,12 @@ const Header = () => {
                 </ul>
                 {/* nav end */}
                 {/* button start */}
-                <div className='border border-primaryGreen'>
-                    <button className='text-white'>
-                        Sign Up
-                    </button>
+                <div className=''>
+                    <a href="/">
+                        <button className='flex items-center justify-center px-6 w-32 h-10 text-white rounded-lg bg-gradient-to-r from-darkGreen to-primaryGreen'>
+                            Sign Up
+                        </button>
+                    </a>
                 </div>
                 {/* button end */}
             </div>
