@@ -1,25 +1,25 @@
 const router = require('express').Router();
 const {
-  employeeAuth,
-  employeeLogin,
-  employeeSignup,
+  userAuth,
+  userLogin,
+  userSignup,
   jwtauth,
   checkRole
 } = require("../Controller/authFunctions");
 
 // User Registration Route
 router.post("/register-user", (req, res) => {
-  employeeSignup(req.body, "user", res);
+  userSignup(req.body, "user", res);
 });
 
 // User Login Route
 router.post("/login-user", async (req, res) => {
-  await employeeLogin(req.body, "user", res);
+  await userLogin(req.body, "user", res);
 });
 
 // Protected route accessible to User/Member subscription level
-router.get("/user-protected", employeeAuth, async (req, res) => {
-  if (req.user.subscriptionLevel === "user") {
+router.get("/user-protected", userAuth, async (req, res) => {
+  if (req.user.role === "user") {
     return res.json(`Welcome, User ${req.user.email}`);
   } else {
     return res.status(403).json("Access denied.");
@@ -28,32 +28,32 @@ router.get("/user-protected", employeeAuth, async (req, res) => {
 
 // Admin Registration Route
 router.post("/register-admin", (req, res) => {
-  employeeSignup(req.body, "admin", res);
+  userSignup(req.body, "admin", res);
 });
 
 // Admin Login Route
 router.post("/login-admin", async (req, res) => {
-  await employeeLogin(req.body, "admin", res);
+  await userLogin(req.body, "admin", res);
 });
 
 // Protected route accessible to Admin subscription level
-router.get("/admin-protected", employeeAuth, checkRole(["admin"]), async (req, res) => {
+router.get("/admin-protected", userAuth, checkRole(["admin"]), async (req, res) => {
   return res.json(`Welcome, Admin ${req.user.email}`);
 });
 
 // Enterprise User Registration Route
 router.post("/register-enterprise", (req, res) => {
-  employeeSignup(req.body, "enterprise", res);
+  userSignup(req.body, "enterprise", res);
 });
 
 // Enterprise User Login Route
 router.post("/login-enterprise", async (req, res) => {
-  await employeeLogin(req.body, "enterprise", res);
+  await userLogin(req.body, "enterprise", res);
 });
 
 // Protected route accessible to Enterprise User subscription level
-router.get("/enterprise-protected", employeeAuth, async (req, res) => {
-  if (req.user.subscriptionLevel === "enterprise") {
+router.get("/enterprise-protected", userAuth, async (req, res) => {
+  if (req.user.role === "enterprise") {
     return res.json(`Welcome, Enterprise User ${req.user.email}`);
   } else {
     return res.status(403).json("Access denied.");
@@ -62,17 +62,17 @@ router.get("/enterprise-protected", employeeAuth, async (req, res) => {
 
 // Premium User Registration Route
 router.post("/register-premium", (req, res) => {
-  employeeSignup(req.body, "premium", res);
+  userSignup(req.body, "premium", res);
 });
 
 // Premium User Login Route
 router.post("/login-premium", async (req, res) => {
-  await employeeLogin(req.body, "premium", res);
+  await userLogin(req.body, "premium", res);
 });
 
 // Protected route accessible to Premium User subscription level
-router.get("/premium-protected", employeeAuth, async (req, res) => {
-  if (req.user.subscriptionLevel === "premium") {
+router.get("/premium-protected", userAuth, async (req, res) => {
+  if (req.user.role === "premium") {
     return res.json(`Welcome, Premium User ${req.user.email}`);
   } else {
     return res.status(403).json("Access denied.");
