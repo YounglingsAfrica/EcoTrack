@@ -6,6 +6,9 @@ module.exports = {
       colors: {
         primaryGreen: "#2ECC40",
         darkGreen: "#143601",
+        // opacity 50%
+        primaryGreen50: "rgba(46, 204, 64, 0.5)",
+        darkGreen50: "rgba(20, 54, 1, 0.5)",
       }
     },
   },

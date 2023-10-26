@@ -25,6 +25,13 @@ const About = () => {
                     alt="About us" 
                 />
             </div>
+            <div 
+                className='flex justify-center items-center text-white bg-darkGreen w-full h-[400px] rounded-xl mt-40'
+            >
+                <h1 className='text-center text-3xl font-light max-w-3xl'>
+                    Our goal is to empower individuals and communities to actively participate in waste reduction and environmental sustainability.
+                </h1>
+            </div>      
         </section>
     )
 }
