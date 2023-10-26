@@ -7,6 +7,19 @@ const navLinks = [
     { href: '#contact', label: 'Contact Us' },
 ]
 
+const handleNavItemClick = (e) => {
+    e.preventDefault();
+  
+    const targetAttr = e.target.getAttribute("href");
+    const location = document.querySelector(targetAttr).offsetTop;
+  
+    window.scrollTo({
+      top: location - 80,
+      left: 0,
+      behavior: 'smooth',
+    });
+  };
+
 const Header = () => {
   return (
     <header className='w-full h-[80px] leading-[80px] flex items-center bg-black'>
@@ -22,11 +35,11 @@ const Header = () => {
                 </div>
                 {/* logo end */}
                 {/* nav start */}
-                <ul className='flex flex-grow justify-center items-center space-x-16'>
+                <ul className='flex flex-grow justify-center items-center space-x-16 mr-16'>
                     {navLinks.map((item) => {
                         return <li key={item.href}>
                             <a 
-                                onClick={''}
+                                onClick={handleNavItemClick}
                                 href={item.href}
                                 className='text-white hover:text-primaryGreen font-[300]'
                             >
@@ -39,7 +52,9 @@ const Header = () => {
                 {/* button start */}
                 <div className=''>
                     <a href="/">
-                        <button className='flex items-center justify-center px-6 w-32 h-10 text-white rounded-lg bg-gradient-to-r from-darkGreen to-primaryGreen'>
+                        <button 
+                            className='flex items-center justify-center px-6 w-auto h-10 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen'
+                        >
                             Sign Up
                         </button>
                     </a>

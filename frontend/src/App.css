@@ -13,6 +13,7 @@ html {
 body {
   font-family: "Outfit", sans-serif;
   overflow-x: hidden;
+  background-color: black;
 }
   
 .container {

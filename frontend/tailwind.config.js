@@ -9,6 +9,19 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        ".text-gradient": {
+          background: "linear-gradient(90deg, #2ECC40, #143601)",
+          "-webkit-background-clip": "text",
+          "-moz-background-clip": "system",
+          "background-clip": "text",
+          "color": "transparent",
+        },
+      };
+      addUtilities(newUtilities);
+    },
+  ],
 }
 
