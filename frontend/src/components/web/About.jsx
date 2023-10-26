@@ -12,9 +12,11 @@ const About = () => {
                         Redefining <span className='text-gradient'>Waste Management</span>
                     </h2>
                     <p 
-                        className="text-white font-thin text-lg max-w-4xl leading-8"
+                        className="text-white font-thin text-lg pl-20 max-w-2xl leading-8"
                     >
-                        At EcoTrack Solutions, we are on a mission to build a sustainable future by revolutionizing waste management practices. We understand the critical importance of environmental preservation and the need for responsible waste management to combat the global challenges we face. With a focus on innovation, we strive to develop cutting-edge solutions that minimize waste, optimize resource utilization, and promote a circular economy. Our team of passionate experts is dedicated to creating sustainable waste management systems that reduce environmental impact while fostering economic growth. Through collaborative partnerships and a commitment to continuous improvement, we are proud to have already achieved significant milestones in waste reduction and environmental stewardship. Join us as we pave the way towards a cleaner, greener, and more sustainable future for generations to come.
+                        At EcoTrack Solutions, we are on a mission to build a sustainable future by revolutionizing waste management practices. We understand the critical importance of environmental preservation and the need for responsible waste management to combat the global challenges we face. With a focus on innovation, we strive to develop cutting-edge solutions that minimize waste, optimize resource utilization, and promote a circular economy. 
+                        <br /><br />
+                        Our team of passionate experts is dedicated to creating sustainable waste management systems that reduce environmental impact while fostering economic growth. Through collaborative partnerships and a commitment to continuous improvement, we are proud to have already achieved significant milestones in waste reduction and environmental stewardship. Join us as we pave the way towards a cleaner, greener, and more sustainable future for generations to come.
                     </p>
                 </div>
                 <img 
