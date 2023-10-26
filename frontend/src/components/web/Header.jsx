@@ -21,6 +21,11 @@ const handleNavItemClick = (e) => {
   };
 
 const Header = () => {
+    //This is for DASHBOARD TESTING.
+    const openNewWindow = () => {
+        window.open('/dashboard-b', '_blank');
+    };
+
   return (
     <header className='w-full h-[80px] leading-[80px] flex items-center bg-black'>
         <div className='container mx-auto'>
@@ -52,7 +57,7 @@ const Header = () => {
                 {/* button start */}
                 <div className=''>
                     <a href="/">
-                        <button 
+                        <button onClick={openNewWindow}
                             className='flex items-center justify-center px-6 w-auto h-10 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen'
                         >
                             Sign Up
