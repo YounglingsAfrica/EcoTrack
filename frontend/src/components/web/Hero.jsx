@@ -9,10 +9,10 @@ const Hero = () => {
                         <h1 className="text-3xl font-thin text-white sm:text-6xl mb-10">
                             Innovating Waste Management for a <span className='text-gradient'>sustainable tomorrow.</span>
                         </h1>
-                        <p className="mt-6 text-md font-thin leading-8 text-white text-center">
+                        <p className="mt-6 text-lg font-thin leading-8 text-white text-center">
                             We believe that every action counts when it comes to preserving our environment and building a better future. With our innovative solutions, cutting-edge technologies, and a passion for sustainability, we are committed to minimizing waste, optimizing resource utilization, and promoting circular economy principles.
                         </p>
-                        <div className="mt-10 flex items-center justify-center gap-x-6">
+                        <div className="mt-16 flex items-center justify-center gap-x-6">
                             <a href="/">
                                 <button 
                                     className="flex items-center justify-center px-6 w-auto h-10 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen"

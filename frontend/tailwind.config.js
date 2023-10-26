@@ -10,6 +10,7 @@ module.exports = {
     },
   },
   plugins: [
+    // custom gradients
     function ({ addUtilities }) {
       const newUtilities = {
         ".text-gradient": {
