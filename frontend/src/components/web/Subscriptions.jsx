@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 const Services = () => {
     return (
-        <section id='services' className='pt-40 mb-20'>
+        <section id='subscriptions' className='pt-40 mb-20'>
             <div>
-                <h1 className='text-center text-7xl font-thin max-w-full mb-20 text-gradient mt-20 pb-10'>
+                <h1 className='text-center text-7xl font-thin max-w-full mb-20 text-gradient2 mt-20 pb-10'>
                     Subscriptions
                 </h1>
             </div>
@@ -40,9 +40,9 @@ const Services = () => {
                                 <div className="flex justify-center items-center rounded-full bg-green-100 h-5 w-5"><svg
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                                         className="h-3 w-3 flex-shrink-0 text-green-500">
-                                        <path fill-rule="evenodd"
+                                        <path fillRule="evenodd"
                                             d="M20.707 5.293a1 1 0 010 1.414l-11 11a1 1 0 01-1.414 0l-5-5a1 1 0 111.414-1.414L9 15.586 19.293 5.293a1 1 0 011.414 0z"
-                                            clip-rule="evenodd"></path>
+                                            clipRule="evenodd"></path>
                                     </svg>
                                 </div>
                                 <span className="text-sm text-gray-500">Access to view-only content</span>
@@ -51,9 +51,9 @@ const Services = () => {
                                 <div className="flex justify-center items-center rounded-full bg-green-100 h-5 w-5"><svg
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                                         className="h-3 w-3 flex-shrink-0 text-green-500">
-                                        <path fill-rule="evenodd"
+                                        <path fillRule="evenodd"
                                             d="M20.707 5.293a1 1 0 010 1.414l-11 11a1 1 0 01-1.414 0l-5-5a1 1 0 111.414-1.414L9 15.586 19.293 5.293a1 1 0 011.414 0z"
-                                            clip-rule="evenodd"></path>
+                                            clipRule="evenodd"></path>
                                     </svg>
                                 </div>
                                 <span className="text-sm text-gray-500">Single user-account</span>
@@ -62,9 +62,9 @@ const Services = () => {
                                 <div className="flex justify-center items-center rounded-full bg-green-100 h-5 w-5"><svg
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                                         className="h-3 w-3 flex-shrink-0 text-green-500">
-                                        <path fill-rule="evenodd"
+                                        <path fillRule="evenodd"
                                             d="M20.707 5.293a1 1 0 010 1.414l-11 11a1 1 0 01-1.414 0l-5-5a1 1 0 111.414-1.414L9 15.586 19.293 5.293a1 1 0 011.414 0z"
-                                            clip-rule="evenodd"></path>
+                                            clipRule="evenodd"></path>
                                     </svg>
                                 </div>
                                 <span className="text-sm text-gray-500">Regular system updates</span>
@@ -102,9 +102,9 @@ const Services = () => {
                                 <div className="flex justify-center items-center rounded-full bg-green-100 h-5 w-5"><svg
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                                         className="h-3 w-3 flex-shrink-0 text-black">
-                                        <path fill-rule="evenodd"
+                                        <path fillRule="evenodd"
                                             d="M20.707 5.293a1 1 0 010 1.414l-11 11a1 1 0 01-1.414 0l-5-5a1 1 0 111.414-1.414L9 15.586 19.293 5.293a1 1 0 011.414 0z"
-                                            clip-rule="evenodd"></path>
+                                            clipRule="evenodd"></path>
                                     </svg>
                                 </div>
                                 <span className="text-sm text-black">Get insights with advanced reporting tools</span>
@@ -113,9 +113,9 @@ const Services = () => {
                                 <div className="flex justify-center items-center rounded-full bg-green-100 h-5 w-5"><svg
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                                         className="h-3 w-3 flex-shrink-0 text-black">
-                                        <path fill-rule="evenodd"
+                                        <path fillRule="evenodd"
                                             d="M20.707 5.293a1 1 0 010 1.414l-11 11a1 1 0 01-1.414 0l-5-5a1 1 0 111.414-1.414L9 15.586 19.293 5.293a1 1 0 011.414 0z"
-                                            clip-rule="evenodd"></path>
+                                            clipRule="evenodd"></path>
                                     </svg>
                                 </div>
                                 <span className="text-sm text-black">Personalized assistance</span>
@@ -124,9 +124,9 @@ const Services = () => {
                                 <div className="flex justify-center items-center rounded-full bg-green-100 h-5 w-5"><svg
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                                         className="h-3 w-3 flex-shrink-0 text-black">
-                                        <path fill-rule="evenodd"
+                                        <path fillRule="evenodd"
                                             d="M20.707 5.293a1 1 0 010 1.414l-11 11a1 1 0 01-1.414 0l-5-5a1 1 0 111.414-1.414L9 15.586 19.293 5.293a1 1 0 011.414 0z"
-                                            clip-rule="evenodd"></path>
+                                            clipRule="evenodd"></path>
                                     </svg>
                                 </div>
                                 <span className="text-sm text-black">Add as many users as you need</span>
@@ -135,9 +135,9 @@ const Services = () => {
                                 <div className="flex justify-center items-center rounded-full bg-green-100 h-5 w-5"><svg
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                                         className="h-3 w-3 flex-shrink-0 text-black">
-                                        <path fill-rule="evenodd"
+                                        <path fillRule="evenodd"
                                             d="M20.707 5.293a1 1 0 010 1.414l-11 11a1 1 0 01-1.414 0l-5-5a1 1 0 111.414-1.414L9 15.586 19.293 5.293a1 1 0 011.414 0z"
-                                            clip-rule="evenodd"></path>
+                                            clipRule="evenodd"></path>
                                     </svg>
                                 </div>
                                 <span className="text-sm text-black">Onboarding, training, and ongoing support</span>
@@ -146,9 +146,9 @@ const Services = () => {
                                 <div className="flex justify-center items-center rounded-full bg-green-100 h-5 w-5"><svg
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                                         className="h-3 w-3 flex-shrink-0 text-black">
-                                        <path fill-rule="evenodd"
+                                        <path fillRule="evenodd"
                                             d="M20.707 5.293a1 1 0 010 1.414l-11 11a1 1 0 01-1.414 0l-5-5a1 1 0 111.414-1.414L9 15.586 19.293 5.293a1 1 0 011.414 0z"
-                                            clip-rule="evenodd"></path>
+                                            clipRule="evenodd"></path>
                                     </svg>
                                 </div>
                                 <span className="text-sm text-black">Access to every feature</span>
@@ -186,9 +186,9 @@ const Services = () => {
                                 <div className="flex justify-center items-center rounded-full bg-green-100 h-5 w-5"><svg
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                                         className="h-3 w-3 flex-shrink-0 text-green-500">
-                                        <path fill-rule="evenodd"
+                                        <path fillRule="evenodd"
                                             d="M20.707 5.293a1 1 0 010 1.414l-11 11a1 1 0 01-1.414 0l-5-5a1 1 0 111.414-1.414L9 15.586 19.293 5.293a1 1 0 011.414 0z"
-                                            clip-rule="evenodd"></path>
+                                            clipRule="evenodd"></path>
                                     </svg>
                                 </div>
                                 <span className="text-sm text-gray-500">No restrictions on trackable waste</span>
@@ -197,9 +197,9 @@ const Services = () => {
                                 <div className="flex justify-center items-center rounded-full bg-green-100 h-5 w-5"><svg
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                                         className="h-3 w-3 flex-shrink-0 text-green-500">
-                                        <path fill-rule="evenodd"
+                                        <path fillRule="evenodd"
                                             d="M20.707 5.293a1 1 0 010 1.414l-11 11a1 1 0 01-1.414 0l-5-5a1 1 0 111.414-1.414L9 15.586 19.293 5.293a1 1 0 011.414 0z"
-                                            clip-rule="evenodd"></path>
+                                            clipRule="evenodd"></path>
                                     </svg>
                                 </div>
                                 <span className="text-sm text-gray-500">Detailed reports and insights</span>
@@ -208,9 +208,9 @@ const Services = () => {
                                 <div className="flex justify-center items-center rounded-full bg-green-100 h-5 w-5"><svg
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                                         className="h-3 w-3 flex-shrink-0 text-green-500">
-                                        <path fill-rule="evenodd"
+                                        <path fillRule="evenodd"
                                             d="M20.707 5.293a1 1 0 010 1.414l-11 11a1 1 0 01-1.414 0l-5-5a1 1 0 111.414-1.414L9 15.586 19.293 5.293a1 1 0 011.414 0z"
-                                            clip-rule="evenodd"></path>
+                                            clipRule="evenodd"></path>
                                     </svg>
                                 </div>
                                 <span className="text-sm text-gray-500">Be the first to get our latest features</span>
@@ -219,9 +219,9 @@ const Services = () => {
                                 <div className="flex justify-center items-center rounded-full bg-green-100 h-5 w-5"><svg
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                                         className="h-3 w-3 flex-shrink-0 text-green-500">
-                                        <path fill-rule="evenodd"
+                                        <path fillRule="evenodd"
                                             d="M20.707 5.293a1 1 0 010 1.414l-11 11a1 1 0 01-1.414 0l-5-5a1 1 0 111.414-1.414L9 15.586 19.293 5.293a1 1 0 011.414 0z"
-                                            clip-rule="evenodd"></path>
+                                            clipRule="evenodd"></path>
                                     </svg>
                                 </div>
                                 <span className="text-sm text-gray-500">Waste Pickup Scheduling and Reminders</span>

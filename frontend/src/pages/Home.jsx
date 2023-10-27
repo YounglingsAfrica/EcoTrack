@@ -2,7 +2,9 @@ import React from 'react';
 import Header from '../components/web/Header';
 import Hero from '../components/web/Hero';
 import About from '../components/web/About';
-import Services from '../components/web/Services';
+import Subscriptions from '../components/web/Subscriptions';
+import Contact from '../components/web/Contact';
+import Footer from '../components/web/Footer';
 
 const Home = () => {
   return (
@@ -10,7 +12,9 @@ const Home = () => {
       <Header />
       <Hero />
       <About />
-      <Services />
+      <Subscriptions />
+      <Contact />
+      <Footer />
     </div>
   )
 }

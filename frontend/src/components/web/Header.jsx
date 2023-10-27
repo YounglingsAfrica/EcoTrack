@@ -3,7 +3,7 @@ import React from 'react';
 const navLinks = [
     { href: '#home', label: 'Home' },
     { href: '#about', label: 'About' },
-    { href: '#services', label: 'Services' },
+    { href: '#subscriptions', label: 'Subscriptions' },
     { href: '#contact', label: 'Contact Us' },
 ]
 
@@ -56,13 +56,11 @@ const Header = () => {
                 {/* nav end */}
                 {/* button start */}
                 <div className=''>
-                    <a href="/">
-                        <button onClick={openNewWindow}
-                            className='flex items-center justify-center px-6 w-auto h-10 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen'
-                        >
-                            Sign Up
-                        </button>
-                    </a>
+                    <button onClick={openNewWindow}
+                        className='flex items-center justify-center px-6 w-auto h-10 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen'
+                    >
+                        Sign Up
+                    </button>
                 </div>
                 {/* button end */}
             </div>
