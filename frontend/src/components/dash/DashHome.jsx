@@ -1,10 +1,11 @@
 import React from 'react'
+import SideBar from './SideBar.1';
 
 const DashHome = () => {
   return (
-    <div>
-      <h1 className='text-white'>TEST</h1>
-    </div>
+    <>
+      <SideBar />
+    </>
   )
 };
 
