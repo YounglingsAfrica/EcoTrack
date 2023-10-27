@@ -13,7 +13,7 @@ const Hero = () => {
                             We believe that every action counts when it comes to preserving our environment and building a better future. With our innovative solutions, cutting-edge technologies, and a passion for sustainability, we are committed to minimizing waste, optimizing resource utilization, and promoting circular economy principles.
                         </p>
                         <div className="mt-16 flex items-center justify-center gap-x-6">
-                            <a href="/">
+                            <a href="#subscriptions">
                                 <button 
                                     className="flex items-center justify-center px-6 w-auto h-10 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen"
                                 >
@@ -21,7 +21,7 @@ const Hero = () => {
                                 </button>
                             </a>
                             <a
-                                href="/"
+                                href="#about"
                                 className="text-sm font-regular underline leading-6 text-white"
                             >
                                 Learn more

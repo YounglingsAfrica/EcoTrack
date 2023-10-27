@@ -34,7 +34,7 @@ const Contact = () => {
                     </div> 
                 </div>
                 <div className='w-1/2'>
-                    <div className='bg-[#F0F0F0] w-[650px] h-[700px] rounded-3xl p-6 px-14'>
+                    <div className='bg-[#F0F0F0] w-[600px] h-[700px] rounded-3xl p-6 px-14'>
                         <div>
                             <h2 className='leading-snug text-center text-5xl font-bold text-black p-10 mb-20'>
                                 Say Hello
