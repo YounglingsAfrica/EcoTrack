@@ -2,7 +2,6 @@ import React from 'react';
 import { useState } from 'react';
 import { BsArrowLeftShort, BsChevronDown } from "react-icons/bs";
 import { BiSolidCube, BiSolidDashboard } from "react-icons/bi";
-//import { GrMapLocation } from "react-icons/gr";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { AiFillSchedule, AiOutlineSchedule } from "react-icons/ai";
 import { LiaRouteSolid } from "react-icons/lia";
@@ -59,14 +58,14 @@ const SideBar  = () => {
         <h1 className={`text-white origin-left font-medium text-2xl duration-300 ${!open && "scale-0"}`}>EcoTrack</h1>
       </div>
 
-      <ul className='pt-2'>
+      <ul className='pt-2 duration-500'>
         {Menus.map((menu, index) => (
           <>
             <li key={index} className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-black rounded-md ${ menu.spacing ? "mt-9" : "mt-2" }`}>
               <span className='text-2xl block float-left text-paleGreen'>
                 {menu.icon ? menu.icon : <BiSolidDashboard />}
               </span>
-              <span className={`text-base font-medium flex-1 duration-200 ${!open && "hidden"}`}>{menu.title}</span>
+              <span className={`text-white text-sm origin-left font-thin flex flex-1 duration-300 ${!open ? "hidden" : ""}`}>{menu.title}</span>
               {menu.submenu && open && (
                 <BsChevronDown className={`${submenuOpen && "rotate-180"} duration-300`} onClick={() => 
                   setSubmenuOpen(!submenuOpen)}/>
@@ -76,7 +75,7 @@ const SideBar  = () => {
             {menu.submenu && submenuOpen && open &&(
               <ul>
                 {menu.submenuItems.map((submenuItem, index) => (
-                  <li key={index} className='text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 px-12 hover:bg-black rounded-md'>
+                  <li key={index} className='text-white text-sm font-thin flex items-center gap-x-4 cursor-pointer p-2 px-12 hover:bg-black rounded-md'>
                     {submenuItem.title}
                   </li>
                 ))}
