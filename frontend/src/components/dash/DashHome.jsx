@@ -5,10 +5,10 @@ import Dashboard from '../../pages/Dashboard';
 const DashHome = () => {
   return (
     <div className='flex'>
-      <div className='basis-[12%] h-[100vh]'>
+      <div className='basis-[5%] h-[100vh]'>
         <SideBar />
       </div>
-      <div className='basis-[88%]'>
+      <div className='basis-[95%] border'>
         <Dashboard />
       </div>
     </div>
