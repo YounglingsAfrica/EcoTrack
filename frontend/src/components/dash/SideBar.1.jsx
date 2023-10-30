@@ -13,7 +13,6 @@ import { FiLogOut } from "react-icons/fi";
 
 const SideBar  = () => {
   const [open, setOpen] = useState(true);
-  const [submenuOpen, setSubmenuOpen] = useState(false);
 
   //Sidebar Items
   const Menus = [
@@ -45,6 +44,8 @@ const SideBar  = () => {
     { title: "Logout", spacing: true, icon: <FiLogOut /> },
   ];
 
+  const [submenuOpen, setSubmenuOpen] = useState(Array(Menus.length).fill(false));
+
   return (
     <div className='flex'>
       <div className={`bg-darkGreen h-screen p-5 pt-8 ${open ? "w-72" : "w-20"} duration-300 relative`}>
@@ -67,12 +68,15 @@ const SideBar  = () => {
               </span>
               <span className={`text-white text-sm origin-left font-thin flex flex-1 duration-300 ${!open ? "hidden" : ""}`}>{menu.title}</span>
               {menu.submenu && open && (
-                <BsChevronDown className={`${submenuOpen && "rotate-180"} duration-300`} onClick={() => 
-                  setSubmenuOpen(!submenuOpen)}/>
+                <BsChevronDown className={`${submenuOpen[index] && "rotate-180"} duration-300`} onClick={() => {
+                  const updatedSubmenuOpen = [...submenuOpen];
+                  updatedSubmenuOpen[index] = !updatedSubmenuOpen[index];
+                  setSubmenuOpen(updatedSubmenuOpen);
+                }}/>
               )}
             </li>
             
-            {menu.submenu && submenuOpen && open &&(
+            {menu.submenu && submenuOpen[index] &&(
               <ul>
                 {menu.submenuItems.map((submenuItem, index) => (
                   <li key={index} className='text-white text-sm font-thin flex items-center gap-x-4 cursor-pointer p-2 px-12 hover:bg-black rounded-md'>
