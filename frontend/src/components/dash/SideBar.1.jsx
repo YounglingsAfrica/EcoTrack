@@ -59,10 +59,10 @@ const SideBar  = () => {
         <h1 className={`text-white origin-left font-medium text-2xl duration-300 ${!open && "scale-0"}`}>EcoTrack</h1>
       </div>
 
-      <ul className='pt-2 duration-500'>
+      <ul className={`pt-2 ${open ? "duration-400 overflow-hidden" : ""}`}>
         {Menus.map((menu, index) => (
           <>
-            <li key={index} className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-black rounded-md ${ menu.spacing ? "mt-9" : "mt-2" }`}>
+            <li key={index} className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-black rounded-md ${ menu.spacing ? "mt-9" : "mt-2" }`} style={{ whiteSpace: "nowrap" }}>
               <span className='text-2xl block float-left text-paleGreen'>
                 {menu.icon ? menu.icon : <BiSolidDashboard />}
               </span>
@@ -89,9 +89,6 @@ const SideBar  = () => {
         ))}
       </ul>
 
-      </div>
-      <div className='p-7'>
-        <h1 className='text-white text-2xl font-semibold'>Admin Dashboard</h1>
       </div>
     </div>
   )
