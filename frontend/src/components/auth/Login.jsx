@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from "../../assets/eco_logo.png";
 import Eco from "../../assets/ecoeco.png";
+import axios from "axios";
 
 const Login = () => {
     const [data, setData] = useState({
@@ -11,6 +12,8 @@ const Login = () => {
 
     const loginUser = (e) => {
         e.preventDefault();
+
+        axios.get("/")
     }
 
     return (
@@ -52,14 +55,24 @@ const Login = () => {
                                 <button 
                                     className="flex items-center justify-center px-6 w-auto h-10 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen shadow-right-bottom"
                                 >
-                                    Sign Up
+                                    Log In
+                                </button>
+                            </div>
+                            <div className="mt-4 flex justify-center">
+                                <h1 className='text-xl font-bold'>OR</h1>
+                            </div>
+                            <div className="mt-6 flex justify-center">
+                                <button 
+                                    className="flex items-center justify-center px-6 w-auto h-10 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen shadow-right-bottom"
+                                >
+                                    Continue with Google
                                 </button>
                             </div>
                         </form>
                     </div>
                     {/* Register form start */}
                     <div className='w-1/2'>
-                        <img className='w-auto h-auto' src={Eco} alt="Eco" />
+                        <img className='w-auto h-full object-cover' src={Eco} alt="Eco" />
                     </div>
                     {/* Register form end */}
                 </div>

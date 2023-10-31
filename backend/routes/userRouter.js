@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const cors = require("cors");
 const { test } = require("../controllers/authController")
+const { registerUser } = require("../controllers/authController");
 
 router.use(
   cors({
@@ -10,6 +11,7 @@ router.use(
 )
 
 router.get("/", test)
+router.post("/signup", registerUser)
 
 
 

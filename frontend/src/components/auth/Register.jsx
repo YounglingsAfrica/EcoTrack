@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Logo from "../../assets/eco_logo.png";
 import PayPalBtn from '../../utils/PayPalBtn';
+import { toast } from "react-hot-toast";
 
 const SignUp = () => {
     const [subscription, setSubscription] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('');
 
+    const navigate = useNavigate();
     const [data, setData] = useState({
         name: '',
         email: '',
@@ -17,10 +19,19 @@ const SignUp = () => {
     const registerUser = async (e) => {
         e.preventDefault();
 
+        const {name, email, password} = data
         try {
-            const response = await axios.post('http://localhost:3000/signup', data);
-            console.log(response.data) //handle response here
-             // call payment function after successful signup 
+            const { data } = await axios.post("/signup", {
+                name, email, password
+            })
+            
+            if (data.error) {
+                toast.error(data.error);
+            } else {
+                setData({})
+                toast.success("Registration successfull. Welcome!")
+                navigate("/login")
+            }
         } catch (error) {
             console.log(error);
         }
@@ -126,7 +137,6 @@ const SignUp = () => {
                                 placeholder="Full Name" 
                                 className="border border-gray-400 bg-red-50 h-10 py-1 px-2 w-80 rounded-xl focus:outline-primaryGreen"
                                 value={data.name}
-                                required
                                 onChange={(e) => setData({...data, name: e.target.value})}
                             />
                         </div>
@@ -136,7 +146,6 @@ const SignUp = () => {
                                 placeholder="Email" 
                                 className="border border-gray-400 bg-red-50 h-10 py-1 px-2 w-80 rounded-xl focus:outline-primaryGreen" 
                                 value={data.email}
-                                required
                                 onChange={(e) => setData({...data, email: e.target.value})}
                             />
                         </div>
@@ -146,7 +155,6 @@ const SignUp = () => {
                                 placeholder="Password" 
                                 className="border border-gray-400 bg-red-50 h-10 py-1 px-2 w-80 rounded-xl focus:outline-primaryGreen" 
                                 value={data.password}
-                                required
                                 onChange={(e) => setData({...data, password: e.target.value})}
                             />
                         </div>
@@ -154,7 +162,6 @@ const SignUp = () => {
                             <input 
                                 type="checkbox" 
                                 className="border border-gray-400 bg-red-50" 
-                                required
                             />
                             <span className='ml-2'>
                                 I accept the <a href="/" className="text-primaryGreen font-semibold">Terms of Use</a> &  <a href="/" className="text-primaryGreen font-semibold">Privacy Policy</a>. 
