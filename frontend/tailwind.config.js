@@ -12,7 +12,7 @@ module.exports = {
         darkGreen50: "rgba(20, 54, 1, 0.5)",
       },
       boxShadow: {
-        'right-bottom': '10px 8px 10px 0 rgba(0, 0, 0, 0.5)',
+        'right-bottom': '3px 5px 20px 0 rgba(0, 0, 0, 0.5)',
     },
     },
   },

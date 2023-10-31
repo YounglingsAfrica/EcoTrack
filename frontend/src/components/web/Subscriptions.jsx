@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Services = () => {
     return (
-        <section id='subscriptions' className='pt-40 mb-20'>
+        <section id='subscriptions' className='mb-40'>
             <div>
                 <h1 className='text-center text-7xl font-thin max-w-full mb-20 text-gradient2 mt-20 pb-10'>
                     Subscriptions
@@ -27,11 +27,11 @@ const Services = () => {
                             <span className="text-4xl font-bold tracking-tight text-black">R0</span>
                             <span className="text-base font-medium text-gray-500">/mo</span>
                         </p>
-                        <a href="/" target="_blank"
+                        <Link to="/signup"
                             className="flex justify-center w-full py-3 mt-4 text-sm font-medium text-black border-2 border-primaryGreen bg-primaryGreen50 rounded-lg hover:scale-105 duration-300"
                         >   
                             Get started now
-                        </a>
+                        </Link>
                     </div>
                     <div className="px-6 pt-6 pb-8">
                         <h3 className="text-sm font-medium text-black">A cost-effective solution for small-scale operations.</h3>
@@ -85,7 +85,7 @@ const Services = () => {
                         <p className="mt-8 text-center"><span className="text-4xl font-bold tracking-tight text-white outline-4 outline-black">R1099</span>
                             <span className="text-base font-medium text-gray-300">/mo</span>
                         </p>
-                        <Link to="/" target="_blank"
+                        <Link to="/signup"
                             className="flex justify-center w-full py-3 mt-4 text-sm font-medium text-white bg-darkGreen50 border-4 border-darkGreen rounded-lg hover:scale-110 duration-300"
                         >   
                             Get started now
@@ -169,11 +169,11 @@ const Services = () => {
                         <p className="mt-8"><span className="text-4xl font-bold tracking-tight text-gray-900">R499</span>
                             <span className="text-base font-medium text-gray-500">/mo</span>
                         </p>
-                        <a href="/" target="_blank"
+                        <Link to="/signup"
                             className="flex justify-center w-full py-3 mt-4 text-sm font-medium text-black border-2 border-primaryGreen bg-primaryGreen50 rounded-lg hover:scale-105 duration-300"
                         >   
                             Get started now
-                        </a>
+                        </Link>
                     </div>
                     <div className="px-6 pt-6 pb-8">
                         <h3 

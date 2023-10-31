@@ -28,6 +28,18 @@ body {
   color: #000; 
 }
 
+.sticky__header {
+  width: 100%;
+  height: 80px;
+  line-height: 80px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  box-shadow: 5px 5px 15px -5px #00000084;
+  z-index: 99;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

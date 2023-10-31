@@ -8,7 +8,7 @@ const Hero = () => {
     };
 
     return (
-        <section id="home">
+        <section id="home" className='container mb-40'>
             <div className="relative isolate px-6 lg:px-8">
                 <div className="mx-auto max-w-5xl sm:py-48 lg:py-56">
                     <div className="text-center">
