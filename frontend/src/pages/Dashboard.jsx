@@ -5,7 +5,7 @@ import { FaCircleUser } from "react-icons/fa6";
 const Dashboard = () => {
     return(
         <>
-            <div className="flex items-center justify-between h-[70px] shadow-lg px-[25px]">
+            <div className="flex items-center justify-between h-[70px] shadow-lg shadow-darkGreen px-[25px]">
                 <div className='p-7'>
                     <h1 className='text-white text-2xl font-semibold'>Admin Dashboard</h1>
                 </div>
