@@ -2,6 +2,7 @@ import React from 'react'
 import SideBar from './SideBar.1';
 import Dashboard from '../../pages/Dashboard';
 import { Outlet } from 'react-router-dom';
+import Main from './Main';
 
 const DashHome = () => {
   return (
@@ -12,7 +13,8 @@ const DashHome = () => {
       <div className='basis-[95%]'>
         <Dashboard />
         <div>
-          <Outlet></Outlet>
+          {/*<Outlet></Outlet>*/}
+          <Main />
         </div>
       </div>
     </div>

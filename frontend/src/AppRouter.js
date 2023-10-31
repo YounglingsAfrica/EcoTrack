@@ -21,9 +21,11 @@ const AppRouter = () => {
                 <Route path="/signup" element={<Registration />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/dashboard-a" element={<Header />} />
-                <Route path="/dashboard-b" element={<DashHome />} />
+                <Route path="/dashboard-b" element={<DashHome />} >
                     <Route index element={<Main />} />
-            </Routes>
+
+                </Route>
+        </Routes>
         </>
     );
 };
