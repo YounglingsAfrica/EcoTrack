@@ -14,17 +14,6 @@ axios.defaults.withCredentials = true;
 
 const AppRouter = () => {
     return(
-<<<<<<< Updated upstream
-        <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/signup" element={<Registration />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/dashboard-a" element={<Header />} />
-            <Route path="/dashboard-b" element={<DashHome />} >
-                <Route index element={<Main />} />
-            </Route>
-        </Routes>
-=======
         <>
         <Toaster position="bottom-right" toastOptions={{duration: 2000}} />
             <Routes>
@@ -33,9 +22,9 @@ const AppRouter = () => {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/dashboard-a" element={<Header />} />
                 <Route path="/dashboard-b" element={<DashHome />} />
+                    <Route index element={<Main />} />
             </Routes>
         </>
->>>>>>> Stashed changes
     );
 };
 
