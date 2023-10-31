@@ -3,7 +3,7 @@ import Dash from "../../assets/dash.png";
 
 const About = () => {
     return (
-        <section id="about" className='container pt-40'>
+        <section id="about" className='pt-40 mb-40'>
             <div className="relative md:flex md:items-center text-center">
                 <div className="w-full md:w-1/2 p-4 flex flex-col justify-center">
                     <h2 

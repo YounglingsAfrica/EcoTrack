@@ -1,6 +1,6 @@
 const bcrypt = require("bcrpyt");
 const jwt = require("jsonwebtoken");
-const User = require("../Database/user");
+const User = require("../database/user");
 
 const userSignup = async (req, role, res) => {
     try {
