@@ -3,6 +3,9 @@ import { Route, Routes } from "react-router-dom";
 import Header from "./components/web/Header";
 import DashHome from "./components/dash/DashHome";
 import Home from "./pages/Home";
+import Registration from "./pages/Registration";
+import LoginPage from "./pages/Login";
+import Main from "./components/dash/Main";
 
 const AppRouter = () => {
     return(
