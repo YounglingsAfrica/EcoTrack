@@ -43,7 +43,7 @@ const Main = () => {
         <div className='h-[100px] rounded-[8px] bg-darkGreen border-l-[4px] border border-paleGreen flex items-center justify-between px-[30px] cursor-pointer hover:shadow-lg transform hover:scale-[103%] transition duration-300 ease-out'>
             <div>
                 <h2 className='text-white text-[11px] leading-[17px] font-bold'>DURATION (HR)</h2>
-                <h1 className='text-white text-[20px] leading-[24px] font-bold'>261</h1>
+                <h1 className='text-white text-[20px] leading-[24px] font-bold'>260</h1>
             </div>
             <BiTimeFive fontSize={28} color='white'/>
         </div>
