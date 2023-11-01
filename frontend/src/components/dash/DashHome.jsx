@@ -3,6 +3,9 @@ import SideBar from './SideBar.1';
 import Dashboard from '../../pages/Dashboard';
 // import { Outlet } from 'react-router-dom';
 import Main from './Main';
+import 'leaflet/dist/leaflet.css';
+import 'tailwindcss/tailwind.css';
+import Map from './Map';
 
 const DashHome = () => {
   return (
@@ -16,6 +19,9 @@ const DashHome = () => {
           {/*<Outlet></Outlet>*/}
           <Main />
         </div>
+      </div>
+      <div>
+        <Map/>
       </div>
     </div>
   )
