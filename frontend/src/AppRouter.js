@@ -17,7 +17,7 @@ const AppRouter = () => {
         <>
         <Toaster position="bottom-right" toastOptions={{duration: 2000}} />
             <Routes>
-                <Route path="/" element={<Home />} />
+                <Route index element={<Home />} />
                 <Route path="/signup" element={<Registration />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/dashboard-a" element={<Header />} />

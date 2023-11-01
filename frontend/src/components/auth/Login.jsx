@@ -61,13 +61,13 @@ const Login = () => {
                             <div className="mt-4 flex justify-center">
                                 <h1 className='text-xl font-bold'>OR</h1>
                             </div>
-                            <div className="mt-6 flex justify-center">
+                            {/* <div className="mt-6 flex justify-center">
                                 <button 
                                     className="flex items-center justify-center px-6 w-auto h-10 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen shadow-right-bottom"
                                 >
                                     Continue with Google
                                 </button>
-                            </div>
+                            </div> */}
                         </form>
                     </div>
                     {/* Register form start */}

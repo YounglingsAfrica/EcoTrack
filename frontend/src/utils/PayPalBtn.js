@@ -5,7 +5,7 @@ const clientId = "AXJBdNgoxh0GJvbFF0i7v53KrO6X7duF5vyB4CpBNKmG2svgBDuGnz4U76ZWcA
 
 function PayPalBtn(props) {
     const { amount, createSubscription, onApprove, catchError, onError, onCancel } = props;
-    const paypalKey = clientId;
+    // const paypalKey = clientId;
 
     return (
         <PayPalScriptProvider 
