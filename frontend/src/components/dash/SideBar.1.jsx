@@ -10,9 +10,10 @@ import { MdRecycling, MdOutlineManageSearch } from "react-icons/md";
 import { LuUserSquare2 } from "react-icons/lu";
 import { VscFeedback } from "react-icons/vsc";
 import { FiLogOut } from "react-icons/fi";
+import { Link } from 'react-router-dom';
 
 const SideBar  = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   //Sidebar Items
   const Menus = [
@@ -41,13 +42,13 @@ const SideBar  = () => {
     },
     { title: "Regulations", icon: <MdOutlineManageSearch /> },
     { title: "Feedback", icon: <VscFeedback /> },
-    { title: "Logout", spacing: true, icon: <FiLogOut /> },
+    { title: "Logout", spacing: true, icon: <FiLogOut />, route: "/" },
   ];
 
   const [submenuOpen, setSubmenuOpen] = useState(Array(Menus.length).fill(false));
 
   return (
-    <div className='flex'>
+    <div className='flex fixed z-50'>
       <div className={`bg-darkGreen h-screen p-5 pt-8 ${open ? "w-72" : "w-20"} duration-300 relative`}>
         <BsArrowLeftShort className={`bg-white text-darkGreen text-3xl 
           rounded-full absolute -right-3 top-9 
@@ -62,6 +63,7 @@ const SideBar  = () => {
       <ul className={`pt-2 ${open ? "duration-400 overflow-hidden" : ""}`}>
         {Menus.map((menu, index) => (
           <>
+          <Link to={menu.route} key={index}>
             <li key={index} className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-black rounded-md ${ menu.spacing ? "mt-9" : "mt-2" }`} style={{ whiteSpace: "nowrap" }}>
               <span className='text-2xl block float-left text-paleGreen'>
                 {menu.icon ? menu.icon : <BiSolidDashboard />}
@@ -75,6 +77,7 @@ const SideBar  = () => {
                 }}/>
               )}
             </li>
+          </Link>
             
             {menu.submenu && submenuOpen[index] &&(
               <ul>
