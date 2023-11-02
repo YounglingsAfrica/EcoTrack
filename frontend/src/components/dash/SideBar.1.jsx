@@ -12,7 +12,7 @@ import { VscFeedback } from "react-icons/vsc";
 import { FiLogOut } from "react-icons/fi";
 
 const SideBar  = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   //Sidebar Items
   const Menus = [
@@ -47,7 +47,7 @@ const SideBar  = () => {
   const [submenuOpen, setSubmenuOpen] = useState(Array(Menus.length).fill(false));
 
   return (
-    <div className='flex'>
+    <div className='flex fixed z-50'>
       <div className={`bg-darkGreen h-screen p-5 pt-8 ${open ? "w-72" : "w-20"} duration-300 relative`}>
         <BsArrowLeftShort className={`bg-white text-darkGreen text-3xl 
           rounded-full absolute -right-3 top-9 

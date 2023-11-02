@@ -6,6 +6,8 @@ import { BiTimeFive } from "react-icons/bi";
 import { FaEllipsisVertical } from "react-icons/fa6";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import PieComponent from './PieComponent';
+import Map from './Map';
+import 'leaflet/dist/leaflet.css';
 
 const data = [
   {
@@ -56,7 +58,9 @@ const data = [
 const Main = () => {
   return (
     <div className='pt-[25px] px-[50px]'>
+
       {/*Reports and Analytics*/}
+
       <div className='flex items-center justify-between'>
         <h1 className='text-white text-lg leading-[34px]'>Reports & Analytics</h1>
         <button className='flex items-center justify-center px-6 w-auto h-10 text-white rounded-lg bg-gradient-to-r from-primaryGreen to-black shadow-sm shadow-white hover:shadow-sm transform hover:scale-[103%] transition duration-300 ease-out'>
@@ -64,7 +68,7 @@ const Main = () => {
         </button>
       </div>      
       <div className='flex pl-[3px] w-full gap-[20px] mt-[15px]'>
-        <div className='basis-[70%] bg-white cursor-pointer rounded-[4px]'>
+        <div className='basis-[50%] bg-white cursor-pointer rounded-[4px]'>
           <div className='bg-[#F8F9FC] flex items-center justify-between py-[15px] px-[20px] border-b-[1px] border-[#EDEDED] mb-[20px] rounded-md'>
             <h2 className='text-darkGreen font-bold'>Collection Routes Overview</h2>
             <FaEllipsisVertical className='cursor-pointer'/>
@@ -91,7 +95,7 @@ const Main = () => {
             </LineChart>
           </div>
         </div>
-        <div className='basis-[30%] border bg-white cursor-pointer rounded-md'>
+        <div className='basis-[25%] border bg-white cursor-pointer rounded-md'>
           <div className='bg-[#F8F9FC] flex items-center justify-between py-[15px] px-[20px] border-b-[1px] border-[#EDEDED] mb-[20px] rounded-md'>
             <h2 className='text-darkGreen font-bold'>Containers Filled Overview</h2>
             <FaEllipsisVertical className='cursor-pointer'/>
@@ -100,26 +104,39 @@ const Main = () => {
               <PieComponent />
           </div>
         </div>
+        
+        {/*Map*/}
+
+        <div className='basis-[25%] border bg-white cursor-pointer rounded-md h-[100px]'>
+          <div className='bg-[#F8F9FC] flex items-center justify-between py-[15px] px-[20px] border-b-[1px] border-[#EDEDED] mb-[20px] rounded-md'>
+            <h2 className='text-darkGreen font-bold'>Collection Map</h2>
+            <FaEllipsisVertical className='cursor-pointer'/>
+          </div>
+          <div>
+            <Map/>
+          </div>
+        </div>
 
       </div>
 
 
       
       {/*Overview */}
+
       <div className='flex items-center justify-between'>
         <h1 className='text-white text-lg leading-[34px] mt-[15px] mb-[10px]'>Overview</h1>
       </div> 
-      <div className='grid grid-cols-4 gap-[30px] pb-[15px]'>
+      <div className='grid grid-cols-4 gap-[30px] pb-[15px] w-[76%]'>
         {/*Routes */}
-        <div className='h-[100px] rounded-[8px] bg-darkGreen border-l-[4px] border border-[paleGreen] flex items-center justify-between px-[30px] cursor-pointer hover:shadow-lg transform hover:scale-[103%] hover:border-[#CCFF33] transition duration-300 ease-out'>
-            <div>
+        <div className='h-[100px] rounded-[8px] bg-black border-l-[4px] border border-[paleGreen] flex items-center justify-between px-[20px] cursor-pointer hover:shadow-lg transform hover:scale-[103%] hover:border-[#CCFF33] transition duration-300 ease-out'>
+            <div className='transform hover:text-[#CCFF33] transition duration-300 ease-out'>
                 <h2 className='text-white text-[11px] leading-[17px] font-bold'>COLLECTION ROUTES</h2>
                 <h1 className='text-white text-[20px] leading-[24px] font-bold'>84</h1>
             </div>
-            <TbRoute fontSize={28} color='white'/>
+            <TbRoute fontSize={28} color='white' />
         </div>
         {/*Containers */}
-        <div className='h-[100px] rounded-[8px] bg-darkGreen border-l-[4px] border border-paleGreen flex items-center justify-between px-[30px] cursor-pointer hover:shadow-lg transform hover:scale-[103%] hover:border-[#CCFF33] transition duration-300 ease-out'>
+        <div className='h-[100px] rounded-[8px] bg-black border-l-[4px] border border-paleGreen flex items-center justify-between px-[20px] cursor-pointer hover:shadow-lg transform hover:scale-[103%] hover:border-[#CCFF33] transition duration-300 ease-out'>
             <div>
                 <h2 className='text-white text-[11px] leading-[17px] font-bold'>CONTAINERS</h2>
                 <h1 className='text-white text-[20px] leading-[24px] font-bold'>2494</h1>
@@ -127,7 +144,7 @@ const Main = () => {
             <LuContainer fontSize={28} color='white'/>
         </div>
         {/*Distance*/}
-        <div className='h-[100px] rounded-[8px] bg-darkGreen border-l-[4px] border border-paleGreen flex items-center justify-between px-[30px] cursor-pointer hover:shadow-lg transform hover:scale-[103%] hover:border-[#CCFF33] transition duration-300 ease-out'>
+        <div className='h-[100px] rounded-[8px] bg-black border-l-[4px] border border-paleGreen flex items-center justify-between px-[20px] cursor-pointer hover:shadow-lg transform hover:scale-[103%] hover:border-[#CCFF33] transition duration-300 ease-out'>
             <div>
                 <h2 className='text-white text-[11px] leading-[17px] font-bold'>DISTANCE (KM)</h2>
                 <h1 className='text-white text-[20px] leading-[24px] font-bold'>4814</h1>
@@ -135,7 +152,7 @@ const Main = () => {
             <RiPinDistanceFill fontSize={28} color='white'/>
         </div>
         {/*Duration*/}
-        <div className='h-[100px] rounded-[8px] bg-darkGreen border-l-[4px] border border-paleGreen flex items-center justify-between px-[30px] cursor-pointer hover:shadow-lg transform hover:scale-[103%] hover:border-[#CCFF33] transition duration-300 ease-out'>
+        <div className='h-[100px] rounded-[8px] bg-black border-l-[4px] border border-paleGreen flex items-center justify-between px-[30px] cursor-pointer hover:shadow-lg transform hover:scale-[103%] hover:border-[#CCFF33] transition duration-300 ease-out'>
             <div>
                 <h2 className='text-white text-[11px] leading-[17px] font-bold'>DURATION (HR)</h2>
                 <h1 className='text-white text-[20px] leading-[24px] font-bold'>260</h1>
