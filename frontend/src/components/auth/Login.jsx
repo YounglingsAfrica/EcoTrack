@@ -78,7 +78,7 @@ const Login = () => {
                                 />
                             </div>
                             <div className="mt-5 flex justify-center">
-                                <Link to="/reset">
+                                <Link to="/forgot">
                                 <p className="mb-0 mt-2 pt-1 text-xs font-regular underline">
                                     Forgot Password {" "}
                                 </p>

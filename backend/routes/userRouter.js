@@ -1,10 +1,17 @@
 const router = require('express').Router();
 const cors = require("cors");
-const { test, registerUser, loginUser, getProfile } = require("../controllers/authController");
+const { 
+  test, 
+  registerUser, 
+  loginUser, 
+  getProfile,
+  forgotPassword,
+  resetPassword 
+} = require("../controllers/authController");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const {OAuth2Client} = require("google-auth-library");
+const {OAuth2Client, JWT} = require("google-auth-library");
 
 router.use(
   cors({
@@ -17,6 +24,12 @@ router.get("/", test)
 router.post("/signup", registerUser)
 router.post("/login", loginUser)
 router.get("/profile", getProfile)
+
+// forgot password
+router.post("/forgot", forgotPassword)
+
+// reset password
+router.post("/reset/:id/:token", resetPassword)
 
 // google auth
 // router.post('/login', async (req, res, next) => {

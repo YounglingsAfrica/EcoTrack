@@ -1,16 +1,35 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Logo from "../../assets/eco_logo.png";
 import Eco from "../../assets/ecoeco.png";
 import X from "../../assets/x-mark.png";
-// import axios from "axios";
+import axios from "axios";
 
 const Reset = () => {
-
+    const navigate = useNavigate()
+    const {id, token} = useParams()
     const [data, setData] = useState({
-        email: ''
-    })
+        password: ''
+    });
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const {password} = data;
+        try {
+            await axios.post(`/reset/${id}/${token}`, {
+                password
+            })
+            .then(res => {
+                if(res.data.Status === "Success") {
+                    navigate("/login")
+                }
+            }).catch(err => console.log(err))
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    
     return (
         <div className="min-h-screen pt-40 bg-black">
             <div className="container mx-auto">
@@ -21,30 +40,20 @@ const Reset = () => {
                             <img src={X} alt="exit" className='h-auto w-4 absolute top-4 left-4 hover:scale-75 duration-300' />
                         </Link> 
                         <img src={Logo} alt="Eco" className='mx-auto w-32' />
-                        <h2 className="text-3xl mb-6 mt-6 text-center">Reset Password</h2>
+                        <h2 className="text-3xl mb-6 mt-6 text-center">Reset Your Password</h2>
                         <p className="mb-4 text-center text-sm">
-                            Enter the email associated with your account and we'll send an email with instructions to reset your password
+                            Please enter your new password:
                         </p>
-                        <form onSubmit={''}>
+                        <form onSubmit={handleSubmit}>
                             <div className="mt-5 flex justify-center">
                                 <input 
-                                    type="text" 
-                                    placeholder="Email" 
+                                    type="password" 
+                                    placeholder="Password" 
                                     className="border border-gray-400 bg-red-50 h-10 py-1 px-2 w-80 rounded-xl focus:outline-primaryGreen" 
-                                    value={data.email}
+                                    value={data.password}
                                     required
-                                    onChange={(e) => setData({...data, email: e.target.value})}
+                                    onChange={(e) => setData({...data, password: e.target.value})}
                                 />
-                            </div>
-                            <div className="mt-5 flex justify-center">
-                                <Link
-                                    to="/login"
-                                    className="text-black underline transition duration-150 ease-in-out hover:text-danger-600 focus:text-danger-600 active:text-danger-700"
-                                >
-                                    <p className="mb-0 mt-2 pt-1 text-xs font-regular">
-                                        Wait, I remember my password {" "}
-                                    </p>
-                                </Link>
                             </div>
                             <div className="mt-6 flex justify-center">
                                 <button 
