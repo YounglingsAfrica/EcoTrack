@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Logo from "../../assets/eco_logo.png";
 import Eco from "../../assets/ecoeco.png";
 import X from "../../assets/x-mark.png";
-import axios from "axios";
+// import axios from "axios";
 
 const Reset = () => {
 

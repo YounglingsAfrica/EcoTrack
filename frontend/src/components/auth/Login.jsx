@@ -78,6 +78,20 @@ const Login = () => {
                                 />
                             </div>
                             <div className="mt-5 flex justify-center">
+                                <Link to="/reset">
+                                <p className="mb-0 mt-2 pt-1 text-xs font-regular underline">
+                                    Forgot Password {" "}
+                                </p>
+                                </Link>
+                            </div>
+                            <div className="mt-6 flex justify-center">
+                                <button 
+                                    className="flex items-center justify-center px-6 w-auto h-10 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen shadow-right-bottom"
+                                >
+                                    Log In
+                                </button>
+                            </div>
+                            <div className="mt-2 flex justify-center">
                                 <p className="mb-0 mt-2 pt-1 text-xs font-regular">
                                     Don't have an account yet? {" "}
                                 <Link
@@ -87,13 +101,6 @@ const Login = () => {
                                     Register
                                 </Link>
                                 </p>
-                            </div>
-                            <div className="mt-6 flex justify-center">
-                                <button 
-                                    className="flex items-center justify-center px-6 w-auto h-10 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen shadow-right-bottom"
-                                >
-                                    Log In
-                                </button>
                             </div>
                             <div
                                 className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-400 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-400"
