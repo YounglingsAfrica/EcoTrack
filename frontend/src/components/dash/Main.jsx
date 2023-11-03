@@ -75,7 +75,7 @@ const Main = () => {
           </div>
           <div>
             <LineChart
-              width={650}
+              width={800}
               height={350}
               data={data}
               margin={{
@@ -126,7 +126,7 @@ const Main = () => {
       <div className='flex items-center justify-between'>
         <h1 className='text-white text-lg leading-[34px] mt-[15px] mb-[10px]'>Overview</h1>
       </div> 
-      <div className='grid grid-cols-4 gap-[30px] pb-[15px] w-[76%]'>
+      <div className='grid grid-cols-4 gap-[25px] pb-[15px] w-[74.5%]'>
         {/*Routes */}
         <div className='h-[100px] rounded-[8px] bg-black border-l-[4px] border border-[paleGreen] flex items-center justify-between px-[20px] cursor-pointer hover:shadow-lg transform hover:scale-[103%] hover:border-[#CCFF33] transition duration-300 ease-out'>
             <div className='transform hover:text-[#CCFF33] transition duration-300 ease-out'>

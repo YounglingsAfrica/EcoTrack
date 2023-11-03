@@ -72,7 +72,7 @@ const loginUser = async (req, res) => {
         } 
         if (!match) {
             res.json({
-                error: "Passwords do not match"
+                error: "Incorrect password"
             })
         }
     } catch (error) {
