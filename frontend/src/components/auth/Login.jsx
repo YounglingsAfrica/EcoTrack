@@ -27,7 +27,7 @@ const Login = () => {
                 toast.error(data.error)
             } else {
                 setData({});
-                toast.success("Login successful. Welcome!")
+                toast.success(`Login successful. Welcome back ${data.name}`)
                 navigate("/dashboard-b")
             }
         } catch (error) {

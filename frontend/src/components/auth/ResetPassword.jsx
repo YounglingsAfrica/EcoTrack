@@ -4,6 +4,7 @@ import Logo from "../../assets/eco_logo.png";
 import Eco from "../../assets/ecoeco.png";
 import X from "../../assets/x-mark.png";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const Reset = () => {
     const navigate = useNavigate()
@@ -17,15 +18,17 @@ const Reset = () => {
 
         const {password} = data;
         try {
-            await axios.post(`/reset/${id}/${token}`, {
+            const res = await axios.post(`/reset/${id}/${token}`, {
                 password
             })
-            .then(res => {
-                if(res.data.Status === "Success") {
-                    navigate("/login")
-                }
-            }).catch(err => console.log(err))
+            if (res.data.Status === "Success") {
+                toast.success("Your password has been successfully reset");
+                navigate("/login");
+            } else {
+                toast.error("There was an issue with your request.");
+            }
         } catch (error) {
+            toast.error(error.message)
             console.log(error)
         }
     }

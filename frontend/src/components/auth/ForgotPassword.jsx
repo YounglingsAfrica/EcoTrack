@@ -4,6 +4,7 @@ import Logo from "../../assets/eco_logo.png";
 import Eco from "../../assets/ecoeco.png";
 import X from "../../assets/x-mark.png";
 import axios from "axios";
+import { toast } from 'react-hot-toast';
 
 const Forgot = () => {
     const [data, setData] = useState({
@@ -16,17 +17,17 @@ const Forgot = () => {
 
         const {email} = data;
         try {
-            await axios.post("/forgot", {
+            const res = await axios.post("/forgot", {
                 email
             })
-            .then(res => {
-                if (res.data.Status === "Success") {
-                    navigate("/login")
-                }
-            }).catch(err => {
-                console.error(err.message);
-            });
+            if (res.data.Status === "Success") {
+                toast.success("Please check your email for further instructions.");
+                navigate("/login");
+            } else {
+                toast.error("There was an issue with your request.");
+            }
         } catch (error) {
+            toast.error(error.message);
             console.log(error)
         }
 
