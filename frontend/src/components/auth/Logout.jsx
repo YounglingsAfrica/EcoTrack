@@ -21,8 +21,8 @@ const Logout = () => {
             });
     
             if (response.ok) {
-                setUser(null);
                 toast.success(`${user.name} has logged out.`)
+                setUser(null);
                 navigate("/")
             } else {
                 console.error("Logout failed, please try again")
