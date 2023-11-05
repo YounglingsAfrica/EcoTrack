@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.95a6d534.css",
+    "main.js": "/static/js/main.a70d262e.js",
+    "static/media/ecoeco.png": "/static/media/ecoeco.81352db77dc217c0392d.png",
+    "static/media/dash.png": "/static/media/dash.cf3d5353ac7c78e7b903.png",
+    "static/media/eco_logo.png": "/static/media/eco_logo.1d7b4fa456e21a2ac2a4.png",
+    "static/media/x-mark.png": "/static/media/x-mark.9b1763dd20ba45a46eba.png",
+    "index.html": "/index.html",
+    "main.95a6d534.css.map": "/static/css/main.95a6d534.css.map",
+    "main.a70d262e.js.map": "/static/js/main.a70d262e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.95a6d534.css",
+    "static/js/main.a70d262e.js"
+  ]
+}
