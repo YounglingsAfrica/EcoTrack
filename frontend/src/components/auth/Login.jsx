@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from "../../assets/eco_logo.png";
 import Eco from "../../assets/ecoeco.png";
 import X from "../../assets/x-mark.png";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { UserContext } from '../../context/userContext';
 
 const Login = () => {
+    const { setUser } = useContext(UserContext);  // use the `setUser` function from the `UserContext`
     const navigate = useNavigate();
     const [data, setData] = useState({
         email: '',
@@ -16,26 +18,31 @@ const Login = () => {
     const loginUser = async (e) => {
         e.preventDefault();
 
-        const {email, password} = data;
+        const { email, password } = data;
+    
         try {
-            const response = await axios.post("/login", {
-                email,
-                password
-            });
-            
-            const responseData = response.data
-
-            if (responseData.error) {
-                toast.error(data.error)
+            const response = await axios.post("/login", { email, password });
+    
+            if (response.data.error) {
+                toast.error(response.data.error);
             } else {
-                setData({});
-                toast.success(`Login successful. Welcome back ${responseData.name}`)
-                navigate("/dashboard-b")
+                // Login was successful, now fetch the profile
+                const profileResponse = await axios.get("/profile", { withCredentials: true });
+    
+                if (profileResponse.data) {
+                    // Set user data in the context
+                    setUser(profileResponse.data);
+                    toast.success(`Login successful. Welcome back ${profileResponse.data.name}`);
+                    navigate("/dashboard-b");
+                } else {
+                    console.error('Failed to get profile');
+                    toast.error('Failed to get profile');
+                }
             }
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
-    }
+    };
 
     // const auth = async () => {
     //     const response = await fetch("http://127.0.0.1:3000/request", {
