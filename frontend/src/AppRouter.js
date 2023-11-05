@@ -10,8 +10,6 @@ import LoginPage from "./pages/Login";
 import Reset from "./components/auth/ResetPassword";
 import Forgot from "./components/auth/ForgotPassword";
 import Logout from "./components/auth/Logout";
-const dotenv = require("dotenv");
-dotenv.config();
 
 axios.defaults.baseURL = process.env.REACT_APP_DEV_URL;
 axios.defaults.withCredentials = true;
