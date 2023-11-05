@@ -40,7 +40,7 @@ const Logout = () => {
                 <div className="flex flex-col lg:flex-row w-10/12 lg:w-8/12 bg-white rounded-2xl mx-auto drop-shadow-xl overflow-hidden">
                     {/* Subscription start */}
                     <div className="w-full lg:w-1/2 py-16 px-12">
-                        <Link to="/">
+                        <Link to="/dashboard-b">
                             <img src={X} alt="exit" className='h-auto w-4 absolute top-4 left-4 hover:scale-75 duration-300' />
                         </Link> 
                         <img src={Logo} alt="Eco" className='mx-auto w-32' />
