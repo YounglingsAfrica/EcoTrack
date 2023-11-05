@@ -6,7 +6,8 @@ const {
   loginUser, 
   getProfile,
   forgotPassword,
-  resetPassword 
+  resetPassword, 
+  logoutUser
 } = require("../controllers/authController");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -24,6 +25,7 @@ router.get("/", test)
 router.post("/signup", registerUser)
 router.post("/login", loginUser)
 router.get("/profile", getProfile)
+router.get("/logout", logoutUser)
 
 // forgot password
 router.post("/forgot", forgotPassword)

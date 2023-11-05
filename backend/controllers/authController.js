@@ -164,11 +164,19 @@ const resetPassword = (req, res) => {
     })
 };
 
+const logoutUser = (req, res) => {
+    res.clearCookie("token");
+    return res.json({
+        message: "Logged out successfully"
+    });
+}
+
 module.exports = {
     test,
     registerUser,
     loginUser,
     getProfile,
     forgotPassword,
-    resetPassword
+    resetPassword,
+    logoutUser
 }
