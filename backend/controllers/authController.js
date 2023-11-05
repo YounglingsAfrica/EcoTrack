@@ -165,7 +165,8 @@ const resetPassword = (req, res) => {
 };
 
 const logoutUser = (req, res) => {
-    res.clearCookie("token");
+    const {name} = req.body;
+    res.clearCookie("token", name);
     return res.json({
         message: "Logged out successfully"
     });
