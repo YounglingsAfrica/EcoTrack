@@ -18,16 +18,18 @@ const Login = () => {
 
         const {email, password} = data;
         try {
-            const {data} = await axios.post("/login", {
+            const response = await axios.post("/login", {
                 email,
                 password
             });
             
-            if (data.error) {
+            const responseData = response.data
+
+            if (responseData.error) {
                 toast.error(data.error)
             } else {
                 setData({});
-                toast.success(`Login successful. Welcome back ${data.name}`)
+                toast.success(`Login successful. Welcome back ${responseData.name}`)
                 navigate("/dashboard-b")
             }
         } catch (error) {
