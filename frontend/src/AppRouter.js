@@ -11,7 +11,7 @@ import Reset from "./components/auth/ResetPassword";
 import Forgot from "./components/auth/ForgotPassword";
 import Logout from "./components/auth/Logout";
 
-axios.defaults.baseURL = process.env.REACT_APP_DEV_URL;
+axios.defaults.baseURL = process.env.REACT_APP_PROD_URL;
 axios.defaults.withCredentials = true;
 
 const AppRouter = () => {
