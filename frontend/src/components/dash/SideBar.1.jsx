@@ -17,7 +17,7 @@ const SideBar  = () => {
 
   //Sidebar Items
   const Menus = [
-    { title: "Dashboard" },
+    { title: "Dashboard", route:"/dashboard-b" },
     { title: "Collection Schedule", icon: <AiOutlineSchedule /> },
     { title: "Request Schedule", icon: <AiFillSchedule/> },
     { title: "Collection Routes", icon: <LiaRouteSolid /> },
@@ -25,6 +25,7 @@ const SideBar  = () => {
     { title: "Recycling Guide", icon: <MdRecycling /> },
     { 
       title: "Disposal Locations", icon: <FaMapLocationDot />,
+      route:"/Disposal",
       submenu: true,
       submenuItems: [
         { title: "Location 1" },
