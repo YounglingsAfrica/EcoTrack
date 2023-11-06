@@ -9,6 +9,7 @@ import Registration from "./pages/Registration";
 import LoginPage from "./pages/Login";
 import Reset from "./components/auth/ResetPassword";
 import Forgot from "./components/auth/ForgotPassword";
+import Disposal from "./components/dash/Disposal";
 // import Main from "./components/dash/Main";
 
 axios.defaults.baseURL = "http://localhost:8000";
@@ -28,6 +29,7 @@ const AppRouter = () => {
                 <Route path="/dashboard-b" element={<DashHome />} >
                     {/* <Route index element={<Main />} /> */}
                 </Route>
+                <Route path="/Disposal" element={<Disposal />}/>
         </Routes>
         </>
     );

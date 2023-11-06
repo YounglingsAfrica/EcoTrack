@@ -75,7 +75,7 @@ const Main = () => {
           </div>
           <div>
             <LineChart
-              width={800}
+              width={500}
               height={350}
               data={data}
               margin={{
@@ -107,11 +107,11 @@ const Main = () => {
         
         {/*Map*/}
 
-        <div className='basis-[25%] border bg-white cursor-pointer rounded-md h-[100px]'>
-          <div className='bg-[#F8F9FC] flex items-center justify-between py-[15px] px-[20px] border-b-[1px] border-[#EDEDED] mb-[20px] rounded-md'>
+        <div className='basis-[25%] border bg-white cursor-pointer rounded-md h-[50vh]'>
+          {/*<div className='bg-[#F8F9FC] flex items-center justify-between py-[15px] px-[20px] border-b-[1px] border-[#EDEDED] mb-[20px] rounded-md'>
             <h2 className='text-darkGreen font-bold'>Collection Map</h2>
             <FaEllipsisVertical className='cursor-pointer'/>
-          </div>
+            </div>*/}
           <div>
             <Map/>
           </div>
@@ -126,7 +126,7 @@ const Main = () => {
       <div className='flex items-center justify-between'>
         <h1 className='text-white text-lg leading-[34px] mt-[15px] mb-[10px]'>Overview</h1>
       </div> 
-      <div className='grid grid-cols-4 gap-[25px] pb-[15px] w-[74.5%]'>
+      <div className='grid grid-cols-4 gap-[25px] pb-[15px] w-[65vw]'>
         {/*Routes */}
         <div className='h-[100px] rounded-[8px] bg-black border-l-[4px] border border-[paleGreen] flex items-center justify-between px-[20px] cursor-pointer hover:shadow-lg transform hover:scale-[103%] hover:border-[#CCFF33] transition duration-300 ease-out'>
             <div className='transform hover:text-[#CCFF33] transition duration-300 ease-out'>
@@ -164,19 +164,19 @@ const Main = () => {
       
 
       {/*<div className='flex mt-[22px] w-full gap-[30px]'>
-        <div className='basis-[55%] border bg-paleGreen shadow-md cursor-pointer rounded-[4px]'>
+        <div className='basis-[36%] border bg-paleGreen shadow-md cursor-pointer rounded-[4px]'>
           <div className='bg-[#F8F9FC] flex items-center justify-between py-[15px] px-[20px] border-b-[1px] border-[#EDEDED]'>
             <h2>Disposal Locations</h2>
             <FaEllipsisVertical color='black' className='cursor-pointer'/>
           </div>
         </div>
-        <div className='basis-[45%] border bg-paleGreen shadow-md cursor-pointer rounded-[4px]'>
+        <div className='basis-[36%] border bg-paleGreen shadow-md cursor-pointer rounded-[4px]'>
           <div className='bg-[#F8F9FC] flex items-center justify-between py-[15px] px-[20px] border-b-[1px] border-[#EDEDED]'>
             <h2>Collection Schedule</h2>
             <FaEllipsisVertical color='black' className='cursor-pointer'/>
           </div>
-        </div>
-            </div>*/}
+          </div>
+          </div>*/}
     </div>
   )
 }

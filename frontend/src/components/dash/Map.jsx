@@ -6,7 +6,7 @@ import 'leaflet-defaulticon-compatibility';
 
 const Map = () => {
   return (
-    <div className="h-[505px]">
+    <div className="h-[86vh]">
       <MapContainer center={[-33.919667, 18.419253]} zoom={13} className="h-full">
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
