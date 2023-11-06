@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 const { hashPassword, comparePassword } = require("../helpers/auth")
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
-
 const test = (req, res) => {
     res.json("test is working")
 }
@@ -67,8 +66,7 @@ const loginUser = async (req, res) => {
                 {expiresIn: "1h"}, 
                 (err, token) => {
                     if (err) throw err;
-                    res.cookie("token", token)
-                    res.json(user)
+                    res.cookie("token", token).json(user)
             })  
         } 
         if (!match) {
@@ -82,18 +80,21 @@ const loginUser = async (req, res) => {
 }
 
 const getProfile = (req, res) => {
-    const authHeader = req.headers["authorization"];
-    const token = authHeader && authHeader.split(' ')[1];
+    const token = req.cookies.token;
 
-    if (token == null) return res.status(401).json({ message: "No token provided"});
+    if (!token) return res.status(401).json({ message: "No token provided"});
     jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
+        console.log('User from JWT:', user);
         if (err) {
             console .error("JWT verification error", err);
             return res.status(403).json({ message: "Token verification failed" })
         }
 
-        User.findById(user._id)
-            .then(user => res.json(user))
+        User.findById(user.id)
+            .then(user => {
+                console.log("User from DB: ", user);
+                res.json(user)
+            })   
             .catch(err => res.status(500).json("Error: " + err));
     });
 };

@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const cors = require("cors");
 const { 
   test, 
   registerUser, 
@@ -13,13 +12,6 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const {OAuth2Client, JWT} = require("google-auth-library");
-
-router.use(
-  cors({
-    credentials: true,
-    origin: process.env.PROD_URL
-  })
-)
 
 router.get("/", test)
 router.post("/signup", registerUser)
