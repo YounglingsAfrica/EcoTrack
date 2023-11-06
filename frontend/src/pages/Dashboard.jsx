@@ -1,8 +1,12 @@
 import React from "react";
 import { FaBell } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
+import { useContext } from 'react';
+import { UserContext } from "../context/userContext";
 
 const Dashboard = () => {
+    const {user} = useContext(UserContext);
+
     return(
         <>
             <div className="flex items-center justify-between h-[70px] shadow-lg shadow-darkGreen px-[25px]">
@@ -11,9 +15,9 @@ const Dashboard = () => {
                 </div>
                 <div className="flex items-center gap-[15px] relative">
                     <div className="border-r-[1px] pr-[25px]">
-                        <p className="text-white">Dwayne</p>
+                        {!!user && (<h2 className="text-white text-lg cursor-pointer">{user.name}</h2>)}
                     </div>
-                    <div className="flex items-center gap-[25px] flex items-center justify-center relative">
+                    <div className="gap-[25px] flex items-center justify-center relative">
                         <FaCircleUser className="text-white text-3xl cursor-pointer" />
                         <div>
                             <FaBell className="text-white text-2xl cursor-pointer" />

@@ -1,5 +1,6 @@
-const mongoose = require("mongoose")
-const { Schema } = mongoose
+const mongoose = require("mongoose");
+const { Schema } = mongoose;
+mongoose.connect(process.env.MONGO_URL);
 
 const UserSchema = new Schema(
     {
@@ -9,7 +10,6 @@ const UserSchema = new Schema(
         email: {
             type: String,
             required: true,
-            unique: true
         },
         password: {
             type: String,

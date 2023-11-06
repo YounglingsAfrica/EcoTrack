@@ -7,9 +7,13 @@ import DashHome from "./components/dash/DashHome";
 import Home from "./pages/Home";
 import Registration from "./pages/Registration";
 import LoginPage from "./pages/Login";
+import Reset from "./components/auth/ResetPassword";
+import Forgot from "./components/auth/ForgotPassword";
+import Disposal from "./components/dash/Disposal";
 // import Main from "./components/dash/Main";
+import Logout from "./components/auth/Logout";
 
-axios.defaults.baseURL = "http://localhost:8000";
+axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
 axios.defaults.withCredentials = true;
 
 const AppRouter = () => {
@@ -20,10 +24,14 @@ const AppRouter = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/signup" element={<Registration />} />
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/forgot" element={<Forgot />} />
+                <Route path="/reset/:id/:token" element={<Reset />} />
                 <Route path="/dashboard-a" element={<Header />} />
+                <Route path="/logout" element={<Logout />} />
                 <Route path="/dashboard-b" element={<DashHome />} >
                     {/* <Route index element={<Main />} /> */}
                 </Route>
+                <Route path="/Disposal" element={<Disposal />}/>
         </Routes>
         </>
     );
