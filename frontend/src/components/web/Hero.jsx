@@ -1,12 +1,6 @@
 import React from 'react';
 
 const Hero = () => {
-
-    //This is for DASHBOARD TESTING.
-    const openNewWindow = () => {
-        window.open('/dashboard-b', '_blank');
-    };
-
     return (
         <section id="home" className='container mb-40'>
             <div className="relative isolate px-6 lg:px-8">
