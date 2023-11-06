@@ -163,7 +163,7 @@ const Main = () => {
 
       
 
-      <div className='flex mt-[22px] w-full gap-[30px]'>
+      {/*<div className='flex mt-[22px] w-full gap-[30px]'>
         <div className='basis-[55%] border bg-paleGreen shadow-md cursor-pointer rounded-[4px]'>
           <div className='bg-[#F8F9FC] flex items-center justify-between py-[15px] px-[20px] border-b-[1px] border-[#EDEDED]'>
             <h2>Disposal Locations</h2>
@@ -176,7 +176,7 @@ const Main = () => {
             <FaEllipsisVertical color='black' className='cursor-pointer'/>
           </div>
         </div>
-            </div>
+            </div>*/}
     </div>
   )
 }
