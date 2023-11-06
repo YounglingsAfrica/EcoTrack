@@ -61,9 +61,10 @@ const loginUser = async (req, res) => {
         // check if passwords match
         const match = await comparePassword(password, user.password)
         if (match) {
-            jwt.sign({email: user.email, id: user._id, name: user.name}, 
+            jwt.sign(
+                {email: user.email, id: user._id, name: user.name}, 
                 process.env.JWT_SECRET, 
-                {}, 
+                {expiresIn: "1h"}, 
                 (err, token) => {
                     if (err) throw err;
                     res.cookie("token", token)
@@ -81,20 +82,21 @@ const loginUser = async (req, res) => {
 }
 
 const getProfile = (req, res) => {
-    const {token} = req.cookies;
-    if (token) {
-        jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
-            if (err) {
-                console.error("JWT verification error", err);
-            } else {
-                res.json(user)
-                console.log("Decoded user data:", user);
-            }
-        })
-    } else {
-        res.json(null)
-    }
-}
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    if (token == null) return res.status(401).json({ message: "No token provided"});
+    jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
+        if (err) {
+            console .error("JWT verification error", err);
+            return res.status(403).json({ message: "Token verification failed" })
+        }
+
+        User.findById(user._id)
+            .then(user => res.json(user))
+            .catch(err => res.status(500).json("Error: " + err));
+    });
+};
 
 const forgotPassword = async (req, res) => {
     const {email} = req.body;

@@ -23,7 +23,6 @@ app.use(
     })
 );
 
-
 app.use("/", require("./routes/userRouter"))
 
 const port = process.env.PORT || 8000;
