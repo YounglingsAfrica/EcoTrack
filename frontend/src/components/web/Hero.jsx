@@ -20,7 +20,7 @@ const Hero = () => {
                         </p>
                         <div className="mt-16 flex items-center justify-center gap-x-6">
                             <a href="#subscriptions">
-                                <button onClick={openNewWindow}
+                                <button
                                     className="flex items-center justify-center px-6 w-auto h-10 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen"
                                 >
                                     Get Started
