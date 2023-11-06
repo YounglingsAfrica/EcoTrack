@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from "../../assets/eco_logo.png";
 import Eco from "../../assets/ecoeco.png";
 import X from "../../assets/x-mark.png";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { UserContext } from '../../context/userContext';
 
 const Login = () => {
+    const { setUser } = useContext(UserContext);  // use the `setUser` function from the `UserContext`
     const navigate = useNavigate();
     const [data, setData] = useState({
         email: '',
@@ -16,32 +18,39 @@ const Login = () => {
     const loginUser = async (e) => {
         e.preventDefault();
 
-        const {email, password} = data;
+        const { email, password } = data;
+    
         try {
-            const {data} = await axios.post("/login", {
-                email,
-                password
-            });
-            
-            if (data.error) {
-                toast.error(data.error)
+            const response = await axios.post("/login", { email, password });
+    
+            if (response.data.error) {
+                toast.error(response.data.error);
             } else {
-                setData({});
-                toast.success(`Login successful. Welcome back ${data.name}`)
-                navigate("/dashboard-b")
+                // Login was successful, now fetch the profile
+                const profileResponse = await axios.get("/profile", { withCredentials: true });
+    
+                if (profileResponse.data) {
+                    // Set user data in the context
+                    setUser(profileResponse.data);
+                    toast.success(`Login successful. Welcome back ${profileResponse.data.name}`);
+                    navigate("/dashboard-b");
+                } else {
+                    console.error('Failed to get profile');
+                    toast.error('Failed to get profile');
+                }
             }
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
-    }
+    };
 
-    const auth = async () => {
-        const response = await fetch("http://127.0.0.1:3000/request", {
-            method: "post",
-        })
-        const data = await response.json();
-        navigate(data.url);
-    }
+    // const auth = async () => {
+    //     const response = await fetch("http://127.0.0.1:3000/request", {
+    //         method: "post",
+    //     })
+    //     const data = await response.json();
+    //     navigate(data.url);
+    // }
 
     return (
         <div className="min-h-screen pt-28 bg-black">
@@ -112,8 +121,7 @@ const Login = () => {
                                 </p>
                             </div>
                             <div className="px-6 sm:px-0 max-w-sm mx-auto mt-6">
-                                <button
-                                    onClick={() => auth()} 
+                                <button 
                                     type="button" 
                                     className="text-white w-full  bg-[#000] hover:scale-105 duration-300 focus:ring-4 focus:outline-none focus:ring-primaryGreen/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-between dark:focus:ring-[#4285F4]/55 mr-2 mb-2"
                                 >

@@ -43,7 +43,7 @@ const SideBar  = () => {
     },
     { title: "Regulations", icon: <MdOutlineManageSearch /> },
     { title: "Feedback", icon: <VscFeedback /> },
-    { title: "Logout", spacing: true, icon: <FiLogOut />, route: "/" },
+    { title: "Logout", spacing: true, icon: <FiLogOut />, route: "/logout" },
   ];
 
   const [submenuOpen, setSubmenuOpen] = useState(Array(Menus.length).fill(false));
@@ -80,7 +80,7 @@ const SideBar  = () => {
             </li>
           </Link>
             
-            {menu.submenu && submenuOpen[index] &&(
+            {menu.submenu && submenuOpen[index] && open && (
               <ul>
                 {menu.submenuItems.map((submenuItem, index) => (
                   <li key={index} className='text-white text-sm font-thin flex items-center gap-x-4 cursor-pointer p-2 px-12 hover:bg-black rounded-md'>

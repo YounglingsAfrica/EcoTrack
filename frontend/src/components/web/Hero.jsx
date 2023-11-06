@@ -1,12 +1,6 @@
 import React from 'react';
 
 const Hero = () => {
-
-    //This is for DASHBOARD TESTING.
-    const openNewWindow = () => {
-        window.open('/dashboard-b', '_blank');
-    };
-
     return (
         <section id="home" className='container mb-40'>
             <div className="relative isolate px-6 lg:px-8">
@@ -20,7 +14,7 @@ const Hero = () => {
                         </p>
                         <div className="mt-16 flex items-center justify-center gap-x-6">
                             <a href="#subscriptions">
-                                <button onClick={openNewWindow}
+                                <button
                                     className="flex items-center justify-center px-6 w-auto h-10 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen"
                                 >
                                     Get Started

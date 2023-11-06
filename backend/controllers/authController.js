@@ -1,9 +1,8 @@
 const User = require("../models/user")
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const { hashPassword, comparePassword } = require("../helpers/auth")
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
-
 const test = (req, res) => {
     res.json("test is working")
 }
@@ -61,14 +60,15 @@ const loginUser = async (req, res) => {
         // check if passwords match
         const match = await comparePassword(password, user.password)
         if (match) {
-            jwt.sign({email: user.email, id: user._id, name: user.name}, 
+            jwt.sign(
+                {email: user.email, id: user._id, name: user.name}, 
                 process.env.JWT_SECRET, 
-                {}, 
+                {expiresIn: "1h"}, 
                 (err, token) => {
                     if (err) throw err;
-                    res.cookie("token", token)
-                    res.json(user)
-            })  
+                    res.cookie("token", token, { sameSite: "None", secure: true }).json(user)
+                }
+            )  
         } 
         if (!match) {
             res.json({
@@ -81,16 +81,24 @@ const loginUser = async (req, res) => {
 }
 
 const getProfile = (req, res) => {
-    const {token} = req.cookies;
-    if (token) {
-        jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
-            if (err) throw err;
-            res.json(user)
-        })
-    } else {
-        res.json(null)
-    }
-}
+    const token = req.cookies.token;
+
+    if (!token) return res.status(401).json({ message: "No token provided"});
+    jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
+        console.log('User from JWT:', user);
+        if (err) {
+            console .error("JWT verification error", err);
+            return res.status(403).json({ message: "Token verification failed" })
+        }
+
+        User.findById(user.id)
+            .then(user => {
+                console.log("User from DB: ", user);
+                res.json(user)
+            })   
+            .catch(err => res.status(500).json("Error: " + err));
+    });
+};
 
 const forgotPassword = async (req, res) => {
     const {email} = req.body;
@@ -116,7 +124,7 @@ const forgotPassword = async (req, res) => {
             from: "ecotracksolutions@gmail.com",
             to: email,
             subject: "Reset Password",
-            text: `Please follow this link to reset your password: http://localhost:3000/reset/${user._id}/${token}`
+            text: `Please follow this link to reset your password: ${process.env.PROD_URL}/reset/${user._id}/${token}`
         };
   
         transporter.sendMail(mailOptions, (error, info) => {
@@ -164,11 +172,20 @@ const resetPassword = (req, res) => {
     })
 };
 
+const logoutUser = (req, res) => {
+    const {name} = req.body;
+    res.clearCookie("token", name);
+    return res.json({
+        message: "Logged out successfully"
+    });
+}
+
 module.exports = {
     test,
     registerUser,
     loginUser,
     getProfile,
     forgotPassword,
-    resetPassword
+    resetPassword,
+    logoutUser
 }

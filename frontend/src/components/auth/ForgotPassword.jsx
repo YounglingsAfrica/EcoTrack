@@ -21,7 +21,7 @@ const Forgot = () => {
                 email
             })
             if (res.data.Status === "Success") {
-                toast.success("Please check your email for further instructions.");
+                toast.success("Please check your email for further instructions");
                 navigate("/login");
             } else {
                 toast.error("There was an issue with your request.");
