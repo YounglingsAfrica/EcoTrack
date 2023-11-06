@@ -17,10 +17,10 @@ app.use(express.json())
 app.use(cookieParser());
 app.use(express.urlencoded({extended: false}))
 app.use(
-    cors({
-      origin: process.env.PROD_URL,
-      credentials: true,
-    })
+  cors({
+    origin: process.env.PROD_URL,
+    credentials: true,
+  })
 );
 
 app.use("/", require("./routes/userRouter"))

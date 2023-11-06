@@ -1,5 +1,5 @@
 const User = require("../models/user")
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const { hashPassword, comparePassword } = require("../helpers/auth")
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
