@@ -124,7 +124,7 @@ const forgotPassword = async (req, res) => {
             from: "ecotracksolutions@gmail.com",
             to: email,
             subject: "Reset Password",
-            text: `Please follow this link to reset your password: http://localhost:3000/reset/${user._id}/${token}`
+            text: `Please follow this link to reset your password: ${process.env.PROD_URL}/${user._id}/${token}`
         };
   
         transporter.sendMail(mailOptions, (error, info) => {
