@@ -16,7 +16,7 @@ const {OAuth2Client, JWT} = require("google-auth-library");
 
 router.get("/", test)
 router.post("/signup", registerUser)
-router.get("/confirm/:id/:token", confirmEmail)
+router.get("/confirm/:token", confirmEmail)
 router.post("/login", loginUser)
 router.get("/profile", getProfile)
 router.get("/logout", logoutUser)
