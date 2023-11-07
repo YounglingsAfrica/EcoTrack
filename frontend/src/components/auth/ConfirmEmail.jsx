@@ -10,7 +10,7 @@ const ConfirmEmail = () => {
     const { id, token } = useParams();
 
     useEffect(() => {
-        axios.get(`/confirm/${id}/${token}`)
+        axios.get(`/confirm/${id}/${token}`, { withCredentials: true })
             .then(res => {
                 console.log('Response from backend:', res.data);
                 setStatus(res.data.message);
