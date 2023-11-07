@@ -29,7 +29,7 @@ const SignUp = () => {
             } else {
                 setData({})
                 toast.success("Registration successful. Please verify your account, we've sent you an email. ")
-                navigate("/login")
+                // navigate("/login")
             }
         } catch (error) {
             console.log(error);
