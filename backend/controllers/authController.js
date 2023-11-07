@@ -52,7 +52,7 @@ const registerUser = async (req, res) => {
         })
 
         // email confirmation 
-        const confirmationToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+        const confirmationToken = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: "1d" });
 
         user = await User.findByIdAndUpdate(user._id, { confirmationToken }, { new: true })
 
