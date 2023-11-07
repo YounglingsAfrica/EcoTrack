@@ -6,6 +6,7 @@ import X from "../../assets/x-mark.png";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { UserContext } from '../../context/userContext';
+import Cookies from "js-cookie";
 
 const Login = () => {
     const { setUser } = useContext(UserContext);  // use the `setUser` function from the `UserContext`
@@ -27,6 +28,7 @@ const Login = () => {
                 toast.error(response.data.error);
             } else {
                 // Login was successful, now fetch the profile
+                Cookies.set('authToken', response.data.token);
                 const profileResponse = await axios.get("/profile", { withCredentials: true });
     
                 if (profileResponse.data) {

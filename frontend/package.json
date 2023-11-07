@@ -11,6 +11,7 @@
     "axios": "^1.6.0",
     "crypto-browserify": "^3.12.0",
     "dotenv": "^16.3.1",
+    "js-cookie": "^3.0.5",
     "leaflet": "^1.9.4",
     "leaflet-defaulticon-compatibility": "^0.1.2",
     "os-browserify": "^0.3.0",
@@ -50,8 +51,6 @@
     ]
   },
   "devDependencies": {
-
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@babel/plugin-proposal-private-property-in-object": "",
     "tailwindcss": "^3.3.5"
   },
