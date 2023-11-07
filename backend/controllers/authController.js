@@ -3,6 +3,17 @@ const bcrypt = require("bcryptjs");
 const { hashPassword, comparePassword } = require("../helpers/auth")
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
+
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+    port: 587,
+    secure: true,
+    auth: {
+        user: "ecotracksolutions@gmail.com",
+        pass: process.env.APP_PASSWORD
+    }
+});
+
 const test = (req, res) => {
     res.json("test is working")
 }
@@ -39,9 +50,57 @@ const registerUser = async (req, res) => {
             password: hashedPassword
         })
 
+        // email confirmation 
+        const confirmationToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+        const confirmationUrl = `${process.env.PROD_URL}/confirm/${user.id}/${confirmationToken}`;
+        const emailTemplate = `
+        <h1>Dear ${user.name},</h1>
+        
+        <p>Thank you for signing up for our website. Please confirm your email by clicking the link below:</p>
+    
+        <a href="${confirmationUrl}">Confirm Email</a>
+        `;
+
+        transporter.sendMail({
+            from: "ecotracksolutions@gmail.com",
+            to: email,
+            subject: "Confirm your email",
+            html: emailTemplate,
+        }, (error, info) => {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log(`Email sent: ${info.response}`);
+            }
+        });
+
+        res.send("Registration successful. Please check your email for confirmation.");
+
         return res.json(user);
     } catch (error) {
         console.log(error)
+    }
+}
+
+const confirmEmail = async (req, res) => {
+    const { id, token } = req.params;
+    
+    try {
+        const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+        
+        if (decoded.id !== id) {
+            return res.json({ Status: 'Invalid token' });
+        }
+        
+        const user = await User.findByIdAndUpdate(id, { isConfirmed: true });
+        
+        if (!user) {
+            return res.json({ Status: 'No user found with that ID' });
+        }
+        
+        res.send('Email confirmed.');
+    } catch (err) {
+        res.json({ Status: 'Error with token or updating user' });
     }
 }
 
@@ -110,15 +169,6 @@ const forgotPassword = async (req, res) => {
             })
         }
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, {expiresIn: "1d"})
-        const transporter = nodemailer.createTransport({
-            service: "gmail",
-            port: 587,
-            secure: true,
-            auth: {
-                user: "ecotracksolutions@gmail.com",
-                pass: process.env.APP_PASSWORD
-            }
-        });
 
         const mailOptions = {
             from: "ecotracksolutions@gmail.com",
@@ -187,5 +237,6 @@ module.exports = {
     getProfile,
     forgotPassword,
     resetPassword,
-    logoutUser
+    logoutUser,
+    confirmEmail
 }

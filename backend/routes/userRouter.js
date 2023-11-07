@@ -6,7 +6,8 @@ const {
   getProfile,
   forgotPassword,
   resetPassword, 
-  logoutUser
+  logoutUser,
+  confirmEmail
 } = require("../controllers/authController");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -15,6 +16,7 @@ const {OAuth2Client, JWT} = require("google-auth-library");
 
 router.get("/", test)
 router.post("/signup", registerUser)
+router.get("/confirm/:id/:token", confirmEmail)
 router.post("/login", loginUser)
 router.get("/profile", getProfile)
 router.get("/logout", logoutUser)
