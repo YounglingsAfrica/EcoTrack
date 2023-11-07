@@ -83,9 +83,6 @@ const registerUser = async (req, res) => {
             }
         });
 
-        res.send("Registration successful. Please check your email for confirmation.");
-
-        return res.json(user);
     } catch (error) {
         console.error('Error registering user:', error);
         res.status(500).json({ error: 'Error registering user' });
