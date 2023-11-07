@@ -92,29 +92,25 @@ const registerUser = async (req, res) => {
 }
 
 const confirmEmail = async (req, res) => {
-    const { id, token } = req.params;
-  
+    const { token } = req.params;
+    
     try {
-        const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-    
-        if (decoded.id.toString() !== id) {
-            return res.status(400).json({ message: 'Invalid token' });
-        }
-    
-        const user = await User.findByIdAndUpdate(id, { isConfirmed: true }, { new: true });
+        // look up the user by their confirmation token
+        const user = await User.findOne({ confirmationToken: token });
     
         if (!user) {
-            return res.status(404).json({ message: 'No user found with that ID' });
+            return res.status(404).json({ message: 'No user found with that confirmation token' });
         }
+
+        // confirm the user's email and clear the confirmation token
+        user.isConfirmed = true;
+        user.confirmationToken = null;
+        await user.save();
     
         return res.status(200).send('Email confirmed.');
     } catch (err) {
         console.error(err);
-        if (err.name === 'JsonWebTokenError') {
-            return res.status(400).json({ message: 'Error with token' });
-        } else {
-            return res.status(500).json({ message: 'Error updating user' });
-        }
+        return res.status(500).json({ message: 'Error confirming email' });
     }
 }
 
