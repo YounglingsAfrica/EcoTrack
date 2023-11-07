@@ -21,6 +21,7 @@ const UserSchema = new Schema(
         },
         confirmationToken: {
             type: String,
+            default: null
         }
     },
     { timestamps: true }
