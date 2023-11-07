@@ -20,7 +20,7 @@ axios.defaults.withCredentials = true;
 const AppRouter = () => {
     return(
         <>
-        <Toaster position="bottom-right" toastOptions={{duration: 2000}} />
+        <Toaster position="bottom-right" toastOptions={{duration: 4000}} />
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/signup" element={<Registration />} />
