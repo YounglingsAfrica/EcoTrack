@@ -69,9 +69,14 @@ const registerUser = async (req, res) => {
             html: emailTemplate,
         }, (error, info) => {
             if (error) {
-                console.log(error);
+                console.log('Error sending email:', error);
+                return res.status(500).json({ error: 'Error sending confirmation email' });
             } else {
                 console.log(`Email sent: ${info.response}`);
+                res.status(200).json({ 
+                    message: "Registration successful. Please check your email for confirmation.", 
+                    user 
+                });
             }
         });
 
@@ -79,29 +84,35 @@ const registerUser = async (req, res) => {
 
         return res.json(user);
     } catch (error) {
-        console.log(error)
+        console.error('Error registering user:', error);
+        res.status(500).json({ error: 'Error registering user' });
     }
 }
 
 const confirmEmail = async (req, res) => {
     const { id, token } = req.params;
-    
+  
     try {
         const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-        
-        if (decoded.id !== id) {
-            return res.json({ Status: 'Invalid token' });
+    
+        if (decoded.id.toString() !== id) {
+            return res.status(400).json({ message: 'Invalid token' });
         }
-        
-        const user = await User.findByIdAndUpdate(id, { isConfirmed: true });
-        
+    
+        const user = await User.findByIdAndUpdate(id, { isConfirmed: true }, { new: true });
+    
         if (!user) {
-            return res.json({ Status: 'No user found with that ID' });
+            return res.status(404).json({ message: 'No user found with that ID' });
         }
-        
-        res.send('Email confirmed.');
+    
+        return res.status(200).send('Email confirmed.');
     } catch (err) {
-        res.json({ Status: 'Error with token or updating user' });
+        console.error(err);
+        if (err.name === 'JsonWebTokenError') {
+            return res.status(400).json({ message: 'Error with token' });
+        } else {
+            return res.status(500).json({ message: 'Error updating user' });
+        }
     }
 }
 
