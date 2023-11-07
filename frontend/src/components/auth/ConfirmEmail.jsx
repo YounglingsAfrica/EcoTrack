@@ -12,7 +12,8 @@ const ConfirmEmail = () => {
     useEffect(() => {
         axios.get(`/confirm/${id}/${token}`)
             .then(res => {
-                setStatus(res.data);
+                console.log('Response from backend:', res.data);
+                setStatus(res.data.message);
             })
             .catch(err => {
                 setStatus("An error ocurred");
