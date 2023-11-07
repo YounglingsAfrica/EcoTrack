@@ -18,6 +18,9 @@ const UserSchema = new Schema(
         isConfirmed: {
             type: Boolean,
             default: false
+        },
+        confirmationToken: {
+            type: String,
         }
     },
     { timestamps: true }

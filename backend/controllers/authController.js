@@ -48,6 +48,7 @@ const registerUser = async (req, res) => {
             name, 
             email, 
             password: hashedPassword,
+            confirmationToken,
             isConfirmed: false
         })
 
@@ -55,7 +56,7 @@ const registerUser = async (req, res) => {
         const confirmationToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
         const confirmationUrl = `${process.env.PROD_URL}/confirm/${user._id}/${confirmationToken}`;
         const emailTemplate = `
-        <h1>Dear ${user.name},</h1>
+        <p>Dear ${user.name},</p>
         
         <p>Thank you for signing up for our website. Please confirm your email by clicking the link below:</p>
     
@@ -155,7 +156,7 @@ const getProfile = (req, res) => {
     const token = req.cookies.token;
 
     if (!token) return res.status(401).json({ message: "No token provided"});
-    jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
+    jwt.verify(token, process.env.JWT_SECRET, { ignoreExpiration }, (err, user) => {
         console.log('User from JWT:', user);
         if (err) {
             console .error("JWT verification error", err);
