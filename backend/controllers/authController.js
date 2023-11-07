@@ -44,7 +44,7 @@ const registerUser = async (req, res) => {
         const hashedPassword = await hashPassword(password)
 
         // create user in db
-        const user = await User.create({
+        let user = await User.create({
             name, 
             email, 
             password: hashedPassword,
