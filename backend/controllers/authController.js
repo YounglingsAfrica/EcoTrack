@@ -156,10 +156,14 @@ const getProfile = (req, res) => {
     const token = req.cookies.token;
 
     if (!token) return res.status(401).json({ message: "No token provided"});
-    jwt.verify(token, process.env.JWT_SECRET, { ignoreExpiration }, (err, user) => {
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
         console.log('User from JWT:', user);
         if (err) {
-            console .error("JWT verification error", err);
+            if (err.name === 'TokenExpiredError') {
+                return res.status(403).json({ message: "Token expired" })
+            }
+            console.error("JWT verification error", err);
             return res.status(403).json({ message: "Token verification failed" })
         }
 
