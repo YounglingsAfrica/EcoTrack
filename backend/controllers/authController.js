@@ -53,7 +53,7 @@ const registerUser = async (req, res) => {
 
         // email confirmation 
         const confirmationToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
-        const confirmationUrl = `${process.env.PROD_URL}/confirm/${user.id}/${confirmationToken}`;
+        const confirmationUrl = `${process.env.PROD_URL}/confirm/${user._id}/${confirmationToken}`;
         const emailTemplate = `
         <h1>Dear ${user.name},</h1>
         
