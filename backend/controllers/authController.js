@@ -54,8 +54,6 @@ const registerUser = async (req, res) => {
         // email confirmation 
         const confirmationToken = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: "1d" });
 
-        res.cookie("confirmationToken", confirmationToken, { sameSite: "None", secure: true });
-
         user = await User.findByIdAndUpdate(user._id, { confirmationToken }, { new: true })
 
         const confirmationUrl = `${process.env.PROD_URL}/confirm/${user._id}/${confirmationToken}`;

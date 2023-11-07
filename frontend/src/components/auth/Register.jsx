@@ -112,7 +112,7 @@ const SignUp = () => {
                                 <p className="mb-0 mt-2 pt-1 text-xs font-regular">
                                     Already have an account? {" "}
                                 <Link
-                                    to="/"
+                                    to="/login"
                                     className="text-blue-700 underline transition duration-150 ease-in-out hover:text-danger-600 focus:text-danger-600 active:text-danger-700"
                                 >
                                     Log in
