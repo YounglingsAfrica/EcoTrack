@@ -7,10 +7,10 @@ import axios from "axios";
 
 const ConfirmEmail = () => {
     const [status, setStatus] = useState("Verifying...");
-    const { id, token } = useParams();
+    const { token } = useParams();
 
     useEffect(() => {
-        axios.get(`/confirm/${id}/${token}`, { withCredentials: true })
+        axios.get(`/confirm/${token}`, { withCredentials: true })
             .then(res => {
                 console.log('Response from backend:', res.data);
                 setStatus(res.data.message);
@@ -18,7 +18,7 @@ const ConfirmEmail = () => {
             .catch(err => {
                 setStatus("An error ocurred");
             })
-    }, [id, token]);
+    }, [token]);
 
     return (
         <div className="min-h-screen pt-40 bg-black">

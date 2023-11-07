@@ -24,7 +24,7 @@ const AppRouter = () => {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/signup" element={<Registration />} />
-                <Route path="/confirm/:id/:token" element={<ConfirmEmail />} />
+                <Route path="/confirm/:token" element={<ConfirmEmail />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/forgot" element={<Forgot />} />
                 <Route path="/reset/:id/:token" element={<Reset />} />
