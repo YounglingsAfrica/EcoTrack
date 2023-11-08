@@ -22,10 +22,11 @@ const Contact = () => {
                 name, 
                 email, 
                 message
-            });
+            }).then(() => {
+                setData({});
+            })
         }
         toast.success("Submitted! We'll get back to you very soon.")
-        setData({});
     }
 
     return (
