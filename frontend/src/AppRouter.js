@@ -40,13 +40,15 @@ const AppRouter = () => {
                     <Route path="/forgot" element={<Forgot />} />
                     <Route path="/reset/:id/:token" element={<Reset />} />
                     <Route path="/dashboard-a" element={<Header />} />
-                    <Route path="/dashboard-b/*">
-                    <Routes>
-                        <Route index element={<ProtectedRoute><DashHome /></ProtectedRoute>} />
-                        <Route path="logout" element={<ProtectedRoute><Logout /></ProtectedRoute>} />
-                        <Route path="disposal" element={<ProtectedRoute><Disposal /></ProtectedRoute>} />
-                    </Routes>
-                    </Route>
+                    <Route path="/dashboard-b/*" element={
+                        <ProtectedRoute>
+                            <Routes>
+                                <Route index element={<DashHome />} />
+                                <Route path="logout" element={<Logout />} />
+                                <Route path="disposal" element={<Disposal />} />
+                            </Routes>
+                        </ProtectedRoute>
+                    }/>
                 </Routes>
         </>
     );
