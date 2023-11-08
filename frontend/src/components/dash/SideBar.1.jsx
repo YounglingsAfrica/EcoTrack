@@ -25,7 +25,7 @@ const SideBar  = () => {
     { title: "Recycling Guide", icon: <MdRecycling /> },
     { 
       title: "Disposal Locations", icon: <FaMapLocationDot />,
-      route:"/Disposal",
+      route:"/dashboard-b/disposal",
       submenu: true,
       submenuItems: [
         { title: "Location 1" },
@@ -43,7 +43,7 @@ const SideBar  = () => {
     },
     { title: "Regulations", icon: <MdOutlineManageSearch /> },
     { title: "Feedback", icon: <VscFeedback /> },
-    { title: "Logout", spacing: true, icon: <FiLogOut />, route: "/logout" },
+    { title: "Logout", spacing: true, icon: <FiLogOut />, route: "/dashboard-b/logout" },
   ];
 
   const [submenuOpen, setSubmenuOpen] = useState(Array(Menus.length).fill(false));

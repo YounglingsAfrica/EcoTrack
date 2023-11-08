@@ -160,7 +160,7 @@ const getProfile = (req, res) => {
     if (!token) return res.status(401).json({ message: "No token provided"});
 
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-        console.log('User from JWT:', user);
+        // console.log('User from JWT:', user);
         if (err) {
             if (err.name === 'TokenExpiredError') {
                 return res.status(403).json({ message: "Token expired" })
@@ -171,7 +171,7 @@ const getProfile = (req, res) => {
 
         User.findById(user.id)
             .then(user => {
-                console.log("User from DB: ", user);
+                // console.log("User from DB: ", user);
                 res.json(user)
             })   
             .catch(err => res.status(500).json("Error: " + err));
