@@ -28,7 +28,7 @@ const AppRouter = () => {
                     style: {
                         background: "#000",
                         color: "#2ECC40",
-                        border: "#fff"
+                        borderColor: "#fff"
                     }
                 }} 
             />
@@ -45,10 +45,11 @@ const AppRouter = () => {
                             <Routes>
                                 <Route index element={<DashHome />} />
                                 <Route path="logout" element={<Logout />} />
-                                <Route path="disposal" element={<Disposal />} />
+                                {/* <Route path="disposal" element={<Disposal />} /> */}
                             </Routes>
                         </ProtectedRoute>
                     }/>
+                    <Route path="disposal" element={<Disposal />} />
                 </Routes>
         </>
     );

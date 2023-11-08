@@ -8,7 +8,7 @@ import axios from "axios";
 const ConfirmEmail = () => {
     const [status, setStatus] = useState("Verifying...");
     const { id, token } = useParams();
-
+    
     useEffect(() => {
         axios.get(`/confirm/${id}/${token}`, { withCredentials: true })
             .then(res => {

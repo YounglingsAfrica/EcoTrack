@@ -1,6 +1,31 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
+import { emailRegex } from '../../utils/emailRegex';
 
 const Contact = () => {
+    const [isEmailValid, setIsEmailValid] = useState(false);
+    const [data, setData] = useState({
+        name: "",
+        email: "",
+        message: ""
+    });
+
+
+    const contactFormSubmit = async (e) => {
+        e.preventDefault();
+
+        const {name, email, message} = data;
+
+        if (isEmailValid) {
+            await axios.post("/email", {
+                name, 
+                email, 
+                message
+            });
+        }
+        setData({});
+    }
+
     return (
         <section id='contact' className='container mb-40'>
             <h1 className='text-center text-7xl font-thin max-w-full mb-6 text-gradient2 mt-20 pb-10'>
@@ -10,7 +35,7 @@ const Contact = () => {
                 <div className='w-1/2'>
                     <div className='flex justify-start items-center flex-col'>
                         <h2 
-                            className='max-w-md leading-snug text-center text-5xl font-semibold mb-20 text-white mt-20 pb-10'
+                            className='max-w-md leading-snug text-center text-5xl font-semibold mb-20 text-white mt-20 pb-6'
                         >
                             Let's discuss something cool together
                         </h2>
@@ -23,7 +48,7 @@ const Contact = () => {
                             <p 
                                 className='flex justify-center items-center text-black text-lg font-medium rounded-xl border-2 border-primaryGreen bg-primaryGreen50 w-[300px] h-[50px]'
                             >
-                                <svg className='w-6 mr-2 h-auto' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 16.42V19.9561C21 20.4811 20.5941 20.9167 20.0705 20.9537C19.6331 20.9846 19.2763 21 19 21C10.1634 21 3 13.8366 3 5C3 4.72371 3.01545 4.36687 3.04635 3.9295C3.08337 3.40588 3.51894 3 4.04386 3H7.5801C7.83678 3 8.05176 3.19442 8.07753 3.4498C8.10067 3.67907 8.12218 3.86314 8.14207 4.00202C8.34435 5.41472 8.75753 6.75936 9.3487 8.00303C9.44359 8.20265 9.38171 8.44159 9.20185 8.57006L7.04355 10.1118C8.35752 13.1811 10.8189 15.6425 13.8882 16.9565L15.4271 14.8019C15.5572 14.6199 15.799 14.5573 16.001 14.6532C17.2446 15.2439 18.5891 15.6566 20.0016 15.8584C20.1396 15.8782 20.3225 15.8995 20.5502 15.9225C20.8056 15.9483 21 16.1633 21 16.42Z" fill="rgba(46,204,64,1)"></path></svg>+27 21 708 5123
+                                <svg className='w-6 mr-2 h-auto' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 16.42V19.9561C21 20.4811 20.5941 20.9167 20.0705 20.9537C19.6331 20.9846 19.2763 21 19 21C10.1634 21 3 13.8366 3 5C3 4.72371 3.01545 4.36687 3.04635 3.9295C3.08337 3.40588 3.51894 3 4.04386 3H7.5801C7.83678 3 8.05176 3.19442 8.07753 3.4498C8.10067 3.67907 8.12218 3.86314 8.14207 4.00202C8.34435 5.41472 8.75753 6.75936 9.3487 8.00303C9.44359 8.20265 9.38171 8.44159 9.20185 8.57006L7.04355 10.1118C8.35752 13.1811 10.8189 15.6425 13.8882 16.9565L15.4271 14.8019C15.5572 14.6199 15.799 14.5573 16.001 14.6532C17.2446 15.2439 18.5891 15.6566 20.0016 15.8584C20.1396 15.8782 20.3225 15.8995 20.5502 15.9225C20.8056 15.9483 21 16.1633 21 16.42Z" fill="rgba(46,204,64,1)"></path></svg>+27 21 708 5123 
                             </p>
                             <p 
                                 className='flex justify-center items-center text-white font-medium text-lg w-[300px] h-[50px]'
@@ -35,26 +60,43 @@ const Contact = () => {
                 </div>
                 <div className='w-1/2'>
                     <div className='bg-[#F0F0F0] w-[600px] h-[700px] rounded-3xl p-6 px-14'>
-                        <div>
-                            <h2 className='leading-snug text-center text-5xl font-bold text-black p-10 mb-20'>
+                        <form onSubmit={contactFormSubmit} className='grid'>
+                            <h2 className='leading-snug text-center text-5xl font-bold text-black p-10 mb-10'>
                                 Say Hello
                             </h2>                    
                             <input
-                                className='border-b-2 border-gray-400 bg-[#F0F0F0] w-full mb-12 focus:outline-none focus:border-primaryGreen'
-                                type="text" 
+                                className='border-b-4 border-gray-400 bg-[#F0F0F0] w-1/3 mb-12 focus:outline-none focus:border-primaryGreen pb-5'
+                                type="text"
+                                name='name'
                                 placeholder='Your name'
+                                value={data.name}
+                                onChange={(e) => setData({...data, name: e.target.value})}
+                                required
                             />
                             <input
-                                className='border-b-2 border-gray-400 bg-[#F0F0F0] w-full mb-12 focus:outline-none focus:border-primaryGreen'
-                                type="email" 
+                                className='border-b-4 border-gray-400 bg-[#F0F0F0] w-2/3 focus:outline-none focus:border-primaryGreen pb-5'
+                                type="email"
+                                name='email' 
                                 placeholder='Your email'
+                                onChange={(e) => {
+                                    const enteredEmail = e.target.value;
+                                    setData({...data, email: enteredEmail});
+                                    setIsEmailValid(emailRegex.test(enteredEmail));
+                                }}
+                                required
                             />
+                            {!isEmailValid && data.email.length > 0 && (
+                                <p className="text-red-600 text-[14px] mt-0">Please enter a valid email.</p>
+                            )}
                             <textarea
-                                className='border-b-2 border-gray-400 bg-[#F0F0F0] w-full mb-20 focus:outline-none focus:border-primaryGreen resize-none'
+                                className='border-b-4 border-gray-400 bg-[#F0F0F0] mt-10 mb-20 focus:outline-none focus:border-primaryGreen resize-none'
                                 type="text" 
+                                name='message'
                                 placeholder='Your message'
+                                onChange={(e) => setData({...data, message: e.target.value})}
+                                required
                             />
-                        </div>
+                        </form>
                             <button 
                                 className='flex items-center text-center justify-center px-6 w-56 h-14 text-white rounded-xl bg-gradient-to-r from-black to-primaryGreen mt-10 mx-auto shadow-right-bottom'
                             >

@@ -249,6 +249,50 @@ const logoutUser = (req, res) => {
     });
 }
 
+const sendEmail = (req, res) => {
+    try {
+        const { name, email, message } = req.body;
+
+        transporter.sendMail({
+            from: "ecotracksolutions@gmail.com",
+            to: "ecotracksolutions@gmail.com",
+            subject: "Message from Visitor",
+            text:`Hello,
+
+            You have received a message from ${name} (${email}).
+    
+            Message:
+            ${message}
+    
+            Regards,
+            ${name}`,
+            html: `<p>Hello,</p>
+    
+            <p>You have received a message from <strong>${name}</strong> (${email}).</p>
+    
+            <p>Message:<br>
+            ${message}</p>
+    
+            <p>Regards,<br>
+            ${name}</p>`
+
+        }, (error, info) => {
+            if (error) {
+                console.log('Error sending email:', error);
+                return res.status(500).json({ error: 'Error sending email' });
+            } else {
+                console.log(`Email sent: ${info.response}`);
+                res.status(200).json({ 
+                    message: "Email Submitted! We'll get right back to you very soon.",  
+                });
+            }
+        });
+    } catch(error) {
+        console.error('Error sending email:', error);
+        res.status(500).json({ error: 'Error sending email' });
+    }
+}
+
 module.exports = {
     test,
     registerUser,
@@ -257,5 +301,6 @@ module.exports = {
     forgotPassword,
     resetPassword,
     logoutUser,
-    confirmEmail
+    confirmEmail,
+    sendEmail
 }

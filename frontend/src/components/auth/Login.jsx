@@ -46,14 +46,6 @@ const Login = () => {
         }
     };
 
-    // const auth = async () => {
-    //     const response = await fetch("http://127.0.0.1:3000/request", {
-    //         method: "post",
-    //     })
-    //     const data = await response.json();
-    //     navigate(data.url);
-    // }
-
     return (
         <div className="min-h-screen pt-28 bg-black">
             <div className="container mx-auto">

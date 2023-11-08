@@ -12,11 +12,8 @@ import { VscFeedback } from "react-icons/vsc";
 import { FiLogOut } from "react-icons/fi";
 import { Link } from 'react-router-dom';
 
-const SideBar  = () => {
-  const [open, setOpen] = useState(false);
-
   //Sidebar Items
-  const Menus = [
+export const Menus = [
     { title: "Dashboard", route:"/dashboard-b" },
     { title: "Collection Schedule", icon: <AiOutlineSchedule /> },
     { title: "Request Schedule", icon: <AiFillSchedule/> },
@@ -44,8 +41,10 @@ const SideBar  = () => {
     { title: "Regulations", icon: <MdOutlineManageSearch /> },
     { title: "Feedback", icon: <VscFeedback /> },
     { title: "Logout", spacing: true, icon: <FiLogOut />, route: "/dashboard-b/logout" },
-  ];
+];
 
+const SideBar  = () => {
+  const [open, setOpen] = useState(false);
   const [submenuOpen, setSubmenuOpen] = useState(Array(Menus.length).fill(false));
 
   return (
