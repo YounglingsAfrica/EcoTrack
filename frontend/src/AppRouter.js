@@ -45,10 +45,11 @@ const AppRouter = () => {
                             <Routes>
                                 <Route index element={<DashHome />} />
                                 <Route path="logout" element={<Logout />} />
-                                <Route path="disposal" element={<Disposal />} />
+                                {/* <Route path="disposal" element={<Disposal />} /> */}
                             </Routes>
                         </ProtectedRoute>
                     }/>
+                    <Route path="disposal" element={<Disposal />} />
                 </Routes>
         </>
     );
