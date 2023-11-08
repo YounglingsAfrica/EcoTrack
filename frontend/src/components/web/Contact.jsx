@@ -23,7 +23,13 @@ const Contact = () => {
                 email, 
                 message
             }).then(() => {
-                setData({});
+                setData({
+                    name: "",
+                    email: "",
+                    message: ""
+                });
+            }).catch(err => {
+                console.log(err);
             })
         }
         toast.success("Submitted! We'll get back to you very soon.")
