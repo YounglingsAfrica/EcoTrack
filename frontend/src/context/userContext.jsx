@@ -10,9 +10,8 @@ export function UserContextProvider({children}) {
         if (user) {
             axios.get("/profile", { withCredentials: true }).then(({data}) => {
                 setUser(data);
-                console.log(data);
             }).catch(error => {
-                if (error.response.status === 401) {
+                if (error.response.status === 401) {    
                     console.error("User is not authenticated");
                 } else {
                     console.error(error);

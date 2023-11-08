@@ -46,19 +46,11 @@ const AppRouter = () => {
                         element={
                             <ProtectedRoute>
                                 <DashHome />
-                                <Routes>
-                                    <Route
-                                        path="Disposal"
-                                        element={
-                                            <ProtectedRoute>
-                                                <Disposal />
-                                            </ProtectedRoute>
-                                        }
-                                    />
-                                </Routes>
                             </ProtectedRoute>
                         } 
-                    />
+                    >
+                        <Route path="Disposal" element={<Disposal/>} />
+                    </Route>
                         {/* <Route index element={<Main />} /> */}
                 </Routes>
         </>

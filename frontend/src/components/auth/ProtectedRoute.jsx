@@ -1,35 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { UserContext } from '../../context/userContext';
 
 const ProtectedRoute = ({ children }) => {
-    const [isAuth, setIsAuth] = useState(null);
+    const { user } = useContext(UserContext);
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get("/profile")
-            .then(res => {
-                if (res.data) {
-                    setIsAuth(true);
-                } else {
-                    setIsAuth(false);
-                }
-            }).catch(err => {
-                setIsAuth(false);
-            });
-    }, []);
-
-    useEffect(() => {
-        if (isAuth === false) {
+        if (!user) {
             navigate("/login");
         }
-    }, [isAuth, navigate]);
+    }, [user, navigate]);
 
-    if (isAuth === null || isAuth === false) {
-        return null;
-    }
-
-    return children;
-}
+    return user ? children : null;
+};
 
 export default ProtectedRoute;
