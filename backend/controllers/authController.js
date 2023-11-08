@@ -124,6 +124,13 @@ const loginUser = async (req, res) => {
             })
         }
 
+        // check if email confirmed
+        if (!user.isConfirmed) {
+            return res.json({
+                error: "Please confirm your email before logging in"
+            });
+        }
+
         // check if passwords match
         const match = await comparePassword(password, user.password)
         if (match) {
