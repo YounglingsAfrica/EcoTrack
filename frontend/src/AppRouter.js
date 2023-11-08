@@ -27,7 +27,8 @@ const AppRouter = () => {
                     duration: 4000, 
                     style: {
                         background: "#000",
-                        color: "#2ECC40"
+                        color: "#2ECC40",
+                        border: "#fff"
                     }
                 }} 
             />
@@ -40,8 +41,22 @@ const AppRouter = () => {
                     <Route path="/reset/:id/:token" element={<Reset />} />
                     <Route path="/dashboard-a" element={<Header />} />
                     <Route path="/logout" element={<Logout />} />
-                    <Route path="/dashboard-b" element={<ProtectedRoute><DashHome /></ProtectedRoute>} >
-                        <Route path="Disposal" element={<Disposal />}/>
+                    <Route 
+                        path="/dashboard-b" 
+                        element={
+                            <ProtectedRoute>
+                                <DashHome />
+                            </ProtectedRoute>
+                        } 
+                    >
+                        <Route 
+                            path="/dashboard-b/Disposal" 
+                            element={
+                                <ProtectedRoute>
+                                    <Disposal />
+                                </ProtectedRoute>
+                            }
+                        />
                         {/* <Route index element={<Main />} /> */}
                     </Route>
                 </Routes>
