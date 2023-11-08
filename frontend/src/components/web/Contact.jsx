@@ -92,6 +92,7 @@ const Contact = () => {
                                 type="email"
                                 name='email' 
                                 placeholder='Your email'
+                                value={data.email}
                                 onChange={(e) => {
                                     const enteredEmail = e.target.value;
                                     setData({...data, email: enteredEmail});
@@ -107,6 +108,7 @@ const Contact = () => {
                                 type="text" 
                                 name='message'
                                 placeholder='Your message'
+                                value={data.message}
                                 onChange={(e) => setData({...data, message: e.target.value})}
                                 required
                             />
