@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { emailRegex } from '../../utils/emailRegex';
+import { toast } from "react-hot-toast";
 
 const Contact = () => {
     const [isEmailValid, setIsEmailValid] = useState(false);
@@ -23,6 +24,7 @@ const Contact = () => {
                 message
             });
         }
+        toast.success("Submitted! We'll get back to you very soon.")
         setData({});
     }
 
