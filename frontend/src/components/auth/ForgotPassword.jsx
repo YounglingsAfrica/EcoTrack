@@ -89,7 +89,7 @@ const Forgot = () => {
                                             visible={true}
                                         /> 
                                     ) : (  
-                                        'Log in'
+                                        'Submit'
                                     )}
                                 </button>
                             </div>
