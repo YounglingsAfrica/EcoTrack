@@ -42,23 +42,24 @@ const AppRouter = () => {
                     <Route path="/dashboard-a" element={<Header />} />
                     <Route path="/logout" element={<Logout />} />
                     <Route 
-                        path="/dashboard-b" 
+                        path="/dashboard-b/*" 
                         element={
                             <ProtectedRoute>
                                 <DashHome />
+                                <Routes>
+                                    <Route
+                                        path="Disposal"
+                                        element={
+                                            <ProtectedRoute>
+                                                <Disposal />
+                                            </ProtectedRoute>
+                                        }
+                                    />
+                                </Routes>
                             </ProtectedRoute>
                         } 
-                    >
-                        <Route 
-                            path="/dashboard-b/Disposal" 
-                            element={
-                                <ProtectedRoute>
-                                    <Disposal />
-                                </ProtectedRoute>
-                            }
-                        />
+                    />
                         {/* <Route index element={<Main />} /> */}
-                    </Route>
                 </Routes>
         </>
     );
