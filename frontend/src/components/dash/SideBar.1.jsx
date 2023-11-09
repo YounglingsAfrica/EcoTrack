@@ -32,6 +32,7 @@ export const Menus = [
     },
     { 
       title: "User Profile", icon: <LuUserSquare2 />,
+      route: "/user-profile",
       submenu: true,
       submenuItems: [
         { title: "Addresses" },

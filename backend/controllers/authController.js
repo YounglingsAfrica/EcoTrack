@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const { hashPassword, comparePassword } = require("../helpers/auth")
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
+const upload = require("../index");
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -214,30 +215,30 @@ const forgotPassword = async (req, res) => {
 const resetPassword = (req, res) => {
     const {id, token} = req.params;
     const {password} = req.body;
-  
+    
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-      if (err) {
-        return res.json({
-          Status: "Error with token"
-        });
-      } else {
-        if (!password || password.length < 6) {
+        if (err) {
             return res.json({
-                error: "Password is required and should be at least 6 characters long"
+            Status: "Error with token"
+            });
+        } else {
+            if (!password || password.length < 6) {
+                return res.json({
+                    error: "Password is required and should be at least 6 characters long"
+                })
+            }
+            bcrypt.hash(password, 12)
+            .then(hash => {
+            User.findByIdAndUpdate({_id: id}, {password: hash})
+            .then(u => res.send({
+                Status: "Success"
+            }))
+            .catch(err => res.send({
+                Status: err
+            }))
             })
+            .catch(err => res.send({Status: err}))
         }
-        bcrypt.hash(password, 12)
-        .then(hash => {
-          User.findByIdAndUpdate({_id: id}, {password: hash})
-          .then(u => res.send({
-            Status: "Success"
-          }))
-          .catch(err => res.send({
-            Status: err
-          }))
-        })
-        .catch(err => res.send({Status: err}))
-      }
     })
 };
 
@@ -293,6 +294,56 @@ const sendEmail = (req, res) => {
     }
 }
 
+const updateUserAccount = async (req, res) => {
+    const {name, email, password, phoneNumber} = req.body;
+    const update = {};
+
+    try {
+        const user = await User.findById(req.user.id);
+
+        if (name && name !== user.name) update.name = name;
+        if (password && password.length >= 6 && password !== user.password) {
+            update.password = await bcrypt.hash(password, 12);
+        }
+        if (email && email !== user.email) update.email = email;
+        if (phoneNumber) update.phoneNumber = phoneNumber;
+
+        if (Object.keys(update).length > 0) {
+            const updatedUser = await User.findByIdAndUpdate(req.user.id, update, { new: true });
+            return res.json(updatedUser);
+        } else {
+            return res.status(400).json({ message: 'No changes detected' });
+        }
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Server Error' });
+    }
+};
+
+const uploadAvatar = async (req, res, next) => {
+    const Upload = upload;
+
+    const uploadMiddleware = Upload.single("avatar");
+
+    uploadMiddleware(req, res, function (err) {
+        if (err) {
+            return res.status(500).json({
+                message: "Error uploading file"
+            });
+        }
+    })  
+
+    try {
+        const user = await User.findByIdAndUpdate(req.user.id, { avatar: req.file.path }, { new: true });
+        return res.json(user);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            message: "Server Error"
+        });
+    }
+}
+
 module.exports = {
     test,
     registerUser,
@@ -302,5 +353,7 @@ module.exports = {
     resetPassword,
     logoutUser,
     confirmEmail,
-    sendEmail
+    sendEmail,
+    updateUserAccount,
+    uploadAvatar
 }

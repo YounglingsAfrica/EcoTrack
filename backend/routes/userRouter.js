@@ -8,8 +8,11 @@ const {
   resetPassword, 
   logoutUser,
   confirmEmail,
-  sendEmail
+  sendEmail,
+  updateUserAccount,
+  uploadAvatar
 } = require("../controllers/authController");
+
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -27,6 +30,10 @@ router.post("/forgot", forgotPassword)
 
 // reset password
 router.post("/reset/:id/:token", resetPassword)
+
+// User profile
+router.post("/profile/update", updateUserAccount)
+router.post("/profile/update/avatar", uploadAvatar)
 
 // google auth
 // router.post('/login', async (req, res, next) => {
