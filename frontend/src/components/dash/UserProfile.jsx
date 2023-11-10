@@ -43,6 +43,9 @@ const UserProfile = () => {
     
     const handleUpdatePhoneNumber = () => {
         axios.post("/profile/update", { phoneNumber: newPhoneNum }, { withCredentials: true })
+            .then(() => {
+                return axios.get("/profile", { withCredentials: true });
+            })
             .then(({data}) => {
                 setUser(data);
             })
