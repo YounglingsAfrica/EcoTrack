@@ -294,30 +294,39 @@ const sendEmail = (req, res) => {
     }
 }
 
-const updateUserAccount = async (req, res) => {
-    const {name, email, password, phoneNumber} = req.body;
-    const update = {};
-
-    try {
-        const user = await User.findById(req.user._id);
-
-        if (name && name !== user.name) update.name = name;
-        if (password && password.length >= 6) {
-            update.password = await bcrypt.hash(password, 12);
-        }
-        if (email && email !== user.email) update.email = email;
-        if (phoneNumber && phoneNumber !== user.phoneNumber) update.phoneNumber = phoneNumber;
-
-        if (Object.keys(update).length > 0) {
-            const updatedUser = await User.findByIdAndUpdate(req.user._id, update, { new: true });
-            return res.json(updatedUser);
+const updateUserAccount = (req, res) => {
+    const { token } = req.params;
+    const { name, email, password, phoneNumber } = req.body;
+    
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            return res.json({
+                Status: "Error with token"
+            });
         } else {
-            return res.status(400).json({ message: 'No changes detected' });
+            User.findById(decoded.userId)
+            .then(user => {
+                const update = {};
+                if (name && name !== user.name) update.name = name;
+                if (password && password.length >= 6) {
+                    const isEqual = bcrypt.compareSync(password, user.password);
+                    if(!isEqual){
+                        update.password = bcrypt.hashSync(password, 12);
+                    }
+                }
+                if (email && email !== user.email) update.email = email;
+                if (phoneNumber && phoneNumber !== user.phoneNumber) update.phoneNumber = phoneNumber;
+                if (Object.keys(update).length > 0) {
+                    User.findByIdAndUpdate(user._id, update, { new: true })
+                    .then(updatedUser => res.json(updatedUser))
+                    .catch(err => res.status(500).json({ message: 'Server Error', err }));
+                } else {
+                    return res.status(400).json({ message: 'No changes detected' });
+                }
+            })
+            .catch(err => res.status(500).json({ message: 'Server Error', err }));
         }
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ message: 'Server Error' });
-    }
+    });
 };
 
 const uploadAvatar = async (req, res, next) => {
