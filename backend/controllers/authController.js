@@ -331,7 +331,12 @@ const updateUserAccount = (req, res) => {
                     return res.status(400).json({ message: 'No changes detected' });
                 }
             })
-            .catch(err => res.status(500).json({ message: 'Server Error', err }));
+            .catch(err => {
+                console.error(err.message);
+                res.status(500).json({
+                    message: "Server Error", err: err.message
+                });
+            })
         }
     });
 };
