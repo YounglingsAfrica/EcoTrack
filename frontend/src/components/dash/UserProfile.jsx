@@ -104,6 +104,7 @@ const UserProfile = () => {
                                 />
                                 <input
                                     type="file"
+                                    name="avatar"
                                     ref={fileInputRef}
                                     hidden
                                     onChange={handleImageUpload}
