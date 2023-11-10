@@ -343,7 +343,7 @@ const updateUserAccount = (req, res) => {
 
 const uploadAvatar = async (req, res) => {
     try {
-        const file = req.files.file;
+        const file = req.files.avatar;
 
         await User.findByIdAndUpdate(
             req.user._id, 

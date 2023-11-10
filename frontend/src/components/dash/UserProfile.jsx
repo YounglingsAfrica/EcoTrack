@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from 'react';
 import SideBar from './SideBar.1';
 import Dashboard from '../../pages/Dashboard';
-// import User from "../../assets/User.png";
+import defaultAvatar from "../../assets/User.png";
 import Verified from "../../assets/verified.svg";
 import { UserContext } from '../../context/userContext';
 import axios from 'axios';
@@ -98,7 +98,7 @@ const UserProfile = () => {
                         <div className='w-1/3 h-80 bg-white rounded-xl text-center border-2 border-black border-dashed p-10 mb-10'>
                             <div className='flex items-center justify-center mb-6'>
                                 <img
-                                    src="data:{{user.avatar.contentType}};base64,{{user.avatar.data}}" 
+                                    src={user?.avatar || defaultAvatar}
                                     alt="User"
                                     className='h-auto w-32 rounded-full cursor-pointer object-cover object-center' 
                                     onClick={handleClickImage}
