@@ -15,6 +15,14 @@ const UserSchema = new Schema(
             type: String,
             required: true,
         },
+        phoneNumber: {
+            type: String,
+            default: null,
+        },
+        avatar: {
+            type: String,
+            default: null,
+        },
         isConfirmed: {
             type: Boolean,
             default: false
