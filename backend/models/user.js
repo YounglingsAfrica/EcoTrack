@@ -21,6 +21,7 @@ const UserSchema = new Schema(
         },
         avatar: {
             type: String,
+            data: Buffer,
             default: null,
         },
         isConfirmed: {

@@ -12,8 +12,6 @@ const {
   updateUserAccount,
   uploadAvatar
 } = require("../controllers/authController");
-const multer = require("multer");
-const upload = multer({ dest: 'avatars/' }).single('avatar');
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -35,7 +33,7 @@ router.post("/reset/:id/:token", resetPassword)
 
 // User profile
 router.post("/profile/update", updateUserAccount)
-router.post("/profile/avatar", upload, uploadAvatar)
+router.post("/profile/avatar", uploadAvatar)
 
 // google auth
 // router.post('/login', async (req, res, next) => {

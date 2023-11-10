@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from 'react';
 import SideBar from './SideBar.1';
 import Dashboard from '../../pages/Dashboard';
-import User from "../../assets/User.png";
+// import User from "../../assets/User.png";
 import Verified from "../../assets/verified.svg";
 import { UserContext } from '../../context/userContext';
 import axios from 'axios';
@@ -70,19 +70,17 @@ const UserProfile = () => {
 
     const handleImageUpload = (e) => {
         const formData = new FormData();
+        
         formData.append('avatar', e.target.files[0]);
-
-        axios.post("/profile/avatar", formData, { headers: {
-            'Content-Type': 'multipart/form-data'
-        }}).then(res => {
-                setUser(prev => ({...prev, avatarUrl: res.data.avatarUrl}));
-                toast.success("Your avatar has been changed.")
-            })
-            .catch(error => {
-                console.error(error);
-                toast.error(error.res.data.message || "An error occurred while changing avatar");
-            });
-    };
+        
+        axios.post('/profile/avatar', formData) 
+        .then(res => {
+            toast.success('Avatar uploaded!');
+        })
+        .catch(err => {
+        toast.error(err.response.data.message); 
+        });
+    }
 
     const handleClickImage = () => {
         fileInputRef.current.click();
@@ -100,7 +98,7 @@ const UserProfile = () => {
                         <div className='w-1/3 h-80 bg-white rounded-xl text-center border-2 border-black border-dashed p-10 mb-10'>
                             <div className='flex items-center justify-center mb-6'>
                                 <img
-                                    src={user?.avatarUrl || User} 
+                                    src="data:{{user.avatar.contentType}};base64,{{user.avatar.data}}" 
                                     alt="User"
                                     className='h-auto w-32 rounded-full cursor-pointer object-cover object-center' 
                                     onClick={handleClickImage}

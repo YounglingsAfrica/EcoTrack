@@ -341,34 +341,20 @@ const updateUserAccount = (req, res) => {
     });
 };
 
-// Helper function to save avatar 
-function saveAvatarToFilesystem(file) {
-    const filename = `user-${req.user._id}-${Date.now()}${path.extname(file.originalname)}`;
-    const filePath = `./avatars/${filename}`;
-    return new Promise((resolve, reject) => {
-        file.mv(filePath, err => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(filename);
-            }  
-        });
-        });
-}
-
 const uploadAvatar = async (req, res) => {
     try {
-        const filename = await saveAvatarToFilesystem(req.file);
+        const file = req.files.file;
 
-        const user = await User.findByIdAndUpdate(
+        await User.findByIdAndUpdate(
             req.user._id, 
-            { avatar: filename }, 
+            { avatar: {
+                data: file.data,
+                contentType: file.mimetype 
+            }}, 
             { new: true }
         );
 
-        return res.json({
-            avatarUrl: `/avatars/${filename}`
-        });
+        return res.send('Avatar uploaded!');
     } catch (error) {
         console.error(error);
         return res.status(500).json({
