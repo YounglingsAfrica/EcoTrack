@@ -306,7 +306,7 @@ const updateUserAccount = (req, res) => {
                 Status: "Error with token"
             });
         } else {
-            User.findById(decoded.user._id)
+            User.findById(decoded.id)
             .then(user => {
                 if (!user) {
                     return res.status(404).json({ message: 'User not found' });
@@ -324,7 +324,7 @@ const updateUserAccount = (req, res) => {
                 if (phoneNumber && phoneNumber !== user.phoneNumber) update.phoneNumber = phoneNumber;
 
                 if (Object.keys(update).length > 0) {
-                    User.findByIdAndUpdate({id: user._id}, update, { new: true })
+                    User.findByIdAndUpdate(user._id, update, { new: true })
                     .then(updatedUser => res.json(updatedUser))
                     .catch(err => res.status(500).json({ message: 'Server Error', err }));
                 } else {
