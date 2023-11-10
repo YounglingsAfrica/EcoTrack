@@ -302,11 +302,11 @@ const updateUserAccount = async (req, res) => {
         const user = await User.findById(req.user.id);
 
         if (name && name !== user.name) update.name = name;
-        if (password && password.length >= 6 && password !== user.password) {
+        if (password && password.length >= 6) {
             update.password = await bcrypt.hash(password, 12);
         }
         if (email && email !== user.email) update.email = email;
-        if (phoneNumber) update.phoneNumber = phoneNumber;
+        if (phoneNumber && phoneNumber !== user.phoneNumber) update.phoneNumber = phoneNumber;
 
         if (Object.keys(update).length > 0) {
             const updatedUser = await User.findByIdAndUpdate(req.user.id, update, { new: true });
@@ -321,18 +321,6 @@ const updateUserAccount = async (req, res) => {
 };
 
 const uploadAvatar = async (req, res, next) => {
-    const Upload = upload;
-
-    const uploadMiddleware = Upload.single("avatar");
-
-    uploadMiddleware(req, res, function (err) {
-        if (err) {
-            return res.status(500).json({
-                message: "Error uploading file"
-            });
-        }
-    })  
-
     try {
         const user = await User.findByIdAndUpdate(req.user.id, { avatar: req.file.path }, { new: true });
         return res.json(user);

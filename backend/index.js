@@ -46,4 +46,4 @@ app.use("/", require("./routes/userRouter"))
 const port = process.env.PORT || 8000;
 app.listen(port, () => console.log(`Server is running on ${port}`));    
 
-module.exports = {upload}
+module.exports = upload;

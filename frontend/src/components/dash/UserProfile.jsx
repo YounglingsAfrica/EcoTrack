@@ -25,6 +25,7 @@ const UserProfile = () => {
             })
             .catch(error => {
                 console.error(error);
+                toast.error(error.response.data.message || "An error occurred while changing name");
             });
         }
     };
@@ -36,6 +37,7 @@ const UserProfile = () => {
             })
             .catch(error => {
                 console.error(error);
+                toast.error(error.response.data.message || "An error occurred while changing password");
             });
     };
     
@@ -46,6 +48,18 @@ const UserProfile = () => {
             })
             .catch(error => {
                 console.error(error);
+                toast.error(error.response.data.message || "An error occurred while changing phone number");
+            });
+    };
+
+    const handleUpdateEmail = () => {
+        axios.post("/profile/update", { email: newEmail }, { withCredentials: true })
+            .then(({data}) => {
+                setUser(data);
+            })
+            .catch(error => {
+                console.error(error);
+                toast.error(error.response.data.message || "An error occurred while changing email");
             });
     };
 
@@ -62,6 +76,7 @@ const UserProfile = () => {
             })
             .catch(error => {
                 console.error(error);
+                toast.error(error.response.data.message || "An error occurred while changing avatar");
             });
     };
 
@@ -138,7 +153,7 @@ const UserProfile = () => {
                                     />         
                                     <button 
                                         className="flex items-center justify-center px-6 w-auto h-12 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen shadow-right-bottom mt-12"
-                                        onClick={handleUpdateName}
+                                        onClick={handleUpdateEmail}
                                     >
                                         Update Email 
                                     </button>
