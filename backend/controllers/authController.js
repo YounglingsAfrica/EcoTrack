@@ -295,7 +295,7 @@ const sendEmail = (req, res) => {
 }
 
 const updateUserAccount = (req, res) => {
-    const {id, token} = req.params;
+    const token = req.cookies.authToken;
     const { name, email, password, phoneNumber } = req.body;
     
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
