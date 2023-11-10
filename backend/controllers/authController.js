@@ -309,7 +309,7 @@ const updateUserAccount = async (req, res) => {
         if (phoneNumber && phoneNumber !== user.phoneNumber) update.phoneNumber = phoneNumber;
 
         if (Object.keys(update).length > 0) {
-            const updatedUser = await User.findByIdAndUpdate(req.user.id, update, { new: true });
+            const updatedUser = await User.findByIdAndUpdate(req.user._id, update, { new: true });
             return res.json(updatedUser);
         } else {
             return res.status(400).json({ message: 'No changes detected' });
