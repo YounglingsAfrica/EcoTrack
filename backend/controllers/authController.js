@@ -295,7 +295,7 @@ const sendEmail = (req, res) => {
 }
 
 const updateUserAccount = (req, res) => {
-    const token = req.cookies.authToken;
+    const {id, token} = req.params;
     const { name, email, password, phoneNumber } = req.body;
     
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
@@ -308,6 +308,10 @@ const updateUserAccount = (req, res) => {
         } else {
             User.findById(decoded.userId)
             .then(user => {
+                if (!user) {
+                    return res.status(404).json({ message: 'User not found' });
+                }
+
                 const update = {};
                 if (name && name !== user.name) update.name = name;
                 if (password && password.length >= 6) {
@@ -318,8 +322,9 @@ const updateUserAccount = (req, res) => {
                 }
                 if (email && email !== user.email) update.email = email;
                 if (phoneNumber && phoneNumber !== user.phoneNumber) update.phoneNumber = phoneNumber;
+
                 if (Object.keys(update).length > 0) {
-                    User.findByIdAndUpdate(user._id, update, { new: true })
+                    User.findByIdAndUpdate({id: user._id}, update, { new: true })
                     .then(updatedUser => res.json(updatedUser))
                     .catch(err => res.status(500).json({ message: 'Server Error', err }));
                 } else {
