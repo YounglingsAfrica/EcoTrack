@@ -343,7 +343,7 @@ const updateUserAccount = (req, res) => {
 
 const uploadAvatar = async (req, res, next) => {
     try {
-        const user = await User.findByIdAndUpdate(req.user.id, { avatar: req.file.path }, { new: true });
+        const user = await User.findByIdAndUpdate(user._id, { avatar: req.file.path }, { new: true });
         return res.json(user);
     } catch (error) {
         console.error(error);

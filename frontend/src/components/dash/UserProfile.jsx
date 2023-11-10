@@ -34,6 +34,7 @@ const UserProfile = () => {
         axios.post("/profile/update", { password: newPassword }, { withCredentials: true })
             .then(({data}) => {
                 setUser(data);
+                toast.success("Your password has been changed.")
             })
             .catch(error => {
                 console.error(error);
@@ -48,6 +49,7 @@ const UserProfile = () => {
             })
             .then(({data}) => {
                 setUser(data);
+                toast.success("Your phone number has been changed.")
             })
             .catch(error => {
                 console.error(error);
@@ -59,6 +61,7 @@ const UserProfile = () => {
         axios.post("/profile/update", { email: newEmail }, { withCredentials: true })
             .then(({data}) => {
                 setUser(data);
+                toast.success("Your email has been changed.")
             })
             .catch(error => {
                 console.error(error);
@@ -76,6 +79,7 @@ const UserProfile = () => {
                 // The server should return the URL of the uploaded image in the response
                 setSelectedImage(data.avatarUrl);
                 setUser(prevUser => ({ ...prevUser, avatarUrl: data.avatarUrl }));
+                toast.success("Your avatar has been changed.")
             })
             .catch(error => {
                 console.error(error);
@@ -117,7 +121,7 @@ const UserProfile = () => {
                                 {user?.name}
                             </h1>
                             <p className='flex justify-center items-center'>
-                                {user?.phoneNum} <span><img src={Verified} alt="verified" className='h-auto w-10 pt-2 pl-2' /></span>
+                                {user?.phoneNumber} <span><img src={Verified} alt="verified" className='h-auto w-10 pt-2 pl-2' /></span>
                             </p>
                         </div>
                         <div className='w-[60.1%] h-80 bg-white rounded-xl border-2 border-black border-dashed p-10 ml-10'>
