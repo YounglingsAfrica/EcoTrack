@@ -13,7 +13,6 @@ const UserProfile = () => {
     const [newName, setNewName] = useState(user?.name || "");
     const [newPassword, setNewPassword] = useState(user?.password || "");
     const [newEmail, setNewEmail] = useState(user?.email || "");
-    const [selectedImage, setSelectedImage] = useState(null);
     const fileInputRef = useRef();
 
     const handleUpdateName = () => {
@@ -70,20 +69,18 @@ const UserProfile = () => {
     };
 
     const handleImageUpload = (e) => {
-        const file = e.target.files[0];
         const formData = new FormData();
-        formData.append('avatar', file);
+        formData.append('avatar', e.target.files[0]);
 
-        axios.post("/profile/update/avatar", formData, { withCredentials: true })
-            .then(({data}) => {
-                // The server should return the URL of the uploaded image in the response
-                setSelectedImage(data.avatarUrl);
-                setUser(prevUser => ({ ...prevUser, avatarUrl: data.avatarUrl }));
+        axios.post("/profile/avatar", formData, { headers: {
+            'Content-Type': 'multipart/form-data'
+        }}).then(res => {
+                setUser(prev => ({...prev, avatarUrl: res.data.avatarUrl}));
                 toast.success("Your avatar has been changed.")
             })
             .catch(error => {
                 console.error(error);
-                toast.error(error.response.data.message || "An error occurred while changing avatar");
+                toast.error(error.res.data.message || "An error occurred while changing avatar");
             });
     };
 
@@ -103,7 +100,7 @@ const UserProfile = () => {
                         <div className='w-1/3 h-80 bg-white rounded-xl text-center border-2 border-black border-dashed p-10 mb-10'>
                             <div className='flex items-center justify-center mb-6'>
                                 <img
-                                    src={selectedImage || User} 
+                                    src={user?.avatarUrl || User} 
                                     alt="User"
                                     className='h-auto w-32 rounded-full cursor-pointer object-cover object-center' 
                                     onClick={handleClickImage}
