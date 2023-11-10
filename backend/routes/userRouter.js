@@ -12,7 +12,7 @@ const {
   updateUserAccount,
   uploadAvatar
 } = require("../controllers/authController");
-const upload = require("../index");
+const { upload } = require("../index");
 
 const dotenv = require("dotenv");
 dotenv.config();
