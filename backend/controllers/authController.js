@@ -306,7 +306,7 @@ const updateUserAccount = (req, res) => {
                 Status: "Error with token"
             });
         } else {
-            User.findById(decoded.user.id)
+            User.findById(decoded.user._id)
             .then(user => {
                 if (!user) {
                     return res.status(404).json({ message: 'User not found' });
