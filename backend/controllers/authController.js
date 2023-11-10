@@ -299,7 +299,7 @@ const updateUserAccount = async (req, res) => {
     const update = {};
 
     try {
-        const user = await User.findById(req.user.id);
+        const user = await User.findById(req.user._id);
 
         if (name && name !== user.name) update.name = name;
         if (password && password.length >= 6) {
