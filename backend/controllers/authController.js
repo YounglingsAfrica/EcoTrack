@@ -300,6 +300,8 @@ const updateUserAccount = (req, res) => {
     
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
+            console.error("Error verifying token:", err);
+            console.error("Token:", token);
             return res.json({
                 Status: "Error with token"
             });
