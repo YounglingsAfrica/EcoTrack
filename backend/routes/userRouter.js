@@ -12,7 +12,6 @@ const {
   updateUserAccount,
   uploadAvatar
 } = require("../controllers/authController");
-const { upload } = require("../index");
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 
