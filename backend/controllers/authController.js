@@ -342,27 +342,34 @@ const updateUserAccount = (req, res) => {
     });
 };
 
-const uploadAvatar = async (req, res) => {
-    try {
-        const file = req.file;
+const uploadAvatar = (req, res) => {
+    const token = req.cookies.authToken;
 
-        await User.findByIdAndUpdate(
-            req.user._id, 
-            { avatar: {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            console.error("Error verifying token:", err);
+            console.error("Token:", token);
+            return res.status(500).json({ message: 'Error with token' });
+        } else {
+            const userId = decoded.id;
+            const file = req.file;
+
+            const avatar = {
                 data: fs.readFileSync(path.join(__dirname + "/uploads/" + file.filename)).toString('base64'),
                 contentType: file.mimetype 
-            }}, 
-            { new: true }
-        );
+            };
 
-        return res.send('Avatar uploaded!');
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({
-            message: "Server Error"
-        });
-    }
-}
+            User.findByIdAndUpdate(userId, { avatar }, { new: true })
+            .then(user => {
+                res.json({ message: 'Avatar updated!', avatar: user.avatar });
+            })
+            .catch(err => {
+                console.error(err);
+                res.status(500).json({ message: 'Server Error' });
+            });
+        }
+    });
+};
 
 module.exports = {
     test,
