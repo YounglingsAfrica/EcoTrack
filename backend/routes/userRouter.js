@@ -17,7 +17,7 @@ const {
 const path = require("path");
 const multer = require("multer");
 const uploadsDir = path.join(__dirname, '..', '..', 'uploads');
-const upload = multer({ dest: path.join(__dirname, '..', '..', 'uploads/') });
+const upload = multer({ dest: uploadsDir });
 
 const dotenv = require("dotenv");
 dotenv.config();
