@@ -393,8 +393,6 @@ const uploadAvatar = async (req, res) => {
         return res.status(500).json({message: 'Error reading file'});
     }
     
-    // Further processing...
-    
     try {
         // Decode JWT
         const token = req.cookies.authToken;  
