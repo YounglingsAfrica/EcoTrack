@@ -7,6 +7,8 @@ const fs = require("fs");
 const path = require('path');
 const { v4: uuidv4 } = require("uuid");
 const multer = require("multer");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
