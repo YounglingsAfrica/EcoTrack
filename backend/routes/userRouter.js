@@ -16,9 +16,8 @@ const {
 // Avatar upload middleware
 const path = require("path");
 const multer = require("multer");
-const upload = multer({ dest: 'uploads/' })
-const uploadsDir = path.join(__dirname, '/backend/routes/uploads');
-const fs = require("fs");
+const uploadsDir = path.join(__dirname, '..', '..', 'uploads');
+const upload = multer({ dest: path.join(__dirname, '..', '..', 'uploads/') });
 
 const dotenv = require("dotenv");
 dotenv.config();
