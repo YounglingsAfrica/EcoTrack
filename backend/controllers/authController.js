@@ -397,7 +397,7 @@ const uploadAvatar = async (req, res) => {
         // Decode JWT
         const token = req.cookies.authToken;  
         const decoded = jwt.verify(token, JWT_SECRET);
-        const userId = decoded.id;
+        const userId = decoded._id;
     
         // Update user with avatar 
         const avatar = {
