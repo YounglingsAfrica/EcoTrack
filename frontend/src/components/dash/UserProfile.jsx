@@ -70,7 +70,7 @@ const UserProfile = () => {
     const handleFileUpload = (e) => {
         const data = new FormData();
         const file = e.target.files[0];
-        data.set('file', file);
+        data.set('avatar', file);
         
         axios.post('/profile/avatar', data) 
         .then(res => {
@@ -95,7 +95,10 @@ const UserProfile = () => {
                 <div className='pt-[35px] px-[10px] z-0 h-[90vh]'>
                     <div className='flex flex-wrap text-center p-8 px-20'>
                         <div className='w-1/3 h-80 bg-white rounded-xl text-center border-2 border-black border-dashed p-10 mb-10'>
-                            <div className='flex items-center justify-center mb-6'>
+                            <form
+                                encType='multipart/form-data' method='post' action='/profile/avatar' 
+                                className='flex items-center justify-center mb-6'
+                            >
                                 <img
                                     src={user?.avatar || defaultAvatar}
                                     alt="User"
@@ -111,7 +114,7 @@ const UserProfile = () => {
                                     hidden
                                     onChange={handleFileUpload}
                                 />
-                            </div>
+                            </form>
                             <h1 className='text-center text-2xl mb-3'>
                                 {user?.name}
                             </h1>
