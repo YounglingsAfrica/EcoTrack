@@ -14,6 +14,7 @@ const UserProfile = () => {
     const [newPassword, setNewPassword] = useState(user?.password || "");
     const [newEmail, setNewEmail] = useState(user?.email || "");
     const fileInputRef = useRef();
+    const MAX_SIZE = 5
     const handleUpdateName = () => {
         if (newName !== user?.name) {
             axios.post("/profile/update", { name: newName }, { withCredentials: true })
@@ -70,6 +71,15 @@ const UserProfile = () => {
     const handleFileUpload = (e) => {
         const data = new FormData();
         const file = e.target.files[0];
+        if(!file) {
+            toast.error('No file selected');
+            return; 
+        }
+        if(file.size > MAX_SIZE) {
+            toast.error('File too large, maximum file size: 5MB');
+            return;
+        }
+        
         data.set('avatar', file);
         
         axios.post('/profile/avatar', data) 

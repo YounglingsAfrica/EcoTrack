@@ -365,38 +365,63 @@ const updateUserAccount = (req, res) => {
     });
 };
 
-const uploadAvatar = (req, res) => {
-    const token = req.cookies.authToken;
-
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-        console.log(uploadsDir); 
-        if (err) {
-            console.error("Error verifying token:", err);
-            console.error("Token:", token);
-            return res.status(500).json({ message: 'Error with token' });
-        } else {
-            const userId = decoded.id;
-            const file = req.file;
-            if (!file) {
-                console.error("No file uploaded");
-                return res.status(400).json({ message: 'No file uploaded' });
-            }
-
-            const avatar = {
-                data: fs.readFileSync(path.join(uploadsDir, file.filename)).toString('base64'),
-                contentType: file.mimetype 
-            };
-
-            User.findByIdAndUpdate(userId, { avatar }, { new: true })
-            .then(user => {
-                res.json({ message: 'Avatar updated!', avatar: user.avatar });
-            })
-            .catch(err => {
-                console.error(err);
-                res.status(500).json({ message: 'Server Error' });
-            });
-        }
-    });
+const uploadAvatar = async (req, res) => {
+    if(!req.file) {
+        return res.status(400).json({message: 'No file uploaded'});
+    }
+        
+    const { originalname, path } = req.file;
+        
+    // Get file extension
+    const { ext } = path.parse(originalname);
+        
+    // Rename file 
+    const newPath = path + '.' + ext;
+        
+    try {
+        await fs.rename(path, newPath); 
+    } catch (err) {
+        return res.status(500).json({message: 'Error renaming file'});
+    }
+        
+    // Read file content
+    let avatarData;
+        
+    try {
+        avatarData = fs.readFileSync(newPath);
+    } catch (err) {
+        return res.status(500).json({message: 'Error reading file'});
+    }
+    
+    // Further processing...
+    
+    try {
+        // Decode JWT
+        const token = req.cookies.authToken;  
+        const decoded = jwt.verify(token, JWT_SECRET);
+        const userId = decoded.id;
+    
+        // Update user with avatar 
+        const avatar = {
+            data: avatarData,
+            contentType: req.file.mimetype
+        };
+        
+        const user = await User.findByIdAndUpdate(
+            userId, 
+            { avatar }, 
+            { new: true }
+        );
+    
+        res.json({
+            message: 'Avatar updated!',
+            avatar: user.avatar
+        });
+    
+    } catch (err) {
+        return res.status(500).json({message: 'Error updating avatar'});
+    }
+    
 };
 
 module.exports = {
