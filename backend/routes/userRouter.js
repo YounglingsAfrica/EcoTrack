@@ -38,4 +38,4 @@ router.post("/profile/avatar", upload.single('avatar'), uploadAvatar)
 // google auth
 
 
-module.exports = router, uploadsDir;
+module.exports = router;
