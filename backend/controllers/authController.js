@@ -344,9 +344,11 @@ const updateUserAccount = (req, res) => {
 };
 
 const uploadAvatar = (req, res) => {
+    console.log(uploadsDir); 
     const token = req.cookies.authToken;
 
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        console.log(uploadsDir); 
         if (err) {
             console.error("Error verifying token:", err);
             console.error("Token:", token);
