@@ -13,6 +13,8 @@ const {
   uploadAvatar
 } = require("../controllers/authController");
 
+const multer = require("multer");
+
 // Avatar upload middleware
 const uploadMiddleware = multer({ dest: 'uploads/' })
 

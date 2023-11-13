@@ -359,8 +359,7 @@ const uploadAvatar = async (req, res) => {
             message: 'Error renaming file' 
         });
     }
-
-    let avatarData;
+    
     try {
         avatarData = fs.readFileSync(newFilePath);
     } catch (err) {
