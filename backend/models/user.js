@@ -20,9 +20,11 @@ const UserSchema = new Schema(
             default: null,
         },
         avatar: {
-            type: String,
             data: Buffer,
-            default: null,
+            contentType: {
+                type: String,
+                default: null
+            }
         },
         isConfirmed: {
             type: Boolean,
