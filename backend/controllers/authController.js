@@ -379,7 +379,7 @@ const uploadAvatar = async (req, res) => {
     const newPath = path + '.' + ext;
         
     try {
-        await fs.rename(path, newPath); 
+        fs.renameSync(path, newPath); 
     } catch (err) {
         return res.status(500).json({message: 'Error renaming file'});
     }
