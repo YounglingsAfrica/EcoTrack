@@ -13,7 +13,7 @@ const {
   uploadAvatar
 } = require("../controllers/authController");
 const path = require("path");
-const multer = require('multer');
+const multer = require("multer");
 const uploadsDir = path.join(__dirname, 'uploads');
 
 const storage = multer.diskStorage({
