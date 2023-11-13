@@ -105,7 +105,7 @@ const UserProfile = () => {
                                 className='flex items-center justify-center mb-6'
                             >
                                 <img
-                                    src={user?.avatar || defaultAvatar}
+                                    src={user.avatar || defaultAvatar}
                                     alt="User"
                                     className='h-auto w-32 rounded-full cursor-pointer object-cover object-center' 
                                     title='Edit Avatar'

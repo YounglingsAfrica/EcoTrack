@@ -404,7 +404,7 @@ const uploadAvatar = async (req, res) => {
     
         // Update user with avatar 
         const avatar = {
-            data: avatarData,
+            path: newPath,
             contentType: req.file.mimetype
         };
         console.log(avatar);

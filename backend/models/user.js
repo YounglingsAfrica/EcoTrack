@@ -20,7 +20,10 @@ const UserSchema = new Schema(
             default: null,
         },
         avatar: {
-            data: Buffer,
+            path: {
+                type: String,
+                default: null
+            },
             contentType: {
                 type: String,
                 default: null
