@@ -348,9 +348,9 @@ const uploadAvatar = async (req, res) => {
     if(!req.file) {
         return res.status(400).json({message: 'No file uploaded'});
     }
+    const uploadFolder = '/uploads';
     const parts = originalname.split('.');
-    const ext = parts[parts.length - 1];
-    const newFilePath = oldPath + '.' + ext;
+    const newFilePath = uploadFolder + '/' + originalname;
 
     try {
         fs.renameSync(oldPath, newFilePath);
@@ -359,7 +359,7 @@ const uploadAvatar = async (req, res) => {
             message: 'Error renaming file' 
         });
     }
-    
+
     try {
         avatarData = fs.readFileSync(newFilePath);
     } catch (err) {
