@@ -350,9 +350,10 @@ const uploadAvatar = async (req, res) => {
     }
     const uploadFolder = '/uploads';
     const newFilePath = uploadFolder + '/' + originalname;
+    const tmpPath = req.file.path;
 
     try {
-        fs.renameSync(oldPath, newFilePath);
+        fs.renameSync(tmpPath, `uploads/${req.file.originalname}`);
     } catch (error) {
         console.log(error);
         return res.status(500).json({
