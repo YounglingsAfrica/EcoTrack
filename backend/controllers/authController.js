@@ -408,6 +408,5 @@ module.exports = {
     confirmEmail,
     sendEmail,
     updateUserAccount,
-    uploadAvatar,
-    upload
+    uploadAvatar
 }

@@ -10,8 +10,7 @@ const {
   confirmEmail,
   sendEmail,
   updateUserAccount,
-  uploadAvatar,
-  upload
+  uploadAvatar
 } = require("../controllers/authController");
 
 // Avatar upload middleware
