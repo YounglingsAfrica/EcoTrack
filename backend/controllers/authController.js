@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const fs = require("fs");
 const path = require('path');
-const uploadsDir = require("../routes/userRouter");
 const { v4: uuidv4 } = require("uuid");
 const multer = require("multer");
 
@@ -366,6 +365,7 @@ const updateUserAccount = (req, res) => {
 };
 
 const uploadAvatar = async (req, res) => {
+    const nodePath = require('path');
     if(!req.file) {
         return res.status(400).json({message: 'No file uploaded'});
     }
@@ -373,7 +373,7 @@ const uploadAvatar = async (req, res) => {
     const { originalname, path } = req.file;
         
     // Get file extension
-    const { ext } = path.parse(originalname);
+    const { ext } = nodePath.parse(originalname);
         
     // Rename file 
     const newPath = path + '.' + ext;
