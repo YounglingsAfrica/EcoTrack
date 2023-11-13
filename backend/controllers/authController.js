@@ -410,7 +410,7 @@ const uploadAvatar = async (req, res) => {
         console.log(avatar);
         
         const user = await User.findByIdAndUpdate(
-            { id: userId}, 
+            userId, 
             { avatar: avatar }, 
             { new: true }
         );
