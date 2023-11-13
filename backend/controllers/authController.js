@@ -399,7 +399,7 @@ const uploadAvatar = async (req, res) => {
         // Decode JWT
         const token = req.cookies.authToken;  
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        const userId = decoded._id;
+        const userId = decoded.id;
         console.log(userId);
     
         // Update user with avatar 
@@ -410,7 +410,7 @@ const uploadAvatar = async (req, res) => {
         console.log(avatar);
         
         const user = await User.findByIdAndUpdate(
-            { id: userId }, 
+            { id: userId}, 
             { avatar: avatar }, 
             { new: true }
         );
