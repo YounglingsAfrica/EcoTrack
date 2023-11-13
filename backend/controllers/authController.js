@@ -4,37 +4,8 @@ const { hashPassword, comparePassword } = require("../helpers/auth")
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const fs = require("fs");
-const path = require('path');
-const { v4: uuidv4 } = require("uuid");
-const multer = require("multer");
 const dotenv = require("dotenv");
 dotenv.config();
-
-const uploadsDir = path.join(__dirname, "..", "uploads");
-
-const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        cb(null, uploadsDir)
-    },
-    filename: function(req, file, cb) {
-        console.log('uuidv4:', uuidv4());
-        console.log('Date.now:', Date.now());
-        console.log('file.originalname:', file.originalname);
-        console.log('path.extname(file.originalname):', path.extname(file.originalname));  
-        cb(null, uuidv4() + '-' + Date.now() + path.extname(file.originalname));
-    }
-});
-
-const fileFilter = (req, file, cb) => {
-    const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-    if(allowedFileTypes.includes(file.mimetype)) {
-        cb(null, true);
-    } else {
-        cb(null, false);
-    }
-}
-
-let upload = multer({ storage: storage, fileFilter: fileFilter });
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -373,47 +344,40 @@ const updateUserAccount = (req, res) => {
 };
 
 const uploadAvatar = async (req, res) => {
-    const nodePath = require('path');
+    const { originalname, path: oldPath } = req.file;
     if(!req.file) {
         return res.status(400).json({message: 'No file uploaded'});
     }
-        
-    const { originalname, path } = req.file;
-        
-    // Get file extension
-    const { ext } = nodePath.parse(originalname);
-        
-    // Rename file 
-    const newPath = path + '.' + ext;
-        
+    const parts = originalname.split('.');
+    const ext = parts[parts.length - 1];
+    const newFilePath = oldPath + '.' + ext;
+
     try {
-        fs.renameSync(path, newPath); 
-    } catch (err) {
-        return res.status(500).json({message: 'Error renaming file'});
+        fs.renameSync(oldPath, newFilePath);
+    } catch (error) {
+        return res.status(500).json({
+            message: 'Error renaming file' 
+        });
     }
-        
-    // Read file content
+
     let avatarData;
-        
     try {
-        avatarData = fs.readFileSync(newPath);
+        avatarData = fs.readFileSync(newFilePath);
     } catch (err) {
-        return res.status(500).json({message: 'Error reading file'});
+        return res.status(500).json({
+            message: 'Error reading file'
+        });
     }
     
     try {
-        // Decode JWT
         const token = req.cookies.authToken;  
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const userId = decoded.id;
-        console.log(userId);
     
-        // Update user with avatar 
         const avatar = {
-            path: newPath,
+            path: newFilePath,
             contentType: req.file.mimetype
         };
-        console.log(avatar);
         
         const user = await User.findByIdAndUpdate(
             userId, 
