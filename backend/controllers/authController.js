@@ -3,7 +3,8 @@ const bcrypt = require("bcryptjs");
 const { hashPassword, comparePassword } = require("../helpers/auth")
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
-const upload = require("../index");
+const fs = require("fs");
+const path = require("path");
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -343,12 +344,12 @@ const updateUserAccount = (req, res) => {
 
 const uploadAvatar = async (req, res) => {
     try {
-        const file = req.files.avatar;
+        const file = req.file;
 
         await User.findByIdAndUpdate(
             req.user._id, 
             { avatar: {
-                data: file.data,
+                data: fs.readFileSync(path.join(__dirname + "/uploads/" + file.filename)).toString('base64'),
                 contentType: file.mimetype 
             }}, 
             { new: true }

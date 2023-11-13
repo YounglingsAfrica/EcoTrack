@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import SideBar from './SideBar.1';
 import Dashboard from '../../pages/Dashboard';
 import defaultAvatar from "../../assets/User.png";
@@ -13,7 +13,6 @@ const UserProfile = () => {
     const [newName, setNewName] = useState(user?.name || "");
     const [newPassword, setNewPassword] = useState(user?.password || "");
     const [newEmail, setNewEmail] = useState(user?.email || "");
-    const fileInputRef = useRef();
 
     const handleUpdateName = () => {
         if (newName !== user?.name) {
@@ -68,12 +67,12 @@ const UserProfile = () => {
             });
     };
 
-    const handleImageUpload = (e) => {
-        const formData = new FormData();
+    const handleFileUpload = (e) => {
+        const data = new FormData();
+        const file = e.target.files[0];
+        data.set('file', file);
         
-        formData.append('avatar', e.target.files[0]);
-        
-        axios.post('/profile/avatar', formData) 
+        axios.post('/profile/avatar', data) 
         .then(res => {
             toast.success('Avatar uploaded!');
         })
@@ -81,10 +80,6 @@ const UserProfile = () => {
         toast.error(err.response.data.message); 
         });
     }
-
-    const handleClickImage = () => {
-        fileInputRef.current.click();
-    };
 
     return (
         <div className='flex'>
@@ -101,15 +96,13 @@ const UserProfile = () => {
                                     src={user?.avatar || defaultAvatar}
                                     alt="User"
                                     className='h-auto w-32 rounded-full cursor-pointer object-cover object-center' 
-                                    onClick={handleClickImage}
                                     title='Edit Avatar'
                                 />
                                 <input
                                     type="file"
-                                    name="avatar"
-                                    ref={fileInputRef}
+                                    name="file"
                                     hidden
-                                    onChange={handleImageUpload}
+                                    onChange={handleFileUpload}
                                 />
                             </div>
                             <h1 className='text-center text-2xl mb-3'>
@@ -128,7 +121,7 @@ const UserProfile = () => {
                                     type="text"
                                     value={newName}
                                     onChange={e => setNewName(e.target.value)}
-                                    className='bg-[#E8E8E8] w-1/2 h-14 rounded-2xl border border-gray-400 p-5 focus:outline-primaryGreen text-center'
+                                    className='w-1/2 h-14 rounded-2xl border border-gray-400 p-5 focus:outline-primaryGreen text-center bg-primaryGreen50 placeholder:text-gray-700'
                                     placeholder={user?.name || "Enter your name"}
                                 />
                             </div>
@@ -151,7 +144,7 @@ const UserProfile = () => {
                                         type="email"
                                         value={newEmail}
                                         onChange={e => setNewEmail(e.target.value)}
-                                        className='bg-[#E8E8E8] w-[80%] h-14 rounded-2xl border border-gray-400 p-5 focus:outline-primaryGreen text-center'
+                                        className='w-[80%] h-14 rounded-2xl border border-gray-400 p-5 focus:outline-primaryGreen text-center bg-primaryGreen50 placeholder:text-gray-700'
                                         placeholder={user?.email || "Enter your email"}
                                     />         
                                     <button 
@@ -166,7 +159,7 @@ const UserProfile = () => {
                                         type="password"
                                         value={newPassword}
                                         onChange={e => setNewPassword(e.target.value)}
-                                        className='bg-[#E8E8E8] w-[80%] h-14 rounded-2xl border border-gray-400 p-5 focus:outline-primaryGreen text-center'
+                                        className='bg-primaryGreen50 placeholder:text-gray-700 w-[80%] h-14 rounded-2xl border border-gray-400 p-5 focus:outline-primaryGreen text-center'
                                         placeholder={user?.password || "Enter your password"}
                                     />
                                     <button 
@@ -183,7 +176,7 @@ const UserProfile = () => {
                                         max={10}
                                         value={newPhoneNum}
                                         onChange={e => setNewPhoneNum(e.target.value)}
-                                        className='bg-[#E8E8E8] w-[80%] h-14 rounded-2xl border border-gray-400 p-5 focus:outline-primaryGreen text-center'
+                                        className='bg-primaryGreen50 placeholder:text-gray-700 w-[80%] h-14 rounded-2xl border border-gray-400 p-5 focus:outline-primaryGreen text-center'
                                         placeholder={user?.phoneNumber || "Enter your phone number"}
                                     />
                                     <button 
