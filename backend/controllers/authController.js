@@ -398,12 +398,14 @@ const uploadAvatar = async (req, res) => {
         const token = req.cookies.authToken;  
         const decoded = jwt.verify(token, JWT_SECRET);
         const userId = decoded._id;
+        console.log(userId);
     
         // Update user with avatar 
         const avatar = {
             data: avatarData,
             contentType: req.file.mimetype
         };
+        console.log(avatar);
         
         const user = await User.findByIdAndUpdate(
             userId, 
