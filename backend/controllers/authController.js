@@ -4,8 +4,8 @@ const { hashPassword, comparePassword } = require("../helpers/auth")
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const fs = require("fs");
-const path = require("path");
-const uploadsDir = require("../routes/userRouter");
+const path = require('path');
+const uploadsDir = path.join(__dirname, 'uploads');
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
