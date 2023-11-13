@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import SideBar from './SideBar.1';
 import Dashboard from '../../pages/Dashboard';
 import defaultAvatar from "../../assets/User.png";
@@ -13,7 +13,7 @@ const UserProfile = () => {
     const [newName, setNewName] = useState(user?.name || "");
     const [newPassword, setNewPassword] = useState(user?.password || "");
     const [newEmail, setNewEmail] = useState(user?.email || "");
-
+    const fileInputRef = useRef();
     const handleUpdateName = () => {
         if (newName !== user?.name) {
             axios.post("/profile/update", { name: newName }, { withCredentials: true })
@@ -81,6 +81,10 @@ const UserProfile = () => {
         });
     }
 
+    const handleImageClick = () => {
+        fileInputRef.current.click();
+    }
+
     return (
         <div className='flex'>
             <div className='basis-[5%] h-[100vh] z-40'>
@@ -97,8 +101,10 @@ const UserProfile = () => {
                                     alt="User"
                                     className='h-auto w-32 rounded-full cursor-pointer object-cover object-center' 
                                     title='Edit Avatar'
+                                    onClick={handleImageClick}
                                 />
                                 <input
+                                    ref={fileInputRef}
                                     type="file"
                                     name="file"
                                     hidden
