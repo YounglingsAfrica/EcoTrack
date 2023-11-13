@@ -12,9 +12,20 @@ const {
   updateUserAccount,
   uploadAvatar
 } = require("../controllers/authController");
-
+const path = require("path");
 const multer = require('multer');
-const upload = multer({ dest: "uploads/" });
+const uploadsDir = path.join(__dirname, 'uploads');
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, uploadsDir)
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now())
+  }
+});
+
+const upload = multer({ storage: storage })
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -64,4 +75,4 @@ router.post("/profile/avatar", upload.single('file'), uploadAvatar)
 
 // });
 
-module.exports = router;
+module.exports = router, uploadsDir;

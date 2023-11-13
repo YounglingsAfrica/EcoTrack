@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const fs = require("fs");
 const path = require("path");
+const uploadsDir = require("../routes/userRouter");
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -355,7 +356,7 @@ const uploadAvatar = (req, res) => {
             const file = req.file;
 
             const avatar = {
-                data: fs.readFileSync(path.join(__dirname + "/uploads/" + file.filename)).toString('base64'),
+                data: fs.readFileSync(path.join(uploadsDir, file.filename)).toString('base64'),
                 contentType: file.mimetype 
             };
 
