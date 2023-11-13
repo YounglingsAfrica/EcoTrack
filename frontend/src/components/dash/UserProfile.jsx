@@ -106,7 +106,8 @@ const UserProfile = () => {
                                 <input
                                     ref={fileInputRef}
                                     type="file"
-                                    name="file"
+                                    name="avatar"
+                                    accept=".png, .jpg, .jpeg"
                                     hidden
                                     onChange={handleFileUpload}
                                 />
