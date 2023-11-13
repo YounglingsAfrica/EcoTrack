@@ -27,7 +27,7 @@ const fileFilter = (req, file, cb) => {
     }
 }
 
-let upload = multer({ storage, fileFilter });
+let upload = multer({ storage: storage, fileFilter: fileFilter });
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
