@@ -17,10 +17,10 @@ app.use(express.json())
 app.use(cookieParser());
 app.use(express.urlencoded({extended: false}))    
 app.use(cors({
-  origin: 'https://celadon-llama-2fa0fe.netlify.app'
-  // methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-  // allowedHeaders: ['Content-Type', 'Authorization'],
-  // credentials: true,
+  origin: 'https://celadon-llama-2fa0fe.netlify.app',
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
 }));
 
 app.use("/", require("./routes/userRouter"))
