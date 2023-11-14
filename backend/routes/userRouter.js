@@ -16,7 +16,7 @@ const {
 const multer = require("multer");
 
 // Avatar upload middleware
-const uploadMiddleware = multer({ dest: '/backend/uploads' })
+const uploadMiddleware = multer({ dest: '../uploads' })
 
 const dotenv = require("dotenv");
 dotenv.config();
