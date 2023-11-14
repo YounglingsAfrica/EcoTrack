@@ -18,8 +18,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({extended: false}))
 app.use(
   cors({
-    origin: "https://celadon-llama-2fa0fe.netlify.app",
-    credentials: true,
+    origin: "*"
   })
 );
 
