@@ -20,7 +20,7 @@ export const Menus = [
     { title: "Request Schedule", icon: <AiFillSchedule/> },
     { title: "Collection Routes", icon: <LiaRouteSolid /> },
     { title: "Reports & Analytics", icon: <TbReportSearch />},
-    { title: "Recycling Guide", route:"/Recycling", icon: <MdRecycling /> },
+    { title: "Recycling Guide", route:"/dashboard-b/recycling", icon: <MdRecycling /> },
     { 
       title: "Disposal Locations", icon: <FaMapLocationDot />,
       route:"/dashboard-b/disposal",
@@ -40,8 +40,8 @@ export const Menus = [
         { title: "Billing" },
       ],
     },
-    { title: "Regulations", route:"/Regulations", icon: <HiClipboardDocumentList /> },
-    { title: "Feedback", icon: <VscFeedback /> },
+    { title: "Regulations", route:"/dashboard-b/regulations", icon: <HiClipboardDocumentList /> },
+    { title: "Feedback", route: "/dashboard-b/feedback", icon: <VscFeedback /> },
     { title: "Logout", spacing: true, icon: <FiLogOut />, route: "/dashboard-b/logout" },
 ];
 
