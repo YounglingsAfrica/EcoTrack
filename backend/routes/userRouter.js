@@ -12,17 +12,19 @@ const {
   updateUserAccount,
   uploadAvatar
 } = require("../controllers/authController");
-const fs = require("fs");
-const path = require("path");
 const multer = require("multer");
 
 // Avatar upload middleware
-const uploadsDir = path.resolve(__dirname, '..', 'uploads');
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir, { recursive: true });
-}
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './backend/uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  }
+});
 
-const uploadMiddleware = multer({ dest: uploadsDir })
+const uploadMiddleware = multer({ storage: storage })
 
 const dotenv = require("dotenv");
 dotenv.config();
