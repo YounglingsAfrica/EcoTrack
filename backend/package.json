@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "build": "echo \"No build step\"",
-    "postinstall": "npm rebuild bcrypt --build-from-source"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
