@@ -1,7 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv")
 dotenv.config();
-const { mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
@@ -26,4 +26,4 @@ app.use(
 app.use("/", require("./routes/userRouter"))
 
 const port = process.env.PORT || 8000;
-app.listen(port, () => console.log(`Server is running on ${port}`));    
+app.listen(port, () => console.log(`Server is running on ${port}`));

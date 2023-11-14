@@ -13,11 +13,8 @@ import { FiLogOut } from "react-icons/fi";
 import { HiClipboardDocumentList } from "react-icons/hi2";
 import { Link } from 'react-router-dom';
 
-const SideBar  = () => {
-  const [open, setOpen] = useState(false);
-
   //Sidebar Items
-  const Menus = [
+export const Menus = [
     { title: "Dashboard", route:"/dashboard-b" },
     { title: "Collection Schedule", icon: <AiOutlineSchedule /> },
     { title: "Request Schedule", icon: <AiFillSchedule/> },
@@ -26,7 +23,7 @@ const SideBar  = () => {
     { title: "Recycling Guide", route:"/Recycling", icon: <MdRecycling /> },
     { 
       title: "Disposal Locations", icon: <FaMapLocationDot />,
-      route:"/Disposal",
+      route:"/dashboard-b/disposal",
       submenu: true,
       submenuItems: [
         { title: "Location 1" },
@@ -36,6 +33,7 @@ const SideBar  = () => {
     },
     { 
       title: "User Profile", icon: <LuUserSquare2 />,
+      route: "/dashboard-b/user-profile",
       submenu: true,
       submenuItems: [
         { title: "Addresses" },
@@ -44,9 +42,11 @@ const SideBar  = () => {
     },
     { title: "Regulations", route:"/Regulations", icon: <HiClipboardDocumentList /> },
     { title: "Feedback", icon: <VscFeedback /> },
-    { title: "Logout", spacing: true, icon: <FiLogOut />, route: "/logout" },
-  ];
+    { title: "Logout", spacing: true, icon: <FiLogOut />, route: "/dashboard-b/logout" },
+];
 
+const SideBar  = () => {
+  const [open, setOpen] = useState(false);
   const [submenuOpen, setSubmenuOpen] = useState(Array(Menus.length).fill(false));
 
   return (

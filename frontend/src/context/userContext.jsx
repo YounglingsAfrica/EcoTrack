@@ -7,13 +7,19 @@ export function UserContextProvider({children}) {
     const [user, setUser] = useState(null);
     
     useEffect(() => {
-        if (!user) {
+        if (user) {
             axios.get("/profile", { withCredentials: true }).then(({data}) => {
                 setUser(data);
-                console.log(data);
+            }).catch(error => {
+                if (error.response.status === 401) {    
+                    console.error("User is not authenticated");
+                } else {
+                    console.error(error);
+                }
             })
-        }
-    }, [user])
+        }   
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <UserContext.Provider value={{user, setUser}}>

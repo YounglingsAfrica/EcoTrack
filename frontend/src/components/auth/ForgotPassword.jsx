@@ -5,8 +5,10 @@ import Eco from "../../assets/ecoeco.png";
 import X from "../../assets/x-mark.png";
 import axios from "axios";
 import { toast } from 'react-hot-toast';
+import { ThreeDots } from "react-loader-spinner";
 
 const Forgot = () => {
+    const [isLoading, setIsLoading] = useState(false)
     const [data, setData] = useState({
         email: ''
     })
@@ -15,12 +17,15 @@ const Forgot = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        setIsLoading(true);
+
         const {email} = data;
         try {
             const res = await axios.post("/forgot", {
                 email
             })
             if (res.data.Status === "Success") {
+                setIsLoading(false);
                 toast.success("Please check your email for further instructions");
                 navigate("/login");
             } else {
@@ -72,7 +77,20 @@ const Forgot = () => {
                                 <button 
                                     className="flex items-center justify-center px-6 w-auto h-10 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen shadow-right-bottom"
                                 >
-                                    Submit
+                                    {isLoading ? (
+                                        <ThreeDots 
+                                            height="70" 
+                                            width="70" 
+                                            radius="9"
+                                            color="#fff" 
+                                            ariaLabel="three-dots-loading"
+                                            wrapperStyle={{}}
+                                            wrapperClassName=""
+                                            visible={true}
+                                        /> 
+                                    ) : (  
+                                        'Submit'
+                                    )}
                                 </button>
                             </div>
                         </form>

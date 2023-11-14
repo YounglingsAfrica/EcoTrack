@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import X from "../../assets/x-mark.png";
 import Logo from "../../assets/eco_logo.png";
@@ -6,13 +6,17 @@ import Eco from "../../assets/ecoeco.png";
 import { useContext } from 'react';
 import { UserContext } from "../../context/userContext";
 import { toast } from "react-hot-toast";
+import { ThreeDots } from "react-loader-spinner";
 
 const Logout = () => {
+    const [isLoading, setIsLoading] = useState(false);
     const {user, setUser} = useContext(UserContext);
     const navigate = useNavigate();
     
     const handleLogout = async (e) => {
         e.preventDefault();
+
+        setIsLoading(true);
 
         try {
             const response = await fetch("/logout", {
@@ -21,6 +25,7 @@ const Logout = () => {
             });
     
             if (response.ok) {
+                setIsLoading(false);
                 toast.success(`${user?.name} has logged out.`)
                 setUser(null);
                 navigate("/")
@@ -56,7 +61,20 @@ const Logout = () => {
                                 <button 
                                     className="flex items-center justify-center px-6 w-auto h-10 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen shadow-right-bottom"
                                 >
-                                    Logout
+                                    {isLoading ? (
+                                        <ThreeDots 
+                                            height="70" 
+                                            width="70" 
+                                            radius="9"
+                                            color="#fff" 
+                                            ariaLabel="three-dots-loading"
+                                            wrapperStyle={{}}
+                                            wrapperClassName=""
+                                            visible={true}
+                                        /> 
+                                    ) : (  
+                                        'Log out'
+                                    )}
                                 </button>
                             </div>
                         </form>

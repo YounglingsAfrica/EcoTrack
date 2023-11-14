@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Logo from "../../assets/eco_logo.png";
 import Eco from "../../assets/ecoeco.png";
 import X from "../../assets/x-mark.png";
 import { toast } from "react-hot-toast";
+import { ThreeDots } from "react-loader-spinner";
 
 const SignUp = () => {
-
-    const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
+    // const navigate = useNavigate();
     const [data, setData] = useState({
         name: '',
         email: '',
@@ -17,6 +18,8 @@ const SignUp = () => {
 
     const registerUser = async (e) => {
         e.preventDefault();
+
+        setIsLoading(true);
 
         const {name, email, password} = data
         try {
@@ -28,8 +31,9 @@ const SignUp = () => {
                 toast.error(data.error);
             } else {
                 setData({})
-                toast.success("Registration successful. Welcome!")
-                navigate("/login")
+                toast.success("Registration successful. Please verify your account, we've sent you an email. ")
+                // navigate("/login")
+                setIsLoading(false);
             }
         } catch (error) {
             console.log(error);
@@ -105,7 +109,20 @@ const SignUp = () => {
                                 <button 
                                     className="flex items-center justify-center px-6 w-auto h-10 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen shadow-right-bottom"
                                 >
-                                    Sign Up
+                                    {isLoading ? (
+                                        <ThreeDots 
+                                            height="70" 
+                                            width="70" 
+                                            radius="9"
+                                            color="#fff" 
+                                            ariaLabel="three-dots-loading"
+                                            wrapperStyle={{}}
+                                            wrapperClassName=""
+                                            visible={true}
+                                        /> 
+                                ) : (  
+                                    'Sign up'
+                                )}
                                 </button>
                             </div>
                             <div className="mt-6 flex justify-center">
