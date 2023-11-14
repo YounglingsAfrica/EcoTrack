@@ -6,10 +6,11 @@ import { FaMapLocationDot } from "react-icons/fa6";
 import { AiFillSchedule, AiOutlineSchedule } from "react-icons/ai";
 import { LiaRouteSolid } from "react-icons/lia";
 import { TbReportSearch } from "react-icons/tb";
-import { MdRecycling, MdOutlineManageSearch } from "react-icons/md";
+import { MdRecycling } from "react-icons/md";
 import { LuUserSquare2 } from "react-icons/lu";
 import { VscFeedback } from "react-icons/vsc";
 import { FiLogOut } from "react-icons/fi";
+import { HiClipboardDocumentList } from "react-icons/hi2";
 import { Link } from 'react-router-dom';
 
 const SideBar  = () => {
@@ -22,7 +23,7 @@ const SideBar  = () => {
     { title: "Request Schedule", icon: <AiFillSchedule/> },
     { title: "Collection Routes", icon: <LiaRouteSolid /> },
     { title: "Reports & Analytics", icon: <TbReportSearch />},
-    { title: "Recycling Guide", icon: <MdRecycling /> },
+    { title: "Recycling Guide", route:"/Recycling", icon: <MdRecycling /> },
     { 
       title: "Disposal Locations", icon: <FaMapLocationDot />,
       route:"/Disposal",
@@ -41,7 +42,7 @@ const SideBar  = () => {
         { title: "Billing" },
       ],
     },
-    { title: "Regulations", icon: <MdOutlineManageSearch /> },
+    { title: "Regulations", route:"/Regulations", icon: <HiClipboardDocumentList /> },
     { title: "Feedback", icon: <VscFeedback /> },
     { title: "Logout", spacing: true, icon: <FiLogOut />, route: "/logout" },
   ];

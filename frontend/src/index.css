@@ -3,3 +3,33 @@
 @tailwind components;
 
 @tailwind utilities;
+
+@keyframes phase-in-animation {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .animate-phase-in {
+    animation: phase-in-animation 0.3s ease-out;
+  }
+
+  @keyframes phase-out-animation {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+  }
+  
+  .animate-phase-out {
+    animation: phase-out-animation 0.3s ease-out;
+  }
