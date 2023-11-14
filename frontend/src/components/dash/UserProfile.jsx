@@ -77,7 +77,7 @@ const UserProfile = () => {
         
         data.set('avatar', file);
         
-        axios.post('/profile/avatar/', data) 
+        axios.post('/profile/avatar', data) 
         .then(res => {
             toast.success('Avatar uploaded!');
         })
