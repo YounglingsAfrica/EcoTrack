@@ -26,7 +26,10 @@ const Login = () => {
         const { email, password } = data;
     
         try {
-            const response = await axios.post("/login", { email, password });
+            const response = await axios.post("https://breakable-hosiery-ant.cyclic.app/login", { 
+                email, 
+                password 
+            });
     
             if (response.data.error) {
                 toast.error(response.data.error);
