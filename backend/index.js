@@ -15,12 +15,15 @@ mongoose.connect(process.env.MONGO_URL)
 // middleware
 app.use(express.json())
 app.use(cookieParser());
-app.use(express.urlencoded({extended: false}))
-app.use(
-  cors({
-    origin: "*"
-  })
-);
+app.use(express.urlencoded({extended: false}))    
+const corsOpts = {
+  origin: '*',
+  credentials: true,
+  methods: ['GET','POST','HEAD','PUT','PATCH','DELETE'],
+  allowedHeaders: ['Content-Type'],
+  exposedHeaders: ['Content-Type']
+};
+app.use(cors(corsOpts));
 
 app.use("/", require("./routes/userRouter"))
 
