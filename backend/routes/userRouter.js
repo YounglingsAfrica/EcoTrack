@@ -12,11 +12,17 @@ const {
   updateUserAccount,
   uploadAvatar
 } = require("../controllers/authController");
-
+const fs = require("fs");
+const path = require("path");
 const multer = require("multer");
 
 // Avatar upload middleware
-const uploadMiddleware = multer({ dest: '../uploads/' })
+const uploadsDir = path.resolve(__dirname, '..', 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
+const uploadMiddleware = multer({ dest: uploadsDir })
 
 const dotenv = require("dotenv");
 dotenv.config();
