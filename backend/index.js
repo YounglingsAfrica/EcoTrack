@@ -16,14 +16,12 @@ mongoose.connect(process.env.MONGO_URL)
 app.use(express.json())
 app.use(cookieParser());
 app.use(express.urlencoded({extended: false}))    
-const corsOpts = {
-  origin: '*',
+app.use(cors({
+  origin: 'https://celadon-llama-2fa0fe.netlify.app',
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
-  methods: ['GET','POST','HEAD','PUT','PATCH','DELETE'],
-  allowedHeaders: ['Content-Type'],
-  exposedHeaders: ['Content-Type']
-};
-app.use(cors(corsOpts));
+}));
 
 app.use("/", require("./routes/userRouter"))
 
