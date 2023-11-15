@@ -26,7 +26,7 @@ const Login = () => {
         const { email, password } = data;
     
         try {
-            const response = await axios.post("https://breakable-hosiery-ant.cyclic.app/login", { 
+            const response = await axios.post("/login", { 
                 email, 
                 password 
             });
