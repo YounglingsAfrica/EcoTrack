@@ -356,7 +356,7 @@ const uploadAvatar = async (req, res) => {
     if (!req.file) {
         return res.status(400).json({ message: 'No file uploaded' });
     }
-    
+
     try {
         const token = req.cookies.authToken;  
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
