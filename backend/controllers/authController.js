@@ -6,13 +6,13 @@ const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const admin = require("firebase-admin");
+const { initializeApp, credential, storage } = require('firebase-admin/app');
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
+initializeApp({
+    credential: credential.cert(serviceAccount),
     storageBucket: "gs://ecotrack-9b188.appspot.com"
 });
-const bucket = admin.storage().bucket();
+const bucket = storage().bucket();
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
