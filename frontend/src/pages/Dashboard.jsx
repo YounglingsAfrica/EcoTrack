@@ -18,7 +18,11 @@ const Dashboard = () => {
                         {!!user && (<h2 className="text-white text-lg cursor-pointer">{user.name}</h2>)}
                     </div>
                     <div className="gap-[25px] flex items-center justify-center relative">
-                        <FaCircleUser className="text-white text-3xl cursor-pointer" />
+                    {
+                        user && user.avatar
+                        ? <img src={user.avatar} alt="User Avatar" className="cursor-pointer" />
+                        : <FaCircleUser className="text-white text-3xl cursor-pointer" />
+                    }
                         <div>
                             <FaBell className="text-white text-2xl cursor-pointer" />
                         </div>
