@@ -6,26 +6,24 @@ import { FaMapLocationDot } from "react-icons/fa6";
 import { AiFillSchedule, AiOutlineSchedule } from "react-icons/ai";
 import { LiaRouteSolid } from "react-icons/lia";
 import { TbReportSearch } from "react-icons/tb";
-import { MdRecycling, MdOutlineManageSearch } from "react-icons/md";
+import { MdRecycling } from "react-icons/md";
 import { LuUserSquare2 } from "react-icons/lu";
 import { VscFeedback } from "react-icons/vsc";
 import { FiLogOut } from "react-icons/fi";
+import { HiClipboardDocumentList } from "react-icons/hi2";
 import { Link } from 'react-router-dom';
 
-const SideBar  = () => {
-  const [open, setOpen] = useState(false);
-
   //Sidebar Items
-  const Menus = [
+export const Menus = [
     { title: "Dashboard", route:"/dashboard-b" },
     { title: "Collection Schedule", icon: <AiOutlineSchedule /> },
     { title: "Request Schedule", icon: <AiFillSchedule/> },
     { title: "Collection Routes", icon: <LiaRouteSolid /> },
     { title: "Reports & Analytics", icon: <TbReportSearch />},
-    { title: "Recycling Guide", icon: <MdRecycling /> },
+    { title: "Recycling Guide", route:"/dashboard-b/recycling", icon: <MdRecycling /> },
     { 
       title: "Disposal Locations", icon: <FaMapLocationDot />,
-      route:"/Disposal",
+      route:"/dashboard-b/disposal",
       submenu: true,
       submenuItems: [
         { title: "Location 1" },
@@ -35,17 +33,20 @@ const SideBar  = () => {
     },
     { 
       title: "User Profile", icon: <LuUserSquare2 />,
+      route: "/dashboard-b/user-profile",
       submenu: true,
       submenuItems: [
         { title: "Addresses" },
         { title: "Billing" },
       ],
     },
-    { title: "Regulations", icon: <MdOutlineManageSearch /> },
-    { title: "Feedback", icon: <VscFeedback /> },
-    { title: "Logout", spacing: true, icon: <FiLogOut />, route: "/logout" },
-  ];
+    { title: "Regulations", route:"/dashboard-b/regulations", icon: <HiClipboardDocumentList /> },
+    { title: "Feedback", route: "/dashboard-b/feedback", icon: <VscFeedback /> },
+    { title: "Logout", spacing: true, icon: <FiLogOut />, route: "/dashboard-b/logout" },
+];
 
+const SideBar  = () => {
+  const [open, setOpen] = useState(false);
   const [submenuOpen, setSubmenuOpen] = useState(Array(Menus.length).fill(false));
 
   return (

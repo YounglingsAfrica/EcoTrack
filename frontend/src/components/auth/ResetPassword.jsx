@@ -5,8 +5,10 @@ import Eco from "../../assets/ecoeco.png";
 import X from "../../assets/x-mark.png";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { ThreeDots } from "react-loader-spinner";
 
 const Reset = () => {
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate()
     const {id, token} = useParams()
     const [data, setData] = useState({
@@ -16,12 +18,15 @@ const Reset = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        setIsLoading(true);
+
         const {password} = data;
         try {
             const res = await axios.post(`/reset/${id}/${token}`, {
                 password
             })
             if (res.data.Status === "Success") {
+                setIsLoading(false);
                 toast.success("Your password has been successfully reset");
                 navigate("/login");
             } else {
@@ -62,7 +67,20 @@ const Reset = () => {
                                 <button 
                                     className="flex items-center justify-center px-6 w-auto h-10 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen shadow-right-bottom"
                                 >
-                                    Reset Password
+                                    {isLoading ? (
+                                        <ThreeDots 
+                                            height="70" 
+                                            width="70" 
+                                            radius="9"
+                                            color="#fff" 
+                                            ariaLabel="three-dots-loading"
+                                            wrapperStyle={{}}
+                                            wrapperClassName=""
+                                            visible={true}
+                                        /> 
+                                    ) : (  
+                                        'Reset Password'
+                                    )}
                                 </button>
                             </div>
                         </form>

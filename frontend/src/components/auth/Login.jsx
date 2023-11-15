@@ -6,8 +6,11 @@ import X from "../../assets/x-mark.png";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { UserContext } from '../../context/userContext';
+import Cookies from "js-cookie";
+import { ThreeDots } from 'react-loader-spinner';
 
 const Login = () => {
+    const [isLoading, setIsLoading] = useState(false);
     const { setUser } = useContext(UserContext);  // use the `setUser` function from the `UserContext`
     const navigate = useNavigate();
     const [data, setData] = useState({
@@ -18,6 +21,8 @@ const Login = () => {
     const loginUser = async (e) => {
         e.preventDefault();
 
+        setIsLoading(true);
+
         const { email, password } = data;
     
         try {
@@ -27,11 +32,13 @@ const Login = () => {
                 toast.error(response.data.error);
             } else {
                 // Login was successful, now fetch the profile
+                Cookies.set('authToken', response.data.token);
                 const profileResponse = await axios.get("/profile", { withCredentials: true });
     
                 if (profileResponse.data) {
                     // Set user data in the context
                     setUser(profileResponse.data);
+                    setIsLoading(false);
                     toast.success(`Login successful. Welcome back ${profileResponse.data.name}`);
                     navigate("/dashboard-b");
                 } else {
@@ -43,14 +50,6 @@ const Login = () => {
             console.log(error);
         }
     };
-
-    // const auth = async () => {
-    //     const response = await fetch("http://127.0.0.1:3000/request", {
-    //         method: "post",
-    //     })
-    //     const data = await response.json();
-    //     navigate(data.url);
-    // }
 
     return (
         <div className="min-h-screen pt-28 bg-black">
@@ -97,7 +96,20 @@ const Login = () => {
                                 <button 
                                     className="flex items-center justify-center px-6 w-auto h-10 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen shadow-right-bottom"
                                 >
-                                    Log In
+                                    {isLoading ? (
+                                        <ThreeDots 
+                                            height="70" 
+                                            width="70" 
+                                            radius="9"
+                                            color="#fff" 
+                                            ariaLabel="three-dots-loading"
+                                            wrapperStyle={{}}
+                                            wrapperClassName=""
+                                            visible={true}
+                                        /> 
+                                ) : (  
+                                    'Log in'
+                                )}
                                 </button>
                             </div>
                             <div className="mt-2 flex justify-center">
