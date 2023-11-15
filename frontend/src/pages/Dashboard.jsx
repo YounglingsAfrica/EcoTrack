@@ -20,7 +20,7 @@ const Dashboard = () => {
                     <div className="gap-[25px] flex items-center justify-center relative">
                     {
                         user && user.avatar
-                        ? <img src={user.avatar} alt="User Avatar" className="cursor-pointer" style={{ width: '50px', height: '50px', objectFit: 'cover' }} />
+                        ? <img src={user.avatar} alt="User Avatar" className="cursor-pointer rounded-full w-[50px] h-[50px] object-cover" />
                         : <FaCircleUser className="text-white text-3xl cursor-pointer" />
                     }
                         <div>
