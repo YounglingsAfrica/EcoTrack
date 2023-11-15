@@ -9,26 +9,8 @@ const {
   logoutUser,
   confirmEmail,
   sendEmail,
-  updateUserAccount,
-  uploadAvatar
+  updateUserAccount
 } = require("../controllers/authController");
-
-// Avatar upload middleware
-const path = require("path");
-const multer = require("multer");
-
-const uploadsDir = path.resolve(__dirname, 'backend', 'uploads');
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, uploadsDir)
-  },
-  filename: function (req, file, cb) {
-    cb(null, `${Date.now()}-${file.originalname}`);
-  }
-});
-
-const uploadMiddleware = multer({ storage: storage })
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -48,7 +30,7 @@ router.post("/forgot", forgotPassword)
 router.post("/reset/:id/:token", resetPassword)
 // User profile
 router.post("/profile/update", updateUserAccount)
-router.post("/profile/avatar", uploadMiddleware.single('avatar'), uploadAvatar)
+// router.post("/profile/avatar", uploadMiddleware.single('avatar'), uploadAvatar)
 // google auth
 
 
