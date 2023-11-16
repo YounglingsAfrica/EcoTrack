@@ -6,15 +6,26 @@ export const UserContext = createContext({})
 export function UserContextProvider({children}) {
     const [user, setUser] = useState(null);
     const fetchUserProfile = () => {
-        axios.get("/profile", { withCredentials: true }).then(({data}) => {
-            data.avatar = `/avatar/${data.id}`;
-            setUser(data);
-        }).catch(error => {
-            if (error.response.status === 401) {    
-                console.error("User is not authenticated");
-            } else {
-                console.error(error);
-            }
+        axios.get('/profile', { withCredentials: true })
+        .catch(error => {
+          if (error.response.status === 401) {
+            // Token is expired, refresh it
+            const refreshToken = getCookie('refreshToken');
+            axios.post('/token', { token: refreshToken }, { withCredentials: true })
+              .then(({ data }) => {
+                // Save the new token
+                const authToken = data.authToken;
+      
+                // Retry the /profile request with the new token
+                axios.get('/profile', { headers: { 'Authorization': `Bearer ${authToken}` } })
+                  .then(({ data }) => {
+                    data.avatar = `/avatar/${data.id}`;
+                    setUser(data);
+                  })
+              })
+          } else {
+            console.error(error);
+          }
         });
     };
     
@@ -28,4 +39,10 @@ export function UserContextProvider({children}) {
             {children}
         </UserContext.Provider>
     )
+}
+
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
 }
