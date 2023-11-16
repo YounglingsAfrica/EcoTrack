@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaBell } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
 import { useContext } from 'react';
 import { UserContext } from "../context/userContext";
 
 const Dashboard = () => {
-    const {user} = useContext(UserContext);
+    const {user, fetchUserProfile} = useContext(UserContext);
+
+    useEffect(() => {
+        fetchUserProfile();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return(
         <>

@@ -5,8 +5,7 @@ export const UserContext = createContext({})
 
 export function UserContextProvider({children}) {
     const [user, setUser] = useState(null);
-    
-    useEffect(() => {
+    const fetchUserProfile = () => {
         axios.get("/profile", { withCredentials: true }).then(({data}) => {
             data.avatar = `/avatar/${data.id}`;
             setUser(data);
@@ -16,13 +15,16 @@ export function UserContextProvider({children}) {
             } else {
                 console.error(error);
             }
-        })
+        });
+    };
+    
+    useEffect(() => {
+        fetchUserProfile();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])   
-
+    }, [])  
 
     return (
-        <UserContext.Provider value={{user, setUser}}>
+        <UserContext.Provider value={{user, setUser, fetchUserProfile}}>
             {children}
         </UserContext.Provider>
     )
