@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import { FaBell } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
 import { useContext } from 'react';
 import { UserContext } from "../context/userContext";
+import axios from "axios";
 
 const Dashboard = () => {
     const {user} = useContext(UserContext);
+    const [avatarUrl, setAvatarUrl] = useState(null);
+
+    useEffect(() => {
+        if (user) {
+            axios.get(`/avatar/${user.id}`)
+                .then(response => {
+                    setAvatarUrl(response.config.url);
+                })
+                .catch(error => console.error(error));
+        }
+    }, [user]);
 
     return(
         <>
@@ -19,8 +31,8 @@ const Dashboard = () => {
                     </div>
                     <div className="gap-[25px] flex items-center justify-center relative">
                     {
-                        user && user.avatar
-                        ? <img src={user.avatar} alt="User Avatar" className="cursor-pointer rounded-full w-[50px] h-[50px] object-cover" />
+                        user && avatarUrl
+                        ? <img src={avatarUrl} alt="User Avatar" className="cursor-pointer rounded-full w-[50px] h-[50px] object-cover" />
                         : <FaCircleUser className="text-white text-3xl cursor-pointer" />
                     }
                         <div>
