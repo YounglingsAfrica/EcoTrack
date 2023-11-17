@@ -20,7 +20,7 @@ export function UserContextProvider({children}) {
             })
         }   
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [user])
+    }, [])
 
     return (
         <UserContext.Provider value={{user, setUser}}>
