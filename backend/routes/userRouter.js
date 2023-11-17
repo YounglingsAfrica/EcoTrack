@@ -10,7 +10,8 @@ const {
   confirmEmail,
   sendEmail,
   updateUserAccount,
-  uploadAvatar
+  uploadAvatar,
+  feedback
 } = require("../controllers/authController");
 
 // Avatar upload middleware
@@ -51,5 +52,7 @@ router.post("/profile/update", updateUserAccount)
 router.post("/profile/avatar", uploadMiddleware.single('avatar'), uploadAvatar)
 // google auth
 
+//feedback
+router.post("/feedback", feedback)
 
 module.exports = router;

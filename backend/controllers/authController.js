@@ -1,6 +1,7 @@
-const User = require("../models/user")
+const User = require("../models/user");
+const Feedback = require("../models/feedback");
 const bcrypt = require("bcryptjs");
-const { hashPassword, comparePassword } = require("../helpers/auth")
+const { hashPassword, comparePassword } = require("../helpers/auth");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const fs = require("fs");
@@ -395,6 +396,24 @@ const uploadAvatar = async (req, res) => {
     
 };
 
+//Handle feedback submission
+const feedback = async (req, res) => {
+    const {userId, Feedback} = req.body;
+
+    try{
+        //save feedback to db
+        const newFeedback = new Feedback({ userId, Q1, Q2, Q3, Q4 });
+        await newFeedback.save();
+
+        //send email notification
+
+    }
+    catch (error) {
+        console.error('Error submitting feedback', error);
+        res.status(500).json({ message: 'Failed to submit feedback'})
+    };
+}
+
 module.exports = {
     test,
     registerUser,
@@ -406,5 +425,6 @@ module.exports = {
     confirmEmail,
     sendEmail,
     updateUserAccount,
-    uploadAvatar
+    uploadAvatar,
+    feedback
 }

@@ -19,7 +19,7 @@ import FeedbackHome from "./components/dash/FeedbackHome";
 import RecycleHome from "./components/dash/RecycleHome";
 import RegulationsHome from "./components/dash/RegulationsHome";
 
-axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
+axios.defaults.baseURL = process.env.REACT_APP_DEV_URL;
 axios.defaults.withCredentials = true;
 
 const AppRouter = () => {
@@ -46,12 +46,13 @@ const AppRouter = () => {
                                 <Route path="logout" element={<Logout />} />
                                 <Route path="disposal" element={<Disposal />} />
                                 <Route path="user-profile" element={<UserProfile />} />
-                                <Route path="feedback" element={<FeedbackHome />} />
+                                
                                 <Route path="recycling" element={<RecycleHome />} />
                                 <Route path="regulations" element={<RegulationsHome />} />
                             </Routes>
                         </ProtectedRoute>
                     }/>
+                    <Route path="feedback" element={<FeedbackHome />} />
                 </Routes>
         </>
     );
