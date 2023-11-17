@@ -9,6 +9,7 @@ export function UserContextProvider({children}) {
     useEffect(() => {
         if (user) {
             axios.get("/profile", { withCredentials: true }).then(({data}) => {
+                data.avatar = `/avatar/${data.id}`;
                 setUser(data);
             }).catch(error => {
                 if (error.response.status === 401) {    
