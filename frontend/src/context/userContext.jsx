@@ -8,24 +8,24 @@ export function UserContextProvider({children}) {
     const fetchUserProfile = () => {
         axios.get('/profile', { withCredentials: true })
         .catch(error => {
-          if (error.response.status === 403) {
-            // Token is expired, refresh it
-            const refreshToken = getCookie('refreshToken');
-            axios.post('/token', { token: refreshToken }, { withCredentials: true })
-              .then(({ data }) => {
-                // Save the new token
-                const authToken = data.authToken;
-      
-                // Retry the /profile request with the new token
-                axios.get('/profile', { headers: { 'Authorization': `Bearer ${authToken}` } })
-                  .then(({ data }) => {
-                    data.avatar = `/avatar/${data.id}`;
-                    setUser(data);
-                  })
-              })
-          } else {
-            console.error(error);
-          }
+            if (error.response.status === 401) {
+                // Token is expired, refresh it
+                const refreshToken = getCookie('refreshToken');
+                axios.post('/token', { token: refreshToken }, { withCredentials: true })
+                .then(({ data }) => {
+                    // Save the new token
+                    const authToken = data.authToken;
+        
+                    // Retry the /profile request with the new token
+                    axios.get('/profile', { headers: { 'Authorization': `Bearer ${authToken}` } })
+                    .then(({ data }) => {
+                        data.avatar = `/avatar/${data.id}`;
+                        setUser(data);
+                    })
+                })
+            } else {
+                console.error(error);
+            }
         });
     };
     
