@@ -8,7 +8,7 @@ export function UserContextProvider({children}) {
     const fetchUserProfile = () => {
         axios.get('/profile', { withCredentials: true })
         .catch(error => {
-            if (error.response.status === 401) {
+            if (error.response.status === 403) {
                 // Token is expired, refresh it
                 const refreshToken = getCookie('refreshToken');
                 axios.post('/token', { token: refreshToken }, { withCredentials: true })
