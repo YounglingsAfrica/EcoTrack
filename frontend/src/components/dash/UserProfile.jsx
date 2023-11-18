@@ -14,6 +14,7 @@ const UserProfile = () => {
     const [newPassword, setNewPassword] = useState(user?.password || "");
     const [newEmail, setNewEmail] = useState(user?.email || "");
     const fileInputRef = useRef();
+    
     const handleUpdateName = () => {
         if (newName !== user?.name) {
             axios.post("/profile/update", { name: newName }, { withCredentials: true })
