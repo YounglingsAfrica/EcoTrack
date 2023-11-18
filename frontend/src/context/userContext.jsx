@@ -7,6 +7,10 @@ export function UserContextProvider({children}) {
     const [user, setUser] = useState(null);
     const fetchUserProfile = () => {
         axios.get('/profile', { withCredentials: true })
+        .then(({ data }) => {
+            data.avatar = `/avatar/${data.id}`;
+            setUser(data);
+        })
         .catch(error => {
             if (error.response.status === 403) {
                 // Token is expired, refresh it
