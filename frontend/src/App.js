@@ -5,11 +5,11 @@ import { UserContextProvider } from './context/userContext';
 
 function App() {
   return (
-    <UserContextProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <UserContextProvider>
         <AppRouter />
-      </BrowserRouter>
-    </UserContextProvider>
+      </UserContextProvider>
+    </BrowserRouter>
   );
 }
 
