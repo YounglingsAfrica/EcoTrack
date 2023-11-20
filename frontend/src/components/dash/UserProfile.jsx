@@ -6,8 +6,6 @@ import Verified from "../../assets/verified.svg";
 import { UserContext } from '../../context/userContext';
 import axios from 'axios';
 import { toast } from "react-hot-toast";
-import { Outlet } from 'react-router-dom';
-
 const UserProfile = () => {
     const {user, setUser} = useContext(UserContext);
     const [newPhoneNum, setNewPhoneNum] = useState(user?.newPhoneNum || "");
@@ -202,7 +200,6 @@ const UserProfile = () => {
                                     >
                                         Update Phone Number
                                     </button>
-                                    <Outlet />
                                 </div>
                             </div>
                         </div>
