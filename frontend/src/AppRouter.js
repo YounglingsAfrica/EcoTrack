@@ -45,7 +45,7 @@ const AppRouter = () => {
                                 <Route index element={<DashHome />} />
                                 <Route path="logout" element={<Logout />} />
                                 <Route path="disposal" element={<Disposal />} />
-                                <Route path="user-profile" element={<UserProfile />} >
+                                <Route path="user-profile/*" element={<UserProfile />} >
                                     <Route path="addresses" element={<Addresses />} />
                                 </Route>
                                 <Route path="feedback" element={<FeedbackHome />} />
