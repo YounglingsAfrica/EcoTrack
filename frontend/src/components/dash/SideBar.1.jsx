@@ -36,7 +36,10 @@ export const Menus = [
       route: "/dashboard-b/user-profile",
       submenu: true,
       submenuItems: [
-        { title: "Billing & Addresses", route: "/dashboard-b/user-profile/addresses" },
+        { 
+          title: "Addresses", 
+          route: "/dashboard-b/user-profile/addresses" 
+        },
       ],
     },
     { title: "Regulations", route:"/dashboard-b/regulations", icon: <HiClipboardDocumentList /> },
@@ -70,12 +73,16 @@ const SideBar  = () => {
                 {menu.icon ? menu.icon : <BiSolidDashboard />}
               </span>
               <span className={`text-white text-sm origin-left font-thin flex flex-1 duration-300 ${!open ? "hidden" : ""}`}>{menu.title}</span>
-              {menu.submenu && open && (
-                <BsChevronDown className={`${submenuOpen[index] && "rotate-180"} duration-300`} onClick={() => {
-                  const updatedSubmenuOpen = [...submenuOpen];
-                  updatedSubmenuOpen[index] = !updatedSubmenuOpen[index];
-                  setSubmenuOpen(updatedSubmenuOpen);
-                }}/>
+              {menu.submenu && submenuOpen[index] && open && (
+                <ul>
+                  {menu.submenuItems.map((submenuItem, index) => (
+                    <Link to={submenuItem.route} key={index}>
+                      <li className='text-white text-sm font-thin flex items-center gap-x-4 cursor-pointer p-2 px-12 hover:bg-black rounded-md'>
+                        {submenuItem.title}
+                      </li>
+                    </Link>
+                  ))}
+                </ul>
               )}
             </li>
           </Link>
