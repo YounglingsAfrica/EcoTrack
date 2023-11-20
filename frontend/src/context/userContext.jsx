@@ -9,7 +9,7 @@ export function UserContextProvider({children}) {
         axios.get('/profile', { withCredentials: true })
         .then(({ data }) => {
             // Fetch the signed URL
-            axios.get(`/avatar/${data.id}`, { withCredentials: true })
+            axios.get(`/avatar/${data._id}`, { withCredentials: true })
                 .then(({ request: { responseURL } }) => {
                     data.avatar = responseURL;
                     setUser(data);
