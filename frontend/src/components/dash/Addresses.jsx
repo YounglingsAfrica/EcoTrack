@@ -6,7 +6,7 @@ import { UserContext } from '../../context/userContext';
 
 const Addresses = () => {
     const {user} = useContext(UserContext)
-    const [isLoading, setIsLoading] = useState(false);
+    //const [isLoading, setIsLoading] = useState(false);
     const [address, setAddress] = useState({
         streetDetails: '',
         province: '',
