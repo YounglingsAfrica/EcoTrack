@@ -44,7 +44,7 @@ const Addresses = () => {
                                 Address
                             </h1>
                             <form 
-                                action=""
+                                onSubmit={handleSubmit}
                             >
                                 <div className='flex flex-col justify-center items-center'>
                                     <textarea
@@ -74,7 +74,7 @@ const Addresses = () => {
                                         />
                                     </div>
                                     <button 
-                                        onSubmit={handleSubmit}
+                                        type='submit'
                                         className="flex items-center justify-center px-6 w-auto h-12 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen shadow-right-bottom mt-5"
                                     >
                                         Update 
