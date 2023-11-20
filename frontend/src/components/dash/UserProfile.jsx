@@ -6,6 +6,7 @@ import Verified from "../../assets/verified.svg";
 import { UserContext } from '../../context/userContext';
 import axios from 'axios';
 import { toast } from "react-hot-toast";
+import { Outlet } from 'react-router-dom';
 
 const UserProfile = () => {
     const {user, setUser} = useContext(UserContext);
@@ -93,10 +94,10 @@ const UserProfile = () => {
 
     return (
         <div className='flex'>
-            <div className='basis-[5%] h-[100vh] z-40'>
+            <div className='basis-[4%] h-[100vh] z-40'>
                 <SideBar />
             </div>
-            <div className='basis-[95%]'>
+            <div className='basis-[96%]'>
                 <Dashboard />
                 <div className='pt-[35px] px-[10px] z-0 h-[90vh]'>
                     <div className='flex flex-wrap text-center p-8 px-20'>
@@ -201,6 +202,7 @@ const UserProfile = () => {
                                     >
                                         Update Phone Number
                                     </button>
+                                    <Outlet />
                                 </div>
                             </div>
                         </div>
