@@ -10,7 +10,6 @@ import LoginPage from "./pages/Login";
 import Reset from "./components/auth/ResetPassword";
 import Forgot from "./components/auth/ForgotPassword";
 import Disposal from "./components/dash/Disposal";
-// import Main from "./components/dash/Main";
 import Logout from "./components/auth/Logout";
 import ConfirmEmail from "./components/auth/ConfirmEmail";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
@@ -18,6 +17,7 @@ import UserProfile from "./components/dash/UserProfile";
 import FeedbackHome from "./components/dash/FeedbackHome";
 import RecycleHome from "./components/dash/RecycleHome";
 import RegulationsHome from "./components/dash/RegulationsHome";
+import Addresses from "./components/dash/Addresses";
 
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
 axios.defaults.withCredentials = true;
@@ -52,6 +52,7 @@ const AppRouter = () => {
                             </Routes>
                         </ProtectedRoute>
                     }/>
+                    <Route path="/addresses" element={<Addresses />} />
                 </Routes>
         </>
     );

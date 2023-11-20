@@ -96,7 +96,7 @@ const Login = () => {
                                 <button 
                                     className="flex items-center justify-center px-6 w-auto h-10 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen shadow-right-bottom"
                                 >
-                                    {isLoading ? (
+                                {isLoading ? (
                                         <ThreeDots 
                                             height="70" 
                                             width="70" 

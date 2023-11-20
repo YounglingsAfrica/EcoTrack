@@ -36,8 +36,7 @@ export const Menus = [
       route: "/dashboard-b/user-profile",
       submenu: true,
       submenuItems: [
-        { title: "Addresses" },
-        { title: "Billing" },
+        { title: "Billing & Addresses", route: "/dashboard-b/user-profile/addresses" },
       ],
     },
     { title: "Regulations", route:"/dashboard-b/regulations", icon: <HiClipboardDocumentList /> },
