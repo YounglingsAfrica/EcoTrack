@@ -3,7 +3,6 @@ import SideBar from './SideBar.1';
 import Dashboard from '../../pages/Dashboard';
 import axios from 'axios';
 import { UserContext } from '../../context/userContext';
-import { Outlet } from 'react-router-dom';
 
 const Addresses = () => {
     const {user} = useContext(UserContext)
@@ -80,7 +79,6 @@ const Addresses = () => {
                                     >
                                         Update 
                                     </button>
-                                    <Outlet />
                                 </div>
                             </form>
                         </div>  
