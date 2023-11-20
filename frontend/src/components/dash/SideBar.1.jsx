@@ -66,43 +66,42 @@ const SideBar  = () => {
 
       <ul className={`pt-2 ${open ? "duration-400 overflow-hidden" : ""}`}>
         {Menus.map((menu, index) => (
-          <>
-          <Link to={menu.route} key={index}>
-            <li key={index} className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-black rounded-md ${ menu.spacing ? "mt-9" : "mt-2" }`} style={{ whiteSpace: "nowrap" }}>
-              <span className='text-2xl block float-left text-paleGreen'>
-                {menu.icon ? menu.icon : <BiSolidDashboard />}
-              </span>
-              <span className={`text-white text-sm origin-left font-thin flex flex-1 duration-300 ${!open ? "hidden" : ""}`}>{menu.title}</span>
-              {menu.submenu && submenuOpen[index] && open && (
-                <ul>
-                  {menu.submenuItems.map((submenuItem, index) => (
-                    <Link to={submenuItem.route} key={index}>
-                      <li className='text-white text-sm font-thin flex items-center gap-x-4 cursor-pointer p-2 px-12 hover:bg-black rounded-md'>
-                        {submenuItem.title}
-                      </li>
-                    </Link>
-                  ))}
-                </ul>
-              )}
-            </li>
-          </Link>
-            
+          <React.Fragment key={index}>
+            <Link to={menu.route}>
+              <li className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-black rounded-md ${ menu.spacing ? "mt-9" : "mt-2" }`} style={{ whiteSpace: "nowrap" }}>
+                <span className='text-2xl block float-left text-paleGreen'>
+                  {menu.icon ? menu.icon : <BiSolidDashboard />}
+                </span>
+                <span className={`text-white text-sm origin-left font-thin flex flex-1 duration-300 ${!open ? "hidden" : ""}`}>{menu.title}</span>
+                {menu.submenu && open && (
+                  <BsChevronDown className={`${submenuOpen[index] && "rotate-180"} duration-300`} onClick={(e) => {
+                    e.preventDefault();
+                    const updatedSubmenuOpen = [...submenuOpen];
+                    updatedSubmenuOpen[index] = !updatedSubmenuOpen[index];
+                    setSubmenuOpen(updatedSubmenuOpen);
+                  }}/>
+                )}
+              </li>
+            </Link>
+              
             {menu.submenu && submenuOpen[index] && open && (
               <ul>
-                {menu.submenuItems.map((submenuItem, index) => (
-                  <li key={index} className='text-white text-sm font-thin flex items-center gap-x-4 cursor-pointer p-2 px-12 hover:bg-black rounded-md'>
-                    {submenuItem.title}
-                  </li>
+                {menu.submenuItems.map((submenuItem, submenuIndex) => (
+                  <Link to={submenuItem.route} key={submenuIndex}>
+                    <li className='text-white text-sm font-thin flex items-center gap-x-4 cursor-pointer p-2 px-12 hover:bg-black rounded-md'>
+                      {submenuItem.title}
+                    </li>
+                  </Link>
                 ))}
               </ul>
             )}
-          </>
+          </React.Fragment>
         ))}
       </ul>
 
       </div>
     </div>
-  )
+)
 };
 
 export default SideBar;
