@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import SideBar from './SideBar.1';
 import Dashboard from '../../pages/Dashboard';
 import axios from 'axios';
 import { UserContext } from '../../context/userContext';
 
 const Addresses = () => {
-    const {user} = useContext(UserContext)
+    const {user, setUser} = useContext(UserContext)
     //const [isLoading, setIsLoading] = useState(false);
     const [address, setAddress] = useState({
         streetDetails: '',
@@ -30,6 +30,19 @@ const Addresses = () => {
         }
     };
 
+    useEffect(() => {
+        // Fetch the user's current address from the server
+        axios.get('/address', { withCredentials: true })
+        .then(response => {
+            setAddress(response.data.address);
+            setUser(response.data.user);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
         <div className='flex'>
             <div className='basis-[4%] h-[100vh] z-40'>
@@ -51,10 +64,7 @@ const Addresses = () => {
                                         name='streetDetails'
                                         value={address.streetDetails}
                                         onChange={handleChange}
-                                        placeholder="House/Building Number & Street Name
-                                        Suburb
-                                        City
-                                        Postal Code"
+                                        placeholder={user.address.streetDetails || "House/Building Number & Street Name\nSuburb\nCity\nPostal Code"}
                                         className='w-full h-40 rounded-2xl border border-gray-400 p-5 focus:outline-primaryGreen bg-primaryGreen50 placeholder:text-gray-700 mb-10'
                                     />
                                     <div className='w-full flex justify-between'>
@@ -62,14 +72,14 @@ const Addresses = () => {
                                             name='province'
                                             value={address.province}
                                             onChange={handleChange}
-                                            placeholder="Province"
+                                            placeholder={user.address.province || "Province"}
                                             className='w-1/2 h-20 rounded-2xl border border-gray-400 p-5 focus:outline-primaryGreen bg-primaryGreen50 placeholder:text-gray-700 mb-10 mr-2'
                                         />
                                         <textarea
                                             name='country'
                                             value={address.country}
                                             onChange={handleChange}
-                                            placeholder="Country"
+                                            placeholder={user.address.country || "Country"}
                                             className='w-1/2 h-20 rounded-2xl border border-gray-400 p-5 focus:outline-primaryGreen bg-primaryGreen50 placeholder:text-gray-700 mb-10 ml-2'
                                         />
                                     </div>

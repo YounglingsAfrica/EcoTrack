@@ -31,33 +31,33 @@ const AppRouter = () => {
                     duration: 4000, 
                 }} 
             />
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/signup" element={<Registration />} />
-                    <Route path="/confirm/:id/:token" element={<ConfirmEmail />} />
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/forgot" element={<Forgot />} />
-                    <Route path="/reset/:id/:token" element={<Reset />} />
-                    <Route path="/dashboard-a" element={<Header />} />
-                    <Route path="/dashboard-b/*" element={
-                        <ProtectedRoute>
-                            <Routes>
-                                <Route index element={<DashHome />} />
-                                <Route path="logout" element={<Logout />} />
-                                <Route path="disposal" element={<Disposal />} />
-                                <Route path="user-profile/*" element={
-                                    <Routes>
-                                        <Route index element={< UserProfile/>}/>
-                                        <Route path="addresses" element={<Addresses />} />
-                                    </Routes>
-                                }/>
-                                <Route path="feedback" element={<FeedbackHome />} />
-                                <Route path="recycling" element={<RecycleHome />} />
-                                <Route path="regulations" element={<RegulationsHome />} />
-                            </Routes>
-                        </ProtectedRoute>
-                    }/>
-                </Routes>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/signup" element={<Registration />} />
+                <Route path="/confirm/:id/:token" element={<ConfirmEmail />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/forgot" element={<Forgot />} />
+                <Route path="/reset/:id/:token" element={<Reset />} />
+                <Route path="/dashboard-a" element={<Header />} />
+                <Route path="/dashboard-b/*" element={
+                    <ProtectedRoute>
+                        <Routes>
+                            <Route index element={<DashHome />} />
+                            <Route path="logout" element={<Logout />} />
+                            <Route path="disposal" element={<Disposal />} />
+                            <Route path="user-profile/*" element={
+                                <Routes>
+                                    <Route index element={< UserProfile/>}/>
+                                    <Route path="addresses" element={<Addresses />} />
+                                </Routes>
+                            }/>
+                            <Route path="feedback" element={<FeedbackHome />} />
+                            <Route path="recycling" element={<RecycleHome />} />
+                            <Route path="regulations" element={<RegulationsHome />} />
+                        </Routes>
+                    </ProtectedRoute>
+                }/>
+            </Routes>
         </>
     );
 };
