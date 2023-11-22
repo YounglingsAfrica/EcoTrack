@@ -7,8 +7,11 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import Cookies from "js-cookie";
 import { ThreeDots } from 'react-loader-spinner';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../redux/slice/logoutSlice';
 
 const Login = () => {
+    const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const [data, setData] = useState({
@@ -30,6 +33,7 @@ const Login = () => {
                 toast.error(response.data.error);
             } else {
                 Cookies.set('authToken', response.data.token);
+                dispatch(setUser(response.data.user));
                 toast.success(`Login Successful. Welcome Back ${response.data.name}`);
                 navigate('/dashboard-b')
             }
