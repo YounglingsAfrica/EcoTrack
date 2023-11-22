@@ -10,6 +10,7 @@ import { toast } from "react-hot-toast";
 const UserProfile = () => {
     const user = useSelector(selectUserProfile);
     const dispatch = useDispatch();
+    const [avatarUrl, setAvatarUrl] = useState(null);
     const [newPhoneNum, setNewPhoneNum] = useState(user?.newPhoneNum || "");
     const [newName, setNewName] = useState(user?.name || "");
     const [newPassword, setNewPassword] = useState(user?.password || "");
@@ -21,6 +22,18 @@ const UserProfile = () => {
             dispatch(fetchUserProfile());
         }
     }, [dispatch, user])
+
+    useEffect(() => {
+        if (user) {
+            axios.get(`/avatar/${user._id}`)
+                .then((response) => {
+                    setAvatarUrl(response.data);
+                })
+                .catch((error) => {
+                    console.log("Error fetching avatar", error)
+                })
+        }
+    }, [user])
     
     const handleUpdateName = () => {
         if (newName !== user?.name) {
@@ -98,7 +111,7 @@ const UserProfile = () => {
                                 className='flex items-center justify-center mb-6'
                             >
                                 <img
-                                    src={user.avatar || defaultAvatar}
+                                    src={avatarUrl || defaultAvatar}
                                     alt="User"
                                     className='h-auto w-32 rounded-full cursor-pointer object-cover object-center' 
                                     title='Edit Avatar'
