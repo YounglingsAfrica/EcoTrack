@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { selectUserProfile, updateUserProfile } from "../../redux/slice/profileSlice";
+import { fetchUserProfile, selectUserProfile, updateUserProfile } from "../../redux/slice/profileSlice";
 import SideBar from './SideBar.1';
 import Dashboard from '../../pages/Dashboard';
 import defaultAvatar from "../../assets/User.png";
@@ -15,6 +15,12 @@ const UserProfile = () => {
     const [newPassword, setNewPassword] = useState(user?.password || "");
     const [newEmail, setNewEmail] = useState(user?.email || "");
     const fileInputRef = useRef();
+
+    useEffect(() => {
+        if (!user) {
+            dispatch(fetchUserProfile());
+        }
+    }, [dispatch, user])
     
     const handleUpdateName = () => {
         if (newName !== user?.name) {
