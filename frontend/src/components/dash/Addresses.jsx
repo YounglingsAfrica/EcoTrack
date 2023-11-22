@@ -1,24 +1,22 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setAddress } from "../../redux/slice/addressesSlice";
 import SideBar from './SideBar.1';
 import Dashboard from '../../pages/Dashboard';
 import axios from 'axios';
-import { UserContext } from '../../context/userContext';
 import { ThreeDots } from "react-loader-spinner";
 
 const Addresses = () => {
-    const {user} = useContext(UserContext)
+    const dispatch = useDispatch();
+    const user = useSelector(state => state.user);
+    const address = useSelector(state => state.address);
     const [isLoading, setIsLoading] = useState(false);
-    const [address, setAddress] = useState({
-        streetDetails: '',
-        province: '',
-        country: ''
-    });
 
     const handleChange = (e) => {
-        setAddress({
+        dispatch(setAddress({
             ...address,
             [e.target.name]: e.target.value
-        });
+        }));
     };
 
     const handleSubmit = async (e) => {

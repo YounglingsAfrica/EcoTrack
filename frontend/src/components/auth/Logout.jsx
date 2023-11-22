@@ -3,19 +3,19 @@ import { Link, useNavigate } from "react-router-dom";
 import X from "../../assets/x-mark.png";
 import Logo from "../../assets/eco_logo.png";
 import Eco from "../../assets/ecoeco.png";
-import { useContext } from 'react';
-import { UserContext } from "../../context/userContext";
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from "../../redux/slice/logoutSlice"; 
 import { toast } from "react-hot-toast";
 import { ThreeDots } from "react-loader-spinner";
 
 const Logout = () => {
     const [isLoading, setIsLoading] = useState(false);
-    const {user, setUser} = useContext(UserContext);
+    const dispatch = useDispatch();
+    const user = useSelector(state => state.user);
     const navigate = useNavigate();
     
     const handleLogout = async (e) => {
         e.preventDefault();
-
         setIsLoading(true);
 
         try {
@@ -27,7 +27,7 @@ const Logout = () => {
             if (response.ok) {
                 setIsLoading(false);
                 toast.success(`${user?.name} has logged out.`)
-                setUser(null);
+                dispatch(logoutUser());
                 navigate("/")
             } else {
                 console.error("Logout failed, please try again")

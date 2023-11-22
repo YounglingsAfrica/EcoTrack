@@ -1,17 +1,18 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { fetchUserProfile } from '../../redux/slice/profileSlice';
 import Logo from "../../assets/eco_logo.png";
 import Eco from "../../assets/ecoeco.png";
 import X from "../../assets/x-mark.png";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { UserContext } from '../../context/userContext';
 import Cookies from "js-cookie";
 import { ThreeDots } from 'react-loader-spinner';
 
 const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
-    const { setUser } = useContext(UserContext);  // use the `setUser` function from the `UserContext`
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [data, setData] = useState({
         email: '',
@@ -33,21 +34,21 @@ const Login = () => {
             } else {
                 // Login was successful, now fetch the profile
                 Cookies.set('authToken', response.data.token);
-                const profileResponse = await axios.get("/profile", { withCredentials: true });
-    
-                if (profileResponse.data) {
-                    // Set user data in the context
-                    setUser(profileResponse.data);
-                    setIsLoading(false);
-                    toast.success(`Login Successful. Welcome Back ${profileResponse.data.name}`);
-                    navigate("/dashboard-b");
-                } else {
-                    console.error('Failed to get profile');
-                    toast.error('Failed to get profile');
-                }
+                dispatch(fetchUserProfile())
+                    .then((result) => {
+                        if (result.meta.requestStatus === 'fulfilled') {
+                            toast.success(`Login Successful. Welcome Back ${result.payload.name}`);
+                            navigate('/dashboard-b')
+                        } else {
+                            console.log('Failed to get profile');
+                            toast.error('Failed to get profile');
+                        }
+                    });
             }
         } catch (error) {
             console.log(error);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -97,16 +98,16 @@ const Login = () => {
                                     className="flex items-center justify-center px-6 w-auto h-10 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen shadow-right-bottom"
                                 >
                                 {isLoading ? (
-                                        <ThreeDots 
-                                            height="70" 
-                                            width="70" 
-                                            radius="9"
-                                            color="#fff" 
-                                            ariaLabel="three-dots-loading"
-                                            wrapperStyle={{}}
-                                            wrapperClassName=""
-                                            visible={true}
-                                        /> 
+                                    <ThreeDots 
+                                        height="70" 
+                                        width="70" 
+                                        radius="9"
+                                        color="#fff" 
+                                        ariaLabel="three-dots-loading"
+                                        wrapperStyle={{}}
+                                        wrapperClassName=""
+                                        visible={true}
+                                    /> 
                                 ) : (  
                                     'Log in'
                                 )}

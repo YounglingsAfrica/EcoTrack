@@ -1,11 +1,11 @@
 import React from "react";
 import { FaBell } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
-import { useContext } from 'react';
-import { UserContext } from "../context/userContext";
+import { useSelector } from "react-redux";
+import { selectUserProfile } from "../redux/slice/profileSlice";
 
 const Dashboard = () => {
-    const {user} = useContext(UserContext);
+    const user = useSelector(selectUserProfile);
 
     return(
         <>

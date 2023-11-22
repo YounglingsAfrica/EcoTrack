@@ -1,13 +1,15 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserProfile, updateUserProfile } from "../../redux/slice/profileSlice";
 import SideBar from './SideBar.1';
 import Dashboard from '../../pages/Dashboard';
 import defaultAvatar from "../../assets/User.png";
 import Verified from "../../assets/verified.svg";
-import { UserContext } from '../../context/userContext';
 import axios from 'axios';
 import { toast } from "react-hot-toast";
 const UserProfile = () => {
-    const {user, setUser} = useContext(UserContext);
+    const user = useSelector(selectUserProfile);
+    const dispatch = useDispatch();
     const [newPhoneNum, setNewPhoneNum] = useState(user?.newPhoneNum || "");
     const [newName, setNewName] = useState(user?.name || "");
     const [newPassword, setNewPassword] = useState(user?.password || "");
@@ -16,24 +18,18 @@ const UserProfile = () => {
     
     const handleUpdateName = () => {
         if (newName !== user?.name) {
-            axios.post("/profile/update", { name: newName }, { withCredentials: true })
-            .then(({data}) => {
-                setUser(data);
-                toast.success("Your name has been changed.")
-            })
-            .catch(error => {
-                console.error(error);
-                toast.error(error.response.data.message || "An error occurred while changing name");
-            });
+            dispatch(updateUserProfile({ name: newName }))
+                .then(toast.success("Your name has been changed."))
+                .catch(error => {
+                    console.error(error);
+                    toast.error(error.response.data.message || "An error occurred while changing name");
+                });
         }
     };
     
     const handleUpdatePassword = () => {
-        axios.post("/profile/update", { password: newPassword }, { withCredentials: true })
-            .then(({data}) => {
-                setUser(data);
-                toast.success("Your password has been changed.")
-            })
+        dispatch(updateUserProfile({ password: newPassword }))
+            .then(toast.success("Your password has been changed."))
             .catch(error => {
                 console.error(error);
                 toast.error(error.response.data.message || "An error occurred while changing password");
@@ -41,14 +37,8 @@ const UserProfile = () => {
     };
     
     const handleUpdatePhoneNumber = () => {
-        axios.post("/profile/update", { phoneNumber: newPhoneNum }, { withCredentials: true })
-            .then(() => {
-                return axios.get("/profile", { withCredentials: true });
-            })
-            .then(({data}) => {
-                setUser(data);
-                toast.success("Your phone number has been changed.")
-            })
+        dispatch(updateUserProfile({ phoneNumber: newPhoneNum }))
+            .then(toast.success("Your phone number has been changed."))
             .catch(error => {
                 console.error(error);
                 toast.error(error.response.data.message || "An error occurred while changing phone number");
@@ -56,11 +46,8 @@ const UserProfile = () => {
     };
 
     const handleUpdateEmail = () => {
-        axios.post("/profile/update", { email: newEmail }, { withCredentials: true })
-            .then(({data}) => {
-                setUser(data);
-                toast.success("Your email has been changed.")
-            })
+        dispatch(updateUserProfile({ email: newEmail }))
+            .then(toast.success("Your email has been changed."))
             .catch(error => {
                 console.error(error);
                 toast.error(error.response.data.message || "An error occurred while changing email");
