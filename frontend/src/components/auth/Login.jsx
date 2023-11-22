@@ -9,6 +9,7 @@ import Cookies from "js-cookie";
 import { ThreeDots } from 'react-loader-spinner';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../redux/slice/logoutSlice';
+import { fetchUserProfile } from '../../redux/slice/profileSlice';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -35,6 +36,7 @@ const Login = () => {
                 Cookies.set('authToken', response.data.token);
                 dispatch(setUser(response.data.user));
                 toast.success(`Login Successful. Welcome Back ${response.data.name}`);
+                dispatch(fetchUserProfile());
                 navigate('/dashboard-b')
             }
         } catch (error) {
