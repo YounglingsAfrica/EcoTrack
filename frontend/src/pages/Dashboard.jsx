@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaBell } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
-import { useSelector } from "react-redux";
-import { selectUserProfile } from "../redux/slice/profileSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserProfile, selectUserProfile } from "../redux/slice/profileSlice";
 
 const Dashboard = () => {
+    const dispatch = useDispatch();
     const user = useSelector(selectUserProfile);
+
+    useEffect(() => {
+        dispatch(fetchUserProfile());
+    }, [dispatch]);
 
     return(
         <>
