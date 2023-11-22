@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { fetchUserProfile } from '../../redux/slice/profileSlice';
 import Logo from "../../assets/eco_logo.png";
 import Eco from "../../assets/ecoeco.png";
 import X from "../../assets/x-mark.png";
@@ -12,7 +10,6 @@ import { ThreeDots } from 'react-loader-spinner';
 
 const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [data, setData] = useState({
         email: '',
@@ -32,18 +29,9 @@ const Login = () => {
             if (response.data.error) {
                 toast.error(response.data.error);
             } else {
-                // Login was successful, now fetch the profile
                 Cookies.set('authToken', response.data.token);
-                dispatch(fetchUserProfile())
-                    .then((result) => {
-                        if (result.meta.requestStatus === 'fulfilled') {
-                            toast.success(`Login Successful. Welcome Back ${result.payload.name}`);
-                            navigate('/dashboard-b')
-                        } else {
-                            console.log('Failed to get profile');
-                            toast.error('Failed to get profile');
-                        }
-                    });
+                toast.success(`Login Successful. Welcome Back ${response.data.name}`);
+                navigate('/dashboard-b')
             }
         } catch (error) {
             console.log(error);
