@@ -21,15 +21,26 @@ const Addresses = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setIsLoading(true)
         try {
             const response = await axios.put(`/addresses/${user._id}`, address);
             console.log(response.data);
         } catch (error) {
             console.log(error);
         }
-        setIsLoading(false);
     };
+
+    useEffect(() => {
+        // Fetch the user's current address from the server
+        axios.get('/address', { withCredentials: true })
+        .then(response => {
+            setAddress(response.data.address);
+            setUser(response.data.user);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div className='flex'>
@@ -75,20 +86,7 @@ const Addresses = () => {
                                         type='submit'
                                         className="flex items-center justify-center px-6 w-auto h-12 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen shadow-right-bottom mt-5"
                                     >
-                                    {isLoading ? (
-                                        <ThreeDots 
-                                            height="70" 
-                                            width="70" 
-                                            radius="9"
-                                            color="#fff" 
-                                            ariaLabel="three-dots-loading"
-                                            wrapperStyle={{}}
-                                            wrapperClassName=""
-                                            visible={true}
-                                        /> 
-                                    ) : (  
-                                        'Update'
-                                    )} 
+                                        Update 
                                     </button>
                                 </div>
                             </form>
