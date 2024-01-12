@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import SideBar from './SideBar.1';
 import Dashboard from '../../pages/Dashboard';
 import defaultAvatar from "../../assets/User.png";
@@ -6,49 +6,78 @@ import Verified from "../../assets/verified.svg";
 import { UserContext } from '../../context/userContext';
 import axios from 'axios';
 import { toast } from "react-hot-toast";
-import CloudinaryUploadWidget from "../../utils/cloudinaryWidget";
-import { Cloudinary } from "@cloudinary/url-gen";
-import { AdvancedImage, responsive, placeholder } from "@cloudinary/react"; 
+
+const uploadPreset = "nhxmfptn";
+const cloudName = "duvw77iju"
+
+async function uploadImage(file) { // file from <input type="file"> 
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", uploadPreset);
+    
+    const res = await fetch(
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+        {
+            method: "POST",
+            body: data,
+        }
+    );
+    const img = await res.json();
+    console.log(img);
+    return img.secure_url;
+    // Post `img.secure_url` to your server and save to MongoDB
+}
 
 const UserProfile = () => {
-    const [publicId, setPublicId] = useState("");
-    // Replace with your own cloud name
-    const [cloudName] = useState("duvw77iju");
-    // Replace with your own upload preset
-    const [uploadPreset] = useState("ml_default");
-
     const {user, setUser} = useContext(UserContext);
     const [newPhoneNum, setNewPhoneNum] = useState(user?.newPhoneNum || "");
     const [newName, setNewName] = useState(user?.name || "");
     const [newPassword, setNewPassword] = useState(user?.password || "");
     const [newEmail, setNewEmail] = useState(user?.email || "");
     const [avatarUrl, setAvatarUrl] = useState("");
-    
-    const [uwConfig] = useState({
-        cloudName,
-        uploadPreset,
-        // cropping: true, //add a cropping step
-        // showAdvancedOptions: true,  //add advanced options (public_id and tag)
-        sources: [ "local", "url"], // restrict the upload sources to URL and local files
-        multiple: false,  //restrict upload to a single file
-        folder: "user_images", //upload files to the specified folder
-        // tags: ["users", "profile"], //add the given tags to the uploaded files
-        // context: {alt: "user_uploaded"}, //add the given context data to the uploaded files
-        clientAllowedFormats: ["images"], //restrict uploading to image files only
-        maxImageFileSize: 2000000,  //restrict file size to less than 2MB
-        maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
-        // theme: "green", //change to a purple theme
+    const [formData, setFormData] = useState({
+        img: ""
     });
 
-      // Create a Cloudinary instance and set your cloud name.
-    const cld = new Cloudinary({
-        cloud: {
-            cloudName
+    const [uploadingImg, setUploadingImg] = useState(false);
+
+    const handleFileChange = async (e) => {
+        const [file] = e.target.files;
+        if (!file) return;
+
+        setUploadingImg(true);
+        const uploadedUrl = await uploadImage(file);
+        setFormData({ ...formData, img: uploadedUrl });
+        setUploadingImg(false);
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (uploadingImg) return;
+
+        try {
+            const response = await axios.post('/profile/avatar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ img: formData.img }),
+            });
+        
+            if (response.ok) {
+                // Image URL successfully sent to the server
+                console.log('Image URL sent to the server!');
+                // Reset the form data
+                setFormData({ img: '' });
+            } else {
+                // Handle the error if the server request fails
+                console.error('Failed to send image URL to the server');
+            }
+        } catch (error) {
+            console.error('Failed to send image URL to the server', error);
         }
-    });
-
-    const myImage = cld.image(publicId);
-
+    };
+    
     const handleUpdateName = () => {
         if (newName !== user?.name) {
             axios.post("/profile/update", { name: newName }, { withCredentials: true })
@@ -102,19 +131,6 @@ const UserProfile = () => {
             });
     };
 
-    useEffect(() => {
-        // Fetch the avatar URL from the backend
-        axios
-            .get(`/profile/avatar/${user.id}`)
-            .then((res) => {
-                setAvatarUrl(res.data.avatarUrl);
-            })
-            .catch((err) => {
-                console.log(err);
-                // Handle any error scenarios
-            });
-    }, [user.id]);
-
     return (
         <div className='flex'>
             <div className='basis-[4%] h-[100vh] z-40'>
@@ -128,6 +144,7 @@ const UserProfile = () => {
                             <form
                                 encType='multipart/form-data' 
                                 className='flex items-center justify-center mb-6'
+                                onSubmit={handleSubmit}
                             >
                                 <img
                                     src={avatarUrl || defaultAvatar}
@@ -135,17 +152,17 @@ const UserProfile = () => {
                                     className='h-auto w-32 rounded-full cursor-pointer object-cover object-center' 
                                     title='Edit Avatar'
                                 />
-                                <CloudinaryUploadWidget 
-                                    uwConfig={uwConfig} 
-                                    setPublicId={setPublicId} 
+                                <input 
+                                    type="file"
+                                    name="avatar"
+                                    hidden
+                                    accept='image/*'
+                                    onChange={handleFileChange}
+                                    disabled={uploadingImg}
                                 />
-                                <div style={{ width: "800px" }}>
-                                    <AdvancedImage
-                                        style={{ maxWidth: "100%" }}
-                                        cldImg={myImage}
-                                        plugins={[responsive(), placeholder()]}
-                                    />
-                                </div>
+                                <button type="submit" disabled={uploadingImg}>
+                                    Submit
+                                </button>
                             </form>
                             <h1 className='text-center text-2xl mb-3'>
                                 {user?.name}
