@@ -131,7 +131,8 @@ const UserProfile = () => {
                     <div className='flex flex-wrap text-center p-8 px-20'>
                         <div className='w-1/3 h-80 bg-white rounded-xl text-center border-2 border-black border-dashed p-10 mb-10'>
                             <form
-                                encType='multipart/form-data' method='post' action='/profile/avatar' 
+                                encType='multipart/form-data' 
+                                method='post' 
                                 className='flex items-center justify-center mb-6'
                             >
                                 <img
