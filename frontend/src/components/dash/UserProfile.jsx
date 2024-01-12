@@ -159,25 +159,6 @@ const UserProfile = () => {
                                     uwConfig={uwConfig} 
                                     setPublicId={setPublicId} 
                                 />
-                                
-                                <p>
-                                    <a
-                                        href="https://cloudinary.com/documentation/upload_widget"
-                                        target="_blank"
-                                        rel='noreferrer'
-                                    >
-                                        Upload Widget User Guide
-                                    </a>
-                                </p>
-                                <p>
-                                    <a
-                                        href="https://cloudinary.com/documentation/upload_widget_reference"
-                                        target="_blank"
-                                        rel='noreferrer'
-                                    >
-                                        Upload Widget Reference
-                                    </a>
-                                </p>
                                 <div style={{ width: "800px" }}>
                                     <AdvancedImage
                                         style={{ maxWidth: "100%" }}
