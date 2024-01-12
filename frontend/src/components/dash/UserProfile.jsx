@@ -157,7 +157,6 @@ const UserProfile = () => {
                                     hidden
                                     accept='image/*'
                                     onChange={handleFileChange}
-                                    disabled={uploadingImg}
                                 />
                                 <button type="submit" disabled={uploadingImg}>
                                     Submit
