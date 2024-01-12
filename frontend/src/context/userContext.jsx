@@ -12,7 +12,7 @@ export function UserContextProvider({children}) {
             axios.get(`/avatar/${data._id}`, { withCredentials: true })
                 .then(({ request: { responseURL } }) => {
                     data.avatar = responseURL;
-                    setUser(data);
+                    setUser({ ...data, avatar: responseURL});
                 })
                 .catch(error => {
                     console.error(error);

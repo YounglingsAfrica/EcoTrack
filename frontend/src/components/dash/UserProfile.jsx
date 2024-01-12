@@ -15,12 +15,9 @@ async function uploadImage(file) { // file from <input type="file">
     data.append("file", file);
     data.append("upload_preset", uploadPreset);
     
-    const res = await fetch(
-        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-        {
-            method: "POST",
-            body: data,
-        }
+    const res = await axios.post(
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, 
+        {body: data}
     );
     const img = await res.json();
     console.log(img);
