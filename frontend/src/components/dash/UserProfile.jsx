@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import SideBar from './SideBar.1';
 import Dashboard from '../../pages/Dashboard';
 import defaultAvatar from "../../assets/User.png";
@@ -23,21 +23,22 @@ const UserProfile = () => {
     const [newPassword, setNewPassword] = useState(user?.password || "");
     const [newEmail, setNewEmail] = useState(user?.email || "");
     const fileInputRef = useRef();
+    const [avatarUrl, setAvatarUrl] = useState("");
     
     const [uwConfig] = useState({
         cloudName,
         uploadPreset,
         // cropping: true, //add a cropping step
         // showAdvancedOptions: true,  //add advanced options (public_id and tag)
-         sources: [ "local", "url"], // restrict the upload sources to URL and local files
-         multiple: false,  //restrict upload to a single file
-         folder: "user_images", //upload files to the specified folder
+        sources: [ "local", "url"], // restrict the upload sources to URL and local files
+        multiple: false,  //restrict upload to a single file
+        folder: "user_images", //upload files to the specified folder
         // tags: ["users", "profile"], //add the given tags to the uploaded files
         // context: {alt: "user_uploaded"}, //add the given context data to the uploaded files
         clientAllowedFormats: ["images"], //restrict uploading to image files only
-         maxImageFileSize: 2000000,  //restrict file size to less than 2MB
-         maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
-         theme: "green", //change to a purple theme
+        maxImageFileSize: 2000000,  //restrict file size to less than 2MB
+        maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
+        theme: "green", //change to a purple theme
     });
 
       // Create a Cloudinary instance and set your cloud name.
@@ -102,25 +103,18 @@ const UserProfile = () => {
             });
     };
 
-    const handleFileUpload = (e) => {
-        const data = new FormData();
-        const file = e.target.files[0];
-        if(!file) {
-            toast.error('No file selected');
-            return; 
-        }
-        
-        data.set('avatar', file);
-        
+    useEffect(() => {
+        // Fetch the avatar URL from the backend
         axios
-            .post('/profile/avatar', data) 
+            .get(`/profile/avatar/${user.id}`)
             .then((res) => {
-                toast.success('Avatar uploaded!');
+                setAvatarUrl(res.data.avatarUrl);
             })
             .catch((err) => {
-                toast.error(err.response.data.message); 
+                console.log(err);
+                // Handle any error scenarios
             });
-    }
+    }, [user.id]);
 
     const handleImageClick = () => {
         fileInputRef.current.click();
@@ -141,23 +135,18 @@ const UserProfile = () => {
                                 className='flex items-center justify-center mb-6'
                             >
                                 <img
-                                    src={user.avatar || defaultAvatar}
-                                    alt="User"
+                                    src={avatarUrl || defaultAvatar}
+                                    alt="Avatar"
                                     className='h-auto w-32 rounded-full cursor-pointer object-cover object-center' 
                                     title='Edit Avatar'
                                     onClick={handleImageClick}
                                 />
-                                <input
-                                    ref={fileInputRef}
-                                    type="file"
-                                    name="avatar"
-                                    accept="image/*"
-                                    hidden
-                                    onChange={handleFileUpload}
-                                />
                                 <CloudinaryUploadWidget 
                                     uwConfig={uwConfig} 
                                     setPublicId={setPublicId} 
+                                    onSuccess={(result) => {
+                                        setPublicId(result.info.public_id);
+                                    }}
                                 />
                                 <div style={{ width: "800px" }}>
                                     <AdvancedImage
