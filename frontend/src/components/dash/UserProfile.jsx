@@ -6,7 +6,7 @@ import Verified from "../../assets/verified.svg";
 import { UserContext } from '../../context/userContext';
 import axios from 'axios';
 import { toast } from "react-hot-toast";
-import cloudinaryWidget from "../../utils/cloudinaryWidget";
+import CloudinaryUploadWidget from "../../utils/cloudinaryWidget";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { AdvancedImage, responsive, placeholder } from "@cloudinary/react"; 
 
@@ -155,7 +155,11 @@ const UserProfile = () => {
                                     hidden
                                     onChange={handleFileUpload}
                                 />
-                                <cloudinaryWidget uwConfig={uwConfig} setPublicId={setPublicId} />
+                                <CloudinaryUploadWidget 
+                                    uwConfig={uwConfig} 
+                                    setPublicId={setPublicId} 
+                                />
+                                
                                 <p>
                                     <a
                                         href="https://cloudinary.com/documentation/upload_widget"
