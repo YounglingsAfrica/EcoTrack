@@ -36,7 +36,7 @@ const registerUser = async (req, res) => {
                 error: "Password is required and should be at least 6 characters long"
             })
         };
-        // check if email okay
+        // check if email exists
         const exist = await User.findOne({email})
         if (exist) {
             return res.json({
@@ -61,11 +61,11 @@ const registerUser = async (req, res) => {
 
         const confirmationUrl = `${process.env.PROD_URL}/confirm/${user._id}/${confirmationToken}`;
         const emailTemplate = `
-        <p>Dear ${user.name},</p>
+            <p>Dear ${user.name},</p>
+            
+            <p>Thank you for signing up for our website. Please confirm your email by clicking the link below:</p>
         
-        <p>Thank you for signing up for our website. Please confirm your email by clicking the link below:</p>
-    
-        <a href="${confirmationUrl}">Confirm Email</a>
+            <a href="${confirmationUrl}">Confirm Email</a>
         `;
 
         transporter.sendMail({

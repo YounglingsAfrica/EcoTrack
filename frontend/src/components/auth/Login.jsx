@@ -1,13 +1,13 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from "react-hot-toast";
+import { UserContext } from '../../context/userContext';
+import { ThreeDots } from 'react-loader-spinner';
 import Logo from "../../assets/eco_logo.png";
 import Eco from "../../assets/ecoeco.png";
 import X from "../../assets/x-mark.png";
-import axios from "axios";
-import { toast } from "react-hot-toast";
-import { UserContext } from '../../context/userContext';
 import Cookies from "js-cookie";
-import { ThreeDots } from 'react-loader-spinner';
+import axios from "axios";
 
 const Login = () => {
     const [isLoading, setIsLoading] = useState(false);

@@ -6,6 +6,7 @@ import Verified from "../../assets/verified.svg";
 import { UserContext } from '../../context/userContext';
 import axios from 'axios';
 import { toast } from "react-hot-toast";
+
 const UserProfile = () => {
     const {user, setUser} = useContext(UserContext);
     const [newPhoneNum, setNewPhoneNum] = useState(user?.newPhoneNum || "");
@@ -77,13 +78,14 @@ const UserProfile = () => {
         
         data.set('avatar', file);
         
-        axios.post('/profile/avatar', data) 
-        .then(res => {
-            toast.success('Avatar uploaded!');
-        })
-        .catch(err => {
-        toast.error(err.response.data.message); 
-        });
+        axios
+            .post('/profile/avatar', data) 
+            .then((res) => {
+                toast.success('Avatar uploaded!');
+            })
+            .catch((err) => {
+                toast.error(err.response.data.message); 
+            });
     }
 
     const handleImageClick = () => {
@@ -115,7 +117,7 @@ const UserProfile = () => {
                                     ref={fileInputRef}
                                     type="file"
                                     name="avatar"
-                                    accept=".png, .jpg, .jpeg"
+                                    accept="image/*"
                                     hidden
                                     onChange={handleFileUpload}
                                 />
