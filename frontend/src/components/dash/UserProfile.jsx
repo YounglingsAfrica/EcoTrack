@@ -34,7 +34,6 @@ const UserProfile = () => {
     const [newName, setNewName] = useState(user?.name || "");
     const [newPassword, setNewPassword] = useState(user?.password || "");
     const [newEmail, setNewEmail] = useState(user?.email || "");
-    const [avatarUrl, setAvatarUrl] = useState("");
     const [formData, setFormData] = useState({
         img: ""
     });
@@ -147,7 +146,7 @@ const UserProfile = () => {
                                 onSubmit={handleSubmit}
                             >
                                 <img
-                                    src={avatarUrl || defaultAvatar}
+                                    src={user.avatar || defaultAvatar}
                                     alt="Avatar"
                                     className='h-auto w-32 rounded-full cursor-pointer object-cover object-center' 
                                     title='Edit Avatar'
