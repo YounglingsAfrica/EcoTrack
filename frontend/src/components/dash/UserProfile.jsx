@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import SideBar from './SideBar.1';
 import Dashboard from '../../pages/Dashboard';
 import defaultAvatar from "../../assets/User.png";
@@ -22,7 +22,6 @@ const UserProfile = () => {
     const [newName, setNewName] = useState(user?.name || "");
     const [newPassword, setNewPassword] = useState(user?.password || "");
     const [newEmail, setNewEmail] = useState(user?.email || "");
-    const fileInputRef = useRef();
     const [avatarUrl, setAvatarUrl] = useState("");
     
     const [uwConfig] = useState({
@@ -38,7 +37,7 @@ const UserProfile = () => {
         clientAllowedFormats: ["images"], //restrict uploading to image files only
         maxImageFileSize: 2000000,  //restrict file size to less than 2MB
         maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
-        theme: "green", //change to a purple theme
+        // theme: "green", //change to a purple theme
     });
 
       // Create a Cloudinary instance and set your cloud name.
@@ -116,10 +115,6 @@ const UserProfile = () => {
             });
     }, [user.id]);
 
-    const handleImageClick = () => {
-        fileInputRef.current.click();
-    }
-
     return (
         <div className='flex'>
             <div className='basis-[4%] h-[100vh] z-40'>
@@ -132,7 +127,6 @@ const UserProfile = () => {
                         <div className='w-1/3 h-80 bg-white rounded-xl text-center border-2 border-black border-dashed p-10 mb-10'>
                             <form
                                 encType='multipart/form-data' 
-                                method='post' 
                                 className='flex items-center justify-center mb-6'
                             >
                                 <img
@@ -140,14 +134,10 @@ const UserProfile = () => {
                                     alt="Avatar"
                                     className='h-auto w-32 rounded-full cursor-pointer object-cover object-center' 
                                     title='Edit Avatar'
-                                    onClick={handleImageClick}
                                 />
                                 <CloudinaryUploadWidget 
                                     uwConfig={uwConfig} 
                                     setPublicId={setPublicId} 
-                                    onSuccess={(result) => {
-                                        setPublicId(result.info.public_id);
-                                    }}
                                 />
                                 <div style={{ width: "800px" }}>
                                     <AdvancedImage
