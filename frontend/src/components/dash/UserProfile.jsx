@@ -6,8 +6,17 @@ import Verified from "../../assets/verified.svg";
 import { UserContext } from '../../context/userContext';
 import axios from 'axios';
 import { toast } from "react-hot-toast";
+import cloudinaryWidget from "../../utils/cloudinaryWidget";
+import { Cloudinary } from "@cloudinary/url-gen";
+import { AdvancedImage, responsive, placeholder } from "@cloudinary/react"; 
 
 const UserProfile = () => {
+    const [publicId, setPublicId] = useState("");
+    // Replace with your own cloud name
+    const [cloudName] = useState("duvw77iju");
+    // Replace with your own upload preset
+    const [uploadPreset] = useState("ml_default");
+
     const {user, setUser} = useContext(UserContext);
     const [newPhoneNum, setNewPhoneNum] = useState(user?.newPhoneNum || "");
     const [newName, setNewName] = useState(user?.name || "");
@@ -15,6 +24,31 @@ const UserProfile = () => {
     const [newEmail, setNewEmail] = useState(user?.email || "");
     const fileInputRef = useRef();
     
+    const [uwConfig] = useState({
+        cloudName,
+        uploadPreset,
+        // cropping: true, //add a cropping step
+        // showAdvancedOptions: true,  //add advanced options (public_id and tag)
+         sources: [ "local", "url"], // restrict the upload sources to URL and local files
+         multiple: false,  //restrict upload to a single file
+         folder: "user_images", //upload files to the specified folder
+        // tags: ["users", "profile"], //add the given tags to the uploaded files
+        // context: {alt: "user_uploaded"}, //add the given context data to the uploaded files
+        clientAllowedFormats: ["images"], //restrict uploading to image files only
+         maxImageFileSize: 2000000,  //restrict file size to less than 2MB
+         maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
+         theme: "green", //change to a purple theme
+    });
+
+      // Create a Cloudinary instance and set your cloud name.
+    const cld = new Cloudinary({
+        cloud: {
+            cloudName
+        }
+    });
+
+    const myImage = cld.image(publicId);
+
     const handleUpdateName = () => {
         if (newName !== user?.name) {
             axios.post("/profile/update", { name: newName }, { withCredentials: true })
@@ -121,6 +155,32 @@ const UserProfile = () => {
                                     hidden
                                     onChange={handleFileUpload}
                                 />
+                                <cloudinaryWidget uwConfig={uwConfig} setPublicId={setPublicId} />
+                                <p>
+                                    <a
+                                        href="https://cloudinary.com/documentation/upload_widget"
+                                        target="_blank"
+                                        rel='noreferrer'
+                                    >
+                                        Upload Widget User Guide
+                                    </a>
+                                </p>
+                                <p>
+                                    <a
+                                        href="https://cloudinary.com/documentation/upload_widget_reference"
+                                        target="_blank"
+                                        rel='noreferrer'
+                                    >
+                                        Upload Widget Reference
+                                    </a>
+                                </p>
+                                <div style={{ width: "800px" }}>
+                                    <AdvancedImage
+                                        style={{ maxWidth: "100%" }}
+                                        cldImg={myImage}
+                                        plugins={[responsive(), placeholder()]}
+                                    />
+                                </div>
                             </form>
                             <h1 className='text-center text-2xl mb-3'>
                                 {user?.name}
