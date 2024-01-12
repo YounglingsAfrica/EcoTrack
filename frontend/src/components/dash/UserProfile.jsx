@@ -60,12 +60,14 @@ const UserProfile = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                withCredentials: true,
                 body: JSON.stringify({ img: formData.img }),
             });
         
             if (response.ok) {
                 // Image URL successfully sent to the server
                 console.log('Image URL sent to the server!');
+                toast.success("Image uploaded!")
                 // Reset the form data
                 setFormData({ img: '' });
             } else {
