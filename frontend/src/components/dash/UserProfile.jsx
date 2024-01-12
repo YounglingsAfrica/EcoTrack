@@ -154,7 +154,6 @@ const UserProfile = () => {
                                 <input 
                                     type="file"
                                     name="avatar"
-                                    hidden
                                     accept='image/*'
                                     onChange={handleFileChange}
                                 />
