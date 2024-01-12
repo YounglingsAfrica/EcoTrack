@@ -47,7 +47,7 @@ const AppRouter = () => {
                             <Route path="disposal" element={<Disposal />} />
                             <Route path="user-profile/*" element={
                                 <Routes>
-                                    
+                                    <Route index element={< UserProfile/>}/>
                                     <Route path="addresses" element={<Addresses />} />
                                 </Routes>
                             }/>
@@ -57,7 +57,6 @@ const AppRouter = () => {
                         </Routes>
                     </ProtectedRoute>
                 }/>
-                <Route index element={<UserProfile />}/>
             </Routes>
         </>
     );
