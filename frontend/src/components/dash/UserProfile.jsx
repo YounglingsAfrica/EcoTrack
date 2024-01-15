@@ -140,25 +140,30 @@ const UserProfile = () => {
                 <Dashboard />
                 <div className='pt-[35px] px-[10px] z-0 h-[90vh]'>
                     <div className='flex flex-wrap text-center p-8 px-20'>
-                        <div className='w-1/3 h-80 bg-white rounded-xl text-center border-2 border-black border-dashed p-10 mb-10'>
+                        <div className='w-1/3 h-80 bg-white rounded-xl text-center border-2 border-black border-dashed p-4 mb-10'>
                             <form
                                 encType='multipart/form-data' 
-                                className='flex items-center justify-center mb-6'
+                                className='flex flex-col items-center justify-center mb-2'
                                 onSubmit={handleSubmit}
                             >
                                 <img
-                                    src={user.avatar || defaultAvatar}
+                                    src={user?.avatar || defaultAvatar}
                                     alt="Avatar"
                                     className='h-auto w-32 rounded-full cursor-pointer object-cover object-center' 
-                                    title='Edit Avatar'
+                                    title='Avatar'
                                 />
                                 <input 
                                     type="file"
                                     name="avatar"
                                     accept='image/*'
+                                    className='mb-3 text-xs ml-28'
                                     onChange={handleFileChange}
                                 />
-                                <button type="submit" disabled={uploadingImg}>
+                                <button 
+                                    type="submit"   
+                                    disabled={uploadingImg} 
+                                    className='flex items-center justify-center px-3 w-auto h-8 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen shadow-right-bottom mt-2'
+                                >
                                     Submit
                                 </button>
                             </form>
