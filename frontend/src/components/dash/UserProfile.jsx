@@ -55,12 +55,11 @@ const UserProfile = () => {
 
         try {
             const response = await axios.post('/profile/avatar', {
-                method: 'POST',
+                img: formData.img,
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 withCredentials: true,
-                body: JSON.stringify({ img: formData.img }),
             });
         
             if (response.ok) {
