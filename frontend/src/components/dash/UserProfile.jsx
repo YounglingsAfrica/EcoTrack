@@ -48,6 +48,7 @@ const UserProfile = () => {
         const uploadedUrl = await uploadImage(file);
         setFormData({ ...formData, img: uploadedUrl });
         setUploadingImg(false);
+        toast.success("Image Uploaded!")
     }
 
     const handleSubmit = async (e) => {
@@ -66,7 +67,6 @@ const UserProfile = () => {
             if (response.ok) {
                 // Image URL successfully sent to the server
                 console.log('Image URL sent to the server!');
-                toast.success("Image uploaded!")
                 // Reset the form data
                 setFormData({ img: '' });
             } else {
