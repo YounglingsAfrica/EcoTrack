@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import SideBar from './SideBar.1';
 import Dashboard from '../../pages/Dashboard';
 import defaultAvatar from "../../assets/User.png";
@@ -10,7 +10,7 @@ import { toast } from "react-hot-toast";
 const uploadPreset = "nhxmfptn";
 const cloudName = "duvw77iju"
 
-async function uploadImage(file) { // file from <input type="file"> 
+async function uploadImage(file) {
     const data = new FormData();
     data.append("file", file);
     data.append("upload_preset", uploadPreset);
@@ -25,7 +25,6 @@ async function uploadImage(file) { // file from <input type="file">
     const img = await res.json();
     console.log(img);
     return img.secure_url;
-    // Post `img.secure_url` to your server and save to MongoDB
 }
 
 const UserProfile = () => {
@@ -65,14 +64,12 @@ const UserProfile = () => {
             });
         
             if (response.ok) {
-                // Image URL successfully sent to the server
                 console.log('Image URL sent to the server!');
                 toast.success("Image uploaded!")
-                // Reset the form data
                 setFormData({ img: '' });
             } else {
-                // Handle the error if the server request fails
                 console.error('Failed to send image URL to the server');
+                toast.error("Image upload failed.")
             }
         } catch (error) {
             console.error('Failed to send image URL to the server', error);
@@ -132,6 +129,17 @@ const UserProfile = () => {
             });
     };
 
+    useEffect(() => {
+        const avatarInput = document.getElementById("avatarInput");
+
+        if (avatarInput) {
+            const avatarImg = document.getElementById("avatarImg");
+            avatarImg.addEventListener("click", () => {
+                avatarInput.click();
+            })
+        }
+    }, []);
+
     return (
         <div className='flex'>
             <div className='basis-[4%] h-[100vh] z-40'>
@@ -147,19 +155,24 @@ const UserProfile = () => {
                                 className='flex items-center justify-center mb-6'
                                 onSubmit={handleSubmit}
                             >
-                                <img
-                                    src={user.avatar || defaultAvatar}
-                                    alt="Avatar"
-                                    className='h-auto w-32 rounded-full cursor-pointer object-cover object-center' 
-                                    title='Edit Avatar'
-                                />
+                                <label htmlFor='avatarInput'>
+                                    <img
+                                        id='avatarImg'
+                                        src={user?.avatar || defaultAvatar}
+                                        alt="Avatar"
+                                        className='h-auto w-32 rounded-full cursor-pointer object-cover object-center' 
+                                        title='Edit Avatar'
+                                    />
+                                </label>
                                 <input 
                                     type="file"
+                                    id='avatarInput'
                                     name="avatar"
                                     accept='image/*'
+                                    className='hidden'
                                     onChange={handleFileChange}
                                 />
-                                <button type="submit" disabled={uploadingImg}>
+                                <button type="submit" disabled={uploadingImg} className='hidden'>
                                     Submit
                                 </button>
                             </form>
