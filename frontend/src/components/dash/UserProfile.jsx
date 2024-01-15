@@ -149,7 +149,7 @@ const UserProfile = () => {
                                 <img
                                     src={user?.avatar || defaultAvatar}
                                     alt="Avatar"
-                                    className='h-auto w-32 rounded-full cursor-pointer object-cover object-center' 
+                                    className='h-auto w-32 rounded-full cursor-pointer object-cover object-center mb-3' 
                                     title='Avatar'
                                 />
                                 <input 
