@@ -40,6 +40,8 @@ const UserProfile = () => {
     const [uploadingImg, setUploadingImg] = useState(false);
 
     const handleFileChange = async (e) => {
+        e.preventDefault();
+        
         const [file] = e.target.files;
         if (!file) return;
 
