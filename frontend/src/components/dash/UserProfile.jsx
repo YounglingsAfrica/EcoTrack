@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import SideBar from './SideBar.1';
 import Dashboard from '../../pages/Dashboard';
 import defaultAvatar from "../../assets/User.png";
@@ -36,7 +36,7 @@ const UserProfile = () => {
     const [formData, setFormData] = useState({
         img: ""
     });
-
+    const formRef = useRef(null);
     const [uploadingImg, setUploadingImg] = useState(false);
 
     const handleFileChange = async (e) => {
@@ -47,6 +47,8 @@ const UserProfile = () => {
         const uploadedUrl = await uploadImage(file);
         setFormData({ ...formData, img: uploadedUrl });
         setUploadingImg(false);
+
+        formRef.current.submit();
     }
 
     const handleSubmit = async (e) => {
@@ -154,6 +156,7 @@ const UserProfile = () => {
                                 encType='multipart/form-data' 
                                 className='flex items-center justify-center mb-6'
                                 onSubmit={handleSubmit}
+                                ref={formRef}
                             >
                                 <label htmlFor='avatarInput'>
                                     <img
@@ -172,9 +175,6 @@ const UserProfile = () => {
                                     className='hidden'
                                     onChange={handleFileChange}
                                 />
-                                <button type="submit" disabled={uploadingImg} className='hidden'>
-                                    Submit
-                                </button>
                             </form>
                             <h1 className='text-center text-2xl mb-3'>
                                 {user?.name}
