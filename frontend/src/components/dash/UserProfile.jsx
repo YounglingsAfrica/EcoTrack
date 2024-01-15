@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import SideBar from './SideBar.1';
 import Dashboard from '../../pages/Dashboard';
 import defaultAvatar from "../../assets/User.png";
@@ -10,7 +10,7 @@ import { toast } from "react-hot-toast";
 const uploadPreset = "nhxmfptn";
 const cloudName = "duvw77iju"
 
-async function uploadImage(file) {
+async function uploadImage(file) { // file from <input type="file"> 
     const data = new FormData();
     data.append("file", file);
     data.append("upload_preset", uploadPreset);
@@ -25,6 +25,7 @@ async function uploadImage(file) {
     const img = await res.json();
     console.log(img);
     return img.secure_url;
+    // Post `img.secure_url` to your server and save to MongoDB
 }
 
 const UserProfile = () => {
@@ -63,12 +64,14 @@ const UserProfile = () => {
             });
         
             if (response.ok) {
+                // Image URL successfully sent to the server
                 console.log('Image URL sent to the server!');
                 toast.success("Image uploaded!")
+                // Reset the form data
                 setFormData({ img: '' });
             } else {
+                // Handle the error if the server request fails
                 console.error('Failed to send image URL to the server');
-                toast.error("Image upload failed.")
             }
         } catch (error) {
             console.error('Failed to send image URL to the server', error);
@@ -128,17 +131,6 @@ const UserProfile = () => {
             });
     };
 
-    useEffect(() => {
-        const avatarInput = document.getElementById("avatarInput");
-
-        if (avatarInput) {
-            const avatarImg = document.getElementById("avatarImg");
-            avatarImg.addEventListener("click", () => {
-                avatarInput.click();
-            })
-        }
-    }, []);
-
     return (
         <div className='flex'>
             <div className='basis-[4%] h-[100vh] z-40'>
@@ -149,6 +141,7 @@ const UserProfile = () => {
                 <div className='pt-[35px] px-[10px] z-0 h-[90vh]'>
                     <div className='flex flex-wrap text-center p-8 px-20'>
                         <div className='w-1/3 h-80 bg-white rounded-xl text-center border-2 border-black border-dashed p-10 mb-10'>
+<<<<<<< HEAD
                             <div className='relative'>
                                 <form
                                     encType='multipart/form-data' 
@@ -181,6 +174,29 @@ const UserProfile = () => {
                                     </button>
                                 </form>
                             </div>
+=======
+                            <form
+                                encType='multipart/form-data' 
+                                className='flex items-center justify-center mb-6'
+                                onSubmit={handleSubmit}
+                            >
+                                <img
+                                    src={user.avatar || defaultAvatar}
+                                    alt="Avatar"
+                                    className='h-auto w-32 rounded-full cursor-pointer object-cover object-center' 
+                                    title='Edit Avatar'
+                                />
+                                <input 
+                                    type="file"
+                                    name="avatar"
+                                    accept='image/*'
+                                    onChange={handleFileChange}
+                                />
+                                <button type="submit" disabled={uploadingImg}>
+                                    Submit
+                                </button>
+                            </form>
+>>>>>>> parent of bce2084 (Touches)
                             <h1 className='text-center text-2xl mb-3'>
                                 {user?.name}
                             </h1>
