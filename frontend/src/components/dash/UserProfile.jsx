@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import SideBar from './SideBar.1';
 import Dashboard from '../../pages/Dashboard';
 import defaultAvatar from "../../assets/User.png";
@@ -36,12 +36,10 @@ const UserProfile = () => {
     const [formData, setFormData] = useState({
         img: ""
     });
-    const formRef = useRef(null);
+
     const [uploadingImg, setUploadingImg] = useState(false);
 
     const handleFileChange = async (e) => {
-        e.preventDefault();
-        
         const [file] = e.target.files;
         if (!file) return;
 
@@ -49,8 +47,6 @@ const UserProfile = () => {
         const uploadedUrl = await uploadImage(file);
         setFormData({ ...formData, img: uploadedUrl });
         setUploadingImg(false);
-
-        formRef.current.submit();
     }
 
     const handleSubmit = async (e) => {
@@ -154,30 +150,38 @@ const UserProfile = () => {
                 <div className='pt-[35px] px-[10px] z-0 h-[90vh]'>
                     <div className='flex flex-wrap text-center p-8 px-20'>
                         <div className='w-1/3 h-80 bg-white rounded-xl text-center border-2 border-black border-dashed p-10 mb-10'>
-                            <form
-                                encType='multipart/form-data' 
-                                className='flex items-center justify-center mb-6'
-                                onSubmit={handleSubmit}
-                                ref={formRef}
-                            >
-                                <label htmlFor='avatarInput'>
-                                    <img
-                                        id='avatarImg'
-                                        src={user?.avatar || defaultAvatar}
-                                        alt="Avatar"
-                                        className='h-auto w-32 rounded-full cursor-pointer object-cover object-center' 
-                                        title='Edit Avatar'
+                            <div className='relative'>
+                                <form
+                                    encType='multipart/form-data' 
+                                    className='flex items-center justify-center mb-6'
+                                    onSubmit={handleSubmit}
+                                >
+                                    <label htmlFor='avatarInput'>
+                                        <img
+                                            id='avatarImg'
+                                            src={user?.avatar || defaultAvatar}
+                                            alt="Avatar"
+                                            className='h-auto w-32 rounded-full cursor-pointer object-cover object-center' 
+                                            title='Edit Avatar'
+                                        />
+                                    </label>
+                                    <input 
+                                        type="file"
+                                        id='avatarInput'
+                                        name="avatar"
+                                        accept='image/*'
+                                        className='hidden'
+                                        onChange={handleFileChange}
                                     />
-                                </label>
-                                <input 
-                                    type="file"
-                                    id='avatarInput'
-                                    name="avatar"
-                                    accept='image/*'
-                                    className='hidden'
-                                    onChange={handleFileChange}
-                                />
-                            </form>
+                                    <button 
+                                        type="submit" 
+                                        disabled={uploadingImg} 
+                                        className='absolute top-0 right-0 mr-2 w-auto p-3 h-12 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen shadow-right-bottom'
+                                    >
+                                        Update
+                                    </button>
+                                </form>
+                            </div>
                             <h1 className='text-center text-2xl mb-3'>
                                 {user?.name}
                             </h1>

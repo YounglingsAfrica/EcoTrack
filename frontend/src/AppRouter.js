@@ -57,7 +57,6 @@ const AppRouter = () => {
                         </Routes>
                     </ProtectedRoute>
                 }/>
-                <Route index element={< UserProfile/>}/>
             </Routes>
         </>
     );
