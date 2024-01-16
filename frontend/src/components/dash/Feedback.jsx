@@ -59,6 +59,7 @@ const Feedback = () => {
                 value={formData.frequency}
                 onChange={handleChange}
                 placeholder='How often do you use our website?'
+                required
               />
               <input 
                 className='border-b-2 border-gray-400 w-full focus:outline-none focus:border-primaryGreen mb-20' 
@@ -67,6 +68,7 @@ const Feedback = () => {
                 value={formData.mostUsedFeature}
                 onChange={handleChange}
                 placeholder='What is your most used feature?'
+                required
               />
               <input 
                 className='border-b-2 border-gray-400 w-full focus:outline-none focus:border-primaryGreen mb-20' 
@@ -75,6 +77,7 @@ const Feedback = () => {
                 value={formData.improvementSuggestion}
                 onChange={handleChange}
                 placeholder='What would you like to see improved the most?'
+                required
               />
               <textarea
                 className='border-b-2 border-gray-400 w-full focus:outline-none focus:border-primaryGreen mb-8' 
@@ -83,6 +86,7 @@ const Feedback = () => {
                 value={formData.motivation}
                 onChange={handleChange}
                 placeholder='What is your motivation to use our website?'
+                required
               />
               <label className="flex items-center mb-4">
                 <input 
