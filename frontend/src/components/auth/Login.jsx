@@ -38,7 +38,6 @@ const Login = () => {
                 if (profileResponse.data) {
                     // Set user data in the context
                     setUser(profileResponse.data);
-                    setIsLoading(false);
                     toast.success(`Login Successful. Welcome Back ${profileResponse.data.name}`);
                     navigate("/dashboard-b");
                 } else {
@@ -49,6 +48,7 @@ const Login = () => {
         } catch (error) {
             console.log(error);
         }
+        setIsLoading(false);
     };
 
     return (
