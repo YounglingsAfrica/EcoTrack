@@ -25,7 +25,7 @@ const Feedback = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post('/feeback', formData)
+    axios.post('/feedback', formData)
       .then((response) => {
         if (response.status === 200) {
           console.log('Feedback Submitted');
