@@ -9,16 +9,14 @@ const Feedback = () => {
     mostUsedFeature: "",
     improvementSuggestion: "",
     motivation: "",
-    followUp: false,
   });
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    const updateValue = type === 'checkbox' ? checked : value;
+    const { name, value } = e.target;
 
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [name]: updateValue,
+      [name]: value,
     }));
   };
 
@@ -34,7 +32,6 @@ const Feedback = () => {
             mostUsedFeature: "",
             improvementSuggestion: "",
             motivation: "",
-            followUp: false,
           })
           toast.success('Feedback Submitted')
         } else {
@@ -88,20 +85,6 @@ const Feedback = () => {
                 placeholder='What is your motivation to use our website?'
                 required
               />
-              <label className="flex items-center mb-4">
-                <input 
-                  type="checkbox" 
-                  className="form-checkbox text-primaryGreen cursor-pointer" 
-                  name="followUp"
-                  checked={formData.followUp}
-                  onChange={handleChange} 
-                />
-                  <span 
-                    className="ml-2 text-sm font-medium text-darkGreen cursor-pointer underline"
-                  >
-                    Receive a personal follow-up to your feedback?
-                  </span>
-                </label>
               <button 
                 className='flex items-center text-center justify-center px-6 w-56 h-14 mt-6 text-white rounded-xl bg-gradient-to-r from-black to-primaryGreen mx-auto shadow-right-bottom hover:shadow-sm transform hover:scale-[103%] transition duration-300 ease-out'
                 type='submit'
