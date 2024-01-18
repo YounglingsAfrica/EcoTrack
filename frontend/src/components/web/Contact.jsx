@@ -45,8 +45,8 @@ const Contact = () => {
             <h1 className='text-center text-7xl font-thin max-w-full mb-6 text-gradient2 mt-20 pb-10'>
                 Contact Us
             </h1>
-            <div className='flex justify-center'>
-                <div className='w-1/2'>
+            <div className='flex justify-center flex-wrap'>
+                <div className='w-full md:w-1/2 flex-wrap'>
                     <div className='flex justify-start items-center flex-col'>
                         <h2 
                             className='max-w-md leading-snug text-center text-5xl font-semibold mb-20 text-white mt-20 pb-6'
@@ -72,7 +72,7 @@ const Contact = () => {
                         </div>
                     </div> 
                 </div>
-                <div className='w-1/2'>
+                <div className='w-1/2 flex flex-wrap justify-center pt-10 md:pt-0'>
                     <div className='bg-[#F0F0F0] w-[600px] h-[700px] rounded-3xl p-6 px-14'>
                         <form onSubmit={contactFormSubmit} className='grid'>
                             <h2 className='leading-snug text-center text-5xl font-bold text-black p-10 mb-10'>

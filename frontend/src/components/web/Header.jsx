@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { BiSolidCube } from "react-icons/bi"
 
 const Header = () => {
     const headerRef = useRef(null);
@@ -68,13 +69,16 @@ const Header = () => {
             ref={headerRef} 
             className='w-full h-[80px] leading-[80px] flex items-center bg-black'
         >
-            <div className='container mx-auto'>
+            <div className='container'>
                 <div className='flex items-center justify-between'>
                     {/* logo start */}
                     <div className="flex items-center gap-[10]">
                         <div className="leading-[20px] pl-2">
                             <a href="/">
-                                <h2 className="text-2xl text-white font-[600]">
+                                <BiSolidCube 
+                                    className='text-primaryGreen text-4xl font-thin cursor-pointer block sm:hidden' 
+                                />
+                                <h2 className="text-2xl text-white font-[600] hidden sm:block">
                                     EcoTrack <span className='text-primaryGreen'>Solutions</span>
                                 </h2>
                             </a>
@@ -109,7 +113,7 @@ const Header = () => {
                     <div>
                         <Link to="/signup">
                             <button
-                                className='flex items-center justify-center px-6 w-auto h-10 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen'
+                                className='flex items-center justify-center px-6 w-auto h-10 text-white rounded-lg bg-gradient-to-r from-black to-primaryGreen text-sm md:text-md'
                             >
                                 Sign Up
                             </button>

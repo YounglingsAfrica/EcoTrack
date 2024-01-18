@@ -18,9 +18,7 @@ body {
   
 .container {
   max-width: 1920px;
-  padding-left: 40px;
-  padding-right: 40px;
-  margin: auto;
+  margin-left: 100px;
 }
 
 ::selection {

@@ -4,9 +4,9 @@ const Hero = () => {
     return (
         <section id="home" className='container mb-40'>
             <div className="relative isolate px-6 lg:px-8">
-                <div className="mx-auto max-w-5xl sm:py-48 lg:py-56">
-                    <div className="text-center">
-                        <h1 className="text-3xl font-thin text-white sm:text-6xl mb-10">
+                <div className="mx-auto max-w-5xl sm:py-48 lg:py-56 py-36 pr-24 sm:pr-0">
+                    <div className="text-center ml-0 lg:ml-20">
+                        <h1 className="text-5xl font-thin text-white sm:text-6xl mb-10">
                             Innovating Waste Management for a <span className='text-gradient'>sustainable tomorrow.</span>
                         </h1>
                         <p className="mt-6 text-lg font-thin leading-8 text-white text-center">

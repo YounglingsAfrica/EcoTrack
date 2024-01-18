@@ -5,15 +5,15 @@ const Services = () => {
     return (
         <section id='subscriptions' className='mb-40'>
             <div>
-                <h1 className='text-center text-7xl font-thin max-w-full mb-20 text-gradient2 mt-20 pb-10'>
+                <h1 className='text-center text-7xl font-thin max-w-full mb-20 text-gradient2 mt-20 ml-16 sm:ml-20 md:ml-36'>
                     Subscriptions
                 </h1>
             </div>
             {/* container start */}
-            <div className='md:grid grid-cols-3 flex-wrap gap-0'>
+            <div className='md:grid grid-cols-3 flex flex-wrap justify-center items-center ml-6 sm:ml-0 lg:ml-20 xl:ml-24 2xl:ml-72 lg:gap-8'>
                 {/* first */}
                 <div 
-                    className="flex-grow my-auto mr-0 p-2 border-white rounded-2xl bg-white border max-w-sm mx-auto mt-20 text-center divide-y-2 divide-dotted divide-primaryGreen50"
+                    className="flex-grow my-auto p-2 border-white rounded-2xl bg-white border max-w-[24rem] mx-auto mt-20 text-center divide-y-2 divide-dotted divide-primaryGreen50 ml-24 sm:ml-44 md:ml-4 mr-0 sm:mr-10 lg:mr-0"
                     style={{boxShadow: "rgba(45, 50, 130, 0.15) 0px 12px 16px -4px, rgba(45, 50, 130, 0.15) 0px 4px 6px -2px"}}
                 >
                     <div className="p-6">
@@ -74,7 +74,7 @@ const Services = () => {
                 </div>
                 {/* second */}
                 <div 
-                    className="flex-grow p-8 bg-gradient-to-bl from-black to-primaryGreen rounded-2xl max-w-sm mx-auto divide-y-2 divide-dotted divide-white "
+                    className="flex-grow p-8 bg-gradient-to-bl from-black to-primaryGreen rounded-2xl max-w-[24rem] mx-auto divide-y-2 divide-dotted divide-white mt-16 ml-24 sm:ml-48 md:ml-20 lg:ml-0"
                     style={{boxShadow: "rgba(45, 50, 130, 0.15) 0px 12px 16px -4px, rgba(45, 50, 130, 0.15) 0px 4px 6px -2px"}}
                 >
                     <div className="p-6">
@@ -158,7 +158,7 @@ const Services = () => {
                 </div>
                 {/* third */}
                 <div 
-                    className="flex-basis[1/3] my-auto ml-0 p-2 border-white bg-white rounded-2xl border divide-y-2 divide-dotted divide-primaryGreen50 max-w-sm mx-auto mt-20"
+                    className="flex-basis[1/3] my-auto p-2 border-white bg-white rounded-2xl border divide-y-2 divide-dotted divide-primaryGreen50 max-w-[24rem] mx-auto mt-20 ml-24 sm:ml-48 lg:ml-0"
                     style={{boxShadow: "rgba(45, 50, 130, 0.15) 0px 12px 16px -4px, rgba(45, 50, 130, 0.15) 0px 4px 6px -2px"}}
                 >
                     <div className="p-6 text-center">
