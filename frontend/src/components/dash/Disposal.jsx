@@ -10,7 +10,7 @@ const Disposal = () => {
       <div className='basis-[5%] h-[100vh] z-40'>
         <SideBar />
       </div>
-      <div className='basis-[95%]'>
+      <div className='basis-[96%]'>
         <Dashboard />
         <div className='pt-[35px] px-[10px] z-0 h-[90vh]'>
           <Map />

@@ -9,7 +9,7 @@ const RecycleHome = () => {
       <div className='basis-[5%] h-[100vh]'>
         <SideBar />
       </div>
-      <div className='basis-[95%]'>
+      <div className='basis-[96%]'>
         <Dashboard />
         <div >
           <Recycle />
