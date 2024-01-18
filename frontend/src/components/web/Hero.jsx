@@ -30,7 +30,7 @@ const Hero = () => {
                     </div>
                 </div>
             </div>
-      </section>
+        </section>
     )
 }
 

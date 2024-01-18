@@ -3,15 +3,38 @@ import { FaBell } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
 import { useContext } from 'react';
 import { UserContext } from "../context/userContext";
+import { useLocation } from "react-router-dom";
 
 const Dashboard = () => {
     const {user} = useContext(UserContext);
+    const location = useLocation();
+
+    const getPageTitle = () => {
+        switch (location.pathname) {
+            case "/dashboard-b":
+                return "Admin Dashboard";
+            case "/dashboard-b/recycling":
+                return "Recycling Guide";
+            case "/dashboard-b/disposal":
+                return "Disposal Locations";
+            case "/dashboard-b/user-profile":
+                return "User Profile";
+            case "/dashboard-b/user-profile/addresses":
+                return "Addresses";
+            case "/dashboard-b/regulations":
+                return "Regulations";
+            case "/dashboard-b/feedback":
+                return "Feedback";
+            default:
+                return "Admin Dashboard";
+        }
+    };
 
     return(
         <>
             <div className="flex items-center justify-between h-[70px] shadow-md shadow-darkGreen px-[25px]">
                 <div className='p-7'>
-                    <h1 className='text-white text-2xl font-semibold'>Admin Dashboard</h1>
+                    <h1 className='text-white text-2xl font-semibold'>{getPageTitle()}</h1>
                 </div>
                 <div className="flex items-center gap-[15px] relative">
                     <div className="border-r-[1px] pr-[25px]">

@@ -12,7 +12,7 @@ const About = () => {
                         Redefining <span className='text-gradient'>Waste Management</span>
                     </h2>
                     <p 
-                        className="text-white font-thin text-lg pl-20 max-w-2xl leading-8"
+                        className="text-white font-thin text-sm md:text-md lg:text-lg pl-20 max-w-2xl leading-8"
                     >
                         At EcoTrack Solutions, we are on a mission to build a sustainable future by revolutionizing waste management practices. We understand the critical importance of environmental preservation and the need for responsible waste management to combat the global challenges we face. With a focus on innovation, we strive to develop cutting-edge solutions that minimize waste, optimize resource utilization, and promote a circular economy. 
                         <br /><br />
@@ -20,7 +20,7 @@ const About = () => {
                     </p>
                 </div>
                 <img 
-                    className="absolute md:relative top-0 right-0 pl-44 ml-20 transform-gpu pb-40 scale-125 md:w-1/2" 
+                    className="flex-wrap lg:flex mx-auto lg:absolute relative top-0 right-0 pl-44 ml-20 transform-gpu pb-40 md:scale-125 md:w-1/2" 
                     src={Dash}
                     alt="About us" 
                 />
