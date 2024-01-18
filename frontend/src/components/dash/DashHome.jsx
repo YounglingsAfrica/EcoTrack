@@ -8,7 +8,7 @@ import 'tailwindcss/tailwind.css';
 const DashHome = () => {
   return (
     <div className='flex'>
-      <div className='basis-[5%] h-[100vh]'>
+      <div className='basis-[4%] h-[100vh]'>
         <SideBar />
       </div>
       <div className='basis-[96%]'>

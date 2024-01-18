@@ -7,7 +7,7 @@ import 'leaflet/dist/leaflet.css';
 const Disposal = () => {
   return (
     <div className='flex'>
-      <div className='basis-[5%] h-[100vh] z-40'>
+      <div className='basis-[4%] h-[100vh] z-40'>
         <SideBar />
       </div>
       <div className='basis-[96%]'>
