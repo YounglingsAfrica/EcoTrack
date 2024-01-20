@@ -41,7 +41,7 @@ const Contact = () => {
     }
 
     return (
-        <section id='contact' className='container mb-40'>
+        <section id='contact' className='mb-40 max-w-full'>
             <h1 className='text-center text-7xl font-thin max-w-full mb-6 text-gradient2 mt-20 pb-10'>
                 Contact Us
             </h1>

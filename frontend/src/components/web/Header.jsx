@@ -23,6 +23,7 @@ const Header = () => {
         window.scrollTo({
             top: location - 160,
             left: 0,
+            right: 0,
             behavior: 'smooth',
         });
 
@@ -67,7 +68,7 @@ const Header = () => {
     return (
         <header 
             ref={headerRef} 
-            className='w-full h-[80px] leading-[80px] flex items-center bg-black'
+            className='max-w-full h-[80px] leading-[80px] flex items-center bg-black'
         >
             <div className='container'>
                 <div className='flex items-center justify-between'>
