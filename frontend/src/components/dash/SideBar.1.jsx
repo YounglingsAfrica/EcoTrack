@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
   //Sidebar Items
 export const Menus = [
     { title: "Dashboard", route:"/dashboard-b" },
-    { title: "Collection Schedule", icon: <AiOutlineSchedule /> },
+    { title: "Collection Schedule", route: "/dashboard-b/c-schedule", icon: <AiOutlineSchedule /> },
     { title: "Request Pickup", icon: <AiFillSchedule/> },
     { title: "Collection Routes", icon: <LiaRouteSolid /> },
     { title: "Reports & Analytics", icon: <TbReportSearch />},
@@ -44,7 +44,7 @@ export const Menus = [
     },
     { title: "Regulations", route:"/dashboard-b/regulations", icon: <HiClipboardDocumentList /> },
     { title: "Feedback", route: "/dashboard-b/feedback", icon: <VscFeedback /> },
-    { title: "Logout", spacing: true, icon: <FiLogOut />, route: "/dashboard-b/logout" },
+    { title: "Logout", spacing: true, icon: <FiLogOut />, route: "/dashboard-b/logout"},
 ];
 
 const SideBar  = () => {
