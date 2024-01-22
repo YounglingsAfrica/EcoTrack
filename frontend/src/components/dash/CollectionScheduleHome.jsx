@@ -4,6 +4,7 @@ import Dashboard from '../../pages/Dashboard';
 import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
+import axios from 'axios';
 
 const CollectionScheduleHome = () => {
         const [selected, setSelected] = useState();
@@ -39,10 +40,9 @@ const CollectionScheduleHome = () => {
         }*/
 
         useEffect(() => {
-            fetch('/collectors')
-                .then((response) => response.json())
-                .then((data) => {
-                    setCollectors(data);
+            axios.get('/collectors')
+                .then((response) => {
+                    setCollectors(response.data);
                 })
                 .catch((error) => {
                     console.error('Error retrieving collectors:', error);
