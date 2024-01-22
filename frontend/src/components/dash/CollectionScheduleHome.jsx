@@ -43,10 +43,12 @@ const CollectionScheduleHome = () => {
             axios.get('/collectors')
                 .then((response) => {
                     setCollectors(response.data);
+                    console.log(collectors);
                 })
                 .catch((error) => {
                     console.error('Error retrieving collectors:', error);
                 });
+            // eslint-disable-next-line react-hooks/exhaustive-deps
         }, []);
 
     return (
@@ -99,7 +101,11 @@ const CollectionScheduleHome = () => {
                             className="w-[80%] block py-2 px-4 rounded-md ml-[88px] border border-black mb-4"
                         >
                             {collectors.map((collector) => (
-                                <li key={collector._id}>{collector.name}</li>
+                                <li 
+                                    key={collector._id}
+                                >
+                                    {collector.name}
+                                </li>
                             ))}
                         </select>
                     </div>
