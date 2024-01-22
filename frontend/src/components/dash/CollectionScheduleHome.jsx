@@ -29,15 +29,14 @@ const CollectionScheduleHome = () => {
             setSelectedTime(time);
         };
 
-        const handleSubmit = () => {
+        /*const handleSubmit = () => {
             const combined = {
                 date: selected,
                 time: selectedTime
             };
 
             console.log('Combined Date and Time:', combined);
-
-        }
+        }*/
 
         useEffect(() => {
             fetch('/collectors')
