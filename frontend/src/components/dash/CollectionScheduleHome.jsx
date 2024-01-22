@@ -42,8 +42,7 @@ const CollectionScheduleHome = () => {
         useEffect(() => {
             axios.get('/collectors')
                 .then((response) => {
-                    setCollectors(response);
-                    console.log(response);
+                    setCollectors(response.data);
                     console.log(collectors);
                 })
                 .catch((error) => {
@@ -102,11 +101,7 @@ const CollectionScheduleHome = () => {
                             className="w-[80%] block py-2 px-4 rounded-md ml-[88px] border border-black mb-4"
                         >
                             {collectors.map((collector) => (
-                                <li 
-                                    key={collector._id}
-                                >
-                                    {collector.name}
-                                </li>
+                                <option key={collector._id} value={collector._id}>{collector.name}</option>
                             ))}
                         </select>
                     </div>
