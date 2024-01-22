@@ -49,7 +49,7 @@ const Hero = () => {
                         </a>
                     </div>
                 </div>
-                <div className="w-full mx-auto mt-20 text-center md:w-10/12">
+                <div className="w-full mx-auto mt-20 text-center">
                     <div className="relative z-0 w-full mt-8">
                         <div className="relative overflow-hidden shadow-2xl">
                             <div className="flex items-center flex-none px-4 bg-darkGreen rounded-b-none h-11 rounded-xl">

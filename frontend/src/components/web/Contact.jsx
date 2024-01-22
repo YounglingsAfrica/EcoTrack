@@ -45,8 +45,8 @@ const Contact = () => {
             <h1 className='text-center text-7xl font-thin max-w-full mb-6 text-gradient2 mt-20 pb-10'>
                 Contact Us
             </h1>
-            <div className='flex justify-center flex-wrap'>
-                <div className='w-full md:w-1/2 flex-wrap'>
+            <div className='flex justify-center flex-wrap w-full'>
+                <div className='w-full lg:w-1/2 flex-wrap'>
                     <div className='flex justify-start items-center flex-col'>
                         <h2 
                             className='max-w-md leading-snug text-center text-5xl font-semibold mb-20 text-white mt-20 pb-6'
