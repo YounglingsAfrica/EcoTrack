@@ -98,11 +98,9 @@ const CollectionScheduleHome = () => {
                         <select 
                             className="w-[80%] block py-2 px-4 rounded-md ml-[88px] border border-black mb-4"
                         >
-                            <ul>
-                                {collectors.map((collector) => (
-                                    <li key={collector._id}>{collector.name}</li>
-                                ))}
-                            </ul>
+                            {collectors.map((collector) => (
+                                <li key={collector._id}>{collector.name}</li>
+                            ))}
                         </select>
                     </div>
                     <div className="bg-gray-400 rounded-xl">
