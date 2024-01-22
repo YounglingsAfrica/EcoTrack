@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
 export const Menus = [
     { title: "Dashboard", route:"/dashboard-b" },
     { title: "Collection Schedule", icon: <AiOutlineSchedule /> },
-    { title: "Request Pickup", icon: <AiFillSchedule/> },
+    { title: "Request Pickup", route:"/dashboard-b/request-pickup", icon: <AiFillSchedule/> },
     { title: "Collection Routes", icon: <LiaRouteSolid /> },
     { title: "Reports & Analytics", icon: <TbReportSearch />},
     { title: "Recycling Guide", route:"/dashboard-b/recycling", icon: <MdRecycling /> },

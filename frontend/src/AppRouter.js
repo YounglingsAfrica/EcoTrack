@@ -18,6 +18,7 @@ import FeedbackHome from "./components/dash/FeedbackHome";
 import RecycleHome from "./components/dash/RecycleHome";
 import RegulationsHome from "./components/dash/RegulationsHome";
 import Addresses from "./components/dash/Addresses";
+import RequestPickupHome from "./components/dash/RequestPickupHome";
 
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
 axios.defaults.withCredentials = true;
@@ -57,6 +58,7 @@ const AppRouter = () => {
                         </Routes>
                     </ProtectedRoute>
                 }/>
+                <Route path="/request-pickup" element={<RequestPickupHome />} />
             </Routes>
         </>
     );
