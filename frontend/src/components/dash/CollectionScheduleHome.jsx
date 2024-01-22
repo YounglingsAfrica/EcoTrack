@@ -42,7 +42,8 @@ const CollectionScheduleHome = () => {
         useEffect(() => {
             axios.get('/collectors')
                 .then((response) => {
-                    setCollectors(response.data);
+                    setCollectors(response);
+                    console.log(response);
                     console.log(collectors);
                 })
                 .catch((error) => {
