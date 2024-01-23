@@ -46,7 +46,6 @@ const AppRouter = () => {
                             <Route index element={<DashHome />} />
                             <Route path="logout" element={<Logout />} />
                             <Route path="disposal" element={<Disposal />} />
-                            <Route path="c-schedule" element={<CollectionScheduleHome />}/>
                             <Route path="user-profile/*" element={
                                 <Routes>
                                     <Route index element={< UserProfile/>}/>
@@ -59,6 +58,7 @@ const AppRouter = () => {
                         </Routes>
                     </ProtectedRoute>
                 }/>
+                <Route path="/c-schedule" element={<CollectionScheduleHome />}/>
             </Routes>
         </>
     );
