@@ -172,17 +172,10 @@ const CollectionScheduleHome = () => {
                                     value={area.name}
                                     checked={selectedArea === area.id}
                                     onChange={handleAreaSelection}
-                                    className='hidden'
                                 />
-                                <label
-                                    htmlFor={`area-${area.id}`}
-                                    className={`inline-block w-6 h-6 rounded-full ${
-                                        selectedArea === area.id ? 'bg-blue-500' : 'bg-gray-300'
-                                    } cursor-pointer`}
-                                >
-                                    <div className={`w-4 h-4 rounded-full ${
-                                        selectedArea === area.id ? 'bg-white' : ''
-                                    } m-1 transition duration-300 ease-in-out`}></div>
+                                <label htmlFor={`area-${area.id}`}>
+                                    <h2 className="text-lg text-white font-bold">{area.name}</h2>
+                                    <p className="text-gray-200">{area.description}</p>
                                 </label>
                                 </div>
                             ))}
@@ -200,17 +193,10 @@ const CollectionScheduleHome = () => {
                                     value={location.name}
                                     checked={selectedLocation === location.id}
                                     onChange={handleLocationSelection}
-                                    className='hidden'
                                 />
-                                <label
-                                htmlFor={`location-${location.id}`}
-                                className={`inline-block w-6 h-6 rounded-full ${
-                                    selectedLocation === location.id ? 'bg-blue-500' : 'bg-gray-300'
-                                } cursor-pointer`}
-                                >
-                                    <div className={`w-4 h-4 rounded-full ${
-                                        selectedLocation === location.id ? 'bg-white' : ''
-                                    } m-1 transition duration-300 ease-in-out`}></div>
+                                <label htmlFor={`location-${location.id}`}>
+                                    <h2 className="text-lg text-white font-bold">{location.name}</h2>
+                                    <p className="text-gray-200">{location.address}</p>
                                 </label>
                                 </div>
                             ))}
