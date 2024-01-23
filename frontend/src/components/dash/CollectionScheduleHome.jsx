@@ -120,12 +120,17 @@ const CollectionScheduleHome = () => {
                         </div>
                         <div className='w-1/2 ml-48'>
                             <h1 className="pt-10 text-2xl font-bold text-black pb-4">Select a time:</h1>
-                            <ul className="flex flex-col justify-center max-w-[8rem] space-y-4 text-black">
+                            <ul 
+                                className="flex flex-col justify-center max-w-[8rem] space-y-4 text-black"
+                                style={{ columnCount: 2 }}
+                            >
                                 {timeSlots.map((timeSlot, index) => (
                                     <li
                                         key={index}
                                         className={`cursor-pointer bg-white text-lg rounded-md h-8 px-2 text-center ${
-                                            selectedTime === timeSlot ? 'text-primaryGreen font-bold text-lg border-2 border-primaryGreen' : ''
+                                            selectedTime === timeSlot 
+                                            ? 'text-primaryGreen font-bold text-lg border-2 border-primaryGreen' 
+                                            : ''
                                         }`}
                                         onClick={() => handleTimeSelection(timeSlot)}
                                     >
