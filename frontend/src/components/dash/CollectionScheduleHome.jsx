@@ -39,12 +39,12 @@ const CollectionScheduleHome = () => {
         setSelectedCollector(e.target.value);
     }
 
-    const handleAreaSelection = (areaId) => {
-        setSelectedArea(areaId);
+    const handleAreaSelection = (e) => {
+        setSelectedArea(e.target.value);
     };
         
-    const handleLocationSelection = (locationId) => {
-        setSelectedLocation(locationId);
+    const handleLocationSelection = (e) => {
+        setSelectedLocation(e.target.value);
     };
 
     const handleSubmit = () => {
