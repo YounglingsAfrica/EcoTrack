@@ -10,6 +10,7 @@ const CollectionScheduleHome = () => {
     const [selected, setSelected] = useState();
     const [selectedTime, setSelectedTime] = useState(null);
     const [collectors, setCollectors] = useState([]);
+    const [selectedCollector, setSelectedCollector] = useState('');
     const [areas, setAreas] = useState([]);
     const [locations, setLocations] = useState([]);
     const [selectedArea, setSelectedArea] = useState('');
@@ -34,6 +35,10 @@ const CollectionScheduleHome = () => {
         setSelectedTime(time);
     };
 
+    const handleCollectorSelection = (e) => {
+        setSelectedCollector(e.target.value);
+    }
+
     const handleAreaSelection = (areaId) => {
         setSelectedArea(areaId);
     };
@@ -46,7 +51,7 @@ const CollectionScheduleHome = () => {
         const combinedSubmission = {
             date: selected,
             time: selectedTime,
-            collector: document.getElementById('collectorSelect').value,
+            collector: selectedCollector,
             area: selectedArea,
             location: selectedLocation
         };
@@ -139,11 +144,15 @@ const CollectionScheduleHome = () => {
                         >
                             Select a Collector:
                         </h2>
-                        <select 
+                        <select
                             className="w-[80%] block py-2 px-4 rounded-md ml-[88px] border border-black mb-4"
+                            value={selectedCollector}
+                            onChange={handleCollectorSelection}
                         >
                             {collectors.map((collector) => (
-                                <option key={collector._id} value={collector._id}>{collector.name}</option>
+                                <option key={collector._id} value={collector._id}>
+                                {collector.name}
+                                </option>
                             ))}
                         </select>
                     </div>
@@ -152,13 +161,19 @@ const CollectionScheduleHome = () => {
                             <h1 className='pb-2 text-xl font-bold'>Select Area/s for pickup:</h1>
                             <div className='w-full h-56 rounded-xl bg-gray-900 overflow-y-scroll'>
                             {areas.map((area) => (
-                                <div 
-                                    key={area.id} 
-                                    className={`area-item p-4 ${selectedArea === area.id ? 'selected' : ''}`}
-                                    onClick={() => handleAreaSelection(area.id)}
-                                >
+                                <div key={area.id} className="area-item p-4">
+                                <input
+                                    type="radio"
+                                    id={`area-${area.id}`}
+                                    name="area"
+                                    value={area.id}
+                                    checked={selectedArea === area.id}
+                                    onChange={handleAreaSelection}
+                                />
+                                <label htmlFor={`area-${area.id}`}>
                                     <h2 className="text-lg text-white font-bold">{area.name}</h2>
-                                    <p>{area.description}</p>
+                                    <p className="text-gray-200">{area.description}</p>
+                                </label>
                                 </div>
                             ))}
                             </div>
@@ -167,13 +182,19 @@ const CollectionScheduleHome = () => {
                             <h1 className='pb-2 text-xl font-bold'>Select disposal location:</h1>
                             <div className='w-full h-56 rounded-xl bg-gray-900 overflow-y-scroll'>
                             {locations.map((location) => (
-                                <div 
-                                    key={location.id} 
-                                    className={`location-item p-4 ${selectedLocation === location.id ? 'selected' : ''}`}
-                                    onClick={() => handleLocationSelection(location.id)}
-                                >
+                                <div key={location.id} className="location-item p-4">
+                                <input
+                                    type="radio"
+                                    id={`location-${location.id}`}
+                                    name="location"
+                                    value={location.id}
+                                    checked={selectedLocation === location.id}
+                                    onChange={handleLocationSelection}
+                                />
+                                <label htmlFor={`location-${location.id}`}>
                                     <h2 className="text-lg text-white font-bold">{location.name}</h2>
-                                    <p>{location.description}</p>
+                                    <p className="text-gray-200">{location.address}</p>
+                                </label>
                                 </div>
                             ))}
                             </div>  
