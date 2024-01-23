@@ -4,6 +4,7 @@ import Dashboard from '../../pages/Dashboard';
 import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
+import "../../App.css";
 import axios from 'axios';
 
 const CollectionScheduleHome = () => {
@@ -149,8 +150,11 @@ const CollectionScheduleHome = () => {
                             onChange={handleCollectorSelection}
                         >
                             {collectors.map((collector) => (
-                                <option key={collector._id} value={collector._id}>
-                                {collector.name}
+                                <option 
+                                    key={collector._id} 
+                                    value={collector.name}
+                                >
+                                    {collector.name}
                                 </option>
                             ))}
                         </select>
