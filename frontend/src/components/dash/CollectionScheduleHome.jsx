@@ -57,7 +57,6 @@ const CollectionScheduleHome = () => {
         };
 
         console.log('Combined Submission:', combinedSubmission);
-        // Perform any other necessary actions with the combined submission data
     };
 
     useEffect(() => {
@@ -166,7 +165,7 @@ const CollectionScheduleHome = () => {
                                     type="radio"
                                     id={`area-${area.id}`}
                                     name="area"
-                                    value={area.id}
+                                    value={area.name}
                                     checked={selectedArea === area.id}
                                     onChange={handleAreaSelection}
                                 />
@@ -187,7 +186,7 @@ const CollectionScheduleHome = () => {
                                     type="radio"
                                     id={`location-${location.id}`}
                                     name="location"
-                                    value={location.id}
+                                    value={location.name}
                                     checked={selectedLocation === location.id}
                                     onChange={handleLocationSelection}
                                 />
