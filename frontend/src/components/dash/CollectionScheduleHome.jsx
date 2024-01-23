@@ -105,7 +105,7 @@ const CollectionScheduleHome = () => {
             <Dashboard />
             <div className='py-[25px] px-[10px] pl-[20px] z-0 h-[90vh]'>
                 <div className="grid grid-cols-2 grid-rows-2 gap-4 h-screen">   
-                    <div className="flex col-span-1 bg-paleGreen rounded-xl m-2">
+                    <div className="flex col-span-1 bg-white rounded-xl m-2">
                         <div className='w-1/2 ml-10'>
                             <h1 className='pt-10 text-2xl font-bold pl-5'>Select a date:</h1>
                             <DayPicker
@@ -159,7 +159,7 @@ const CollectionScheduleHome = () => {
                             ))}
                         </select>
                     </div>
-                    <div className="flex justify-center items-center bg-gray-200 col-span-2 rounded-xl text-center p-10 m-2 max-h-[330px] gap-5">
+                    <div className="flex justify-center items-center bg-paleGreen col-span-2 rounded-xl text-center p-10 m-2 max-h-[330px] gap-5">
                         <div className='w-1/3'>
                             <h1 className='pb-2 text-xl font-bold'>Select Area/s for pickup:</h1>
                             <div className='w-full h-56 rounded-xl bg-gray-900 overflow-y-scroll'>
@@ -172,6 +172,7 @@ const CollectionScheduleHome = () => {
                                     value={area.name}
                                     checked={selectedArea === area.id}
                                     onChange={handleAreaSelection}
+                                    className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
                                 />
                                 <label htmlFor={`area-${area.id}`}>
                                     <h2 className="text-lg text-white font-bold">{area.name}</h2>
@@ -193,6 +194,7 @@ const CollectionScheduleHome = () => {
                                     value={location.name}
                                     checked={selectedLocation === location.id}
                                     onChange={handleLocationSelection}
+                                    className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
                                 />
                                 <label htmlFor={`location-${location.id}`}>
                                     <h2 className="text-lg text-white font-bold">{location.name}</h2>
