@@ -76,8 +76,6 @@ const CollectionScheduleHome = () => {
             toast.error("Error submitting schedule");
         }
 
-
-
         setIsLoading(false);
     };
 
@@ -151,7 +149,7 @@ const CollectionScheduleHome = () => {
                                         key={index}
                                         className={`cursor-pointer bg-white text-lg rounded-md h-[35px] px-2 text-center ${
                                             selectedTime === timeSlot 
-                                            ? 'text-white font-bold text-xl border-2 bg-primaryGreen border-primaryGreen' 
+                                            ? 'text-black font-bold text-xl border-2 bg-primaryGreen border-primaryGreen' 
                                             : ''
                                         }`}
                                         onClick={() => handleTimeSelection(timeSlot)}
@@ -203,8 +201,8 @@ const CollectionScheduleHome = () => {
                                     onChange={handleAreaSelection}
                                 />
                                 <label htmlFor={`area-${area.id}`}>
-                                    <h2 className="text-lg text-white font-bold">{area.name}</h2>
-                                    <p className="text-gray-200">{area.description}</p>
+                                    <h2 className="text-lg text-black font-bold">{area.name}</h2>
+                                    <p className="text-black">{area.description}</p>
                                 </label>
                                 </div>
                             ))}
@@ -224,8 +222,8 @@ const CollectionScheduleHome = () => {
                                     onChange={handleLocationSelection}
                                 />
                                 <label htmlFor={`location-${location.id}`}>
-                                    <h2 className="text-lg text-white font-bold">{location.name}</h2>
-                                    <p className="text-gray-200">{location.address}</p>
+                                    <h2 className="text-lg text-black font-bold">{location.name}</h2>
+                                    <p className="text-black">{location.address}</p>
                                 </label>
                                 </div>
                             ))}
