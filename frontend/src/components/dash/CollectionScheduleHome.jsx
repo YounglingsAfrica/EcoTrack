@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import SideBar from './SideBar.1';
 import Dashboard from '../../pages/Dashboard';
 import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
+import { ThreeDots } from 'react-loader-spinner';
 import 'react-day-picker/dist/style.css';
 import "../../App.css";
-import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const CollectionScheduleHome = () => {
     const [selected, setSelected] = useState();
@@ -16,6 +18,7 @@ const CollectionScheduleHome = () => {
     const [locations, setLocations] = useState([]);
     const [selectedArea, setSelectedArea] = useState('');
     const [selectedLocation, setSelectedLocation] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     let footer = <p>Please pick a day.</p>;
     if (selected) {
@@ -50,7 +53,11 @@ const CollectionScheduleHome = () => {
         setSelectedLocation(e.target.value);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        setIsLoading(true);
+
         const combinedSubmission = {
             date: selected,
             time: selectedTime,
@@ -58,8 +65,20 @@ const CollectionScheduleHome = () => {
             area: selectedArea,
             location: selectedLocation
         };
-
         console.log('Combined Submission:', combinedSubmission);
+
+        try {
+            await axios.post('/collection-schedule', combinedSubmission);
+            console.log("Schedule sent!")
+            toast.success("Schedule submitted! Please await confirmation.")
+        } catch (error) {
+            console.error('Error: ', error);
+            toast.error("Error submitting schedule");
+        }
+
+
+
+        setIsLoading(false);
     };
 
     useEffect(() => {
@@ -106,30 +125,33 @@ const CollectionScheduleHome = () => {
         <div className='basis-[96%]'>
             <Dashboard />
             <div className='py-[25px] px-[10px] pl-[20px] z-0 h-[90vh]'>
-                <div className="grid grid-cols-2 grid-rows-2 gap-4 h-screen">   
-                    <div className="flex col-span-1 bg-white rounded-xl m-2">
+                <div className="grid grid-cols-2 grid-rows-3 gap-4 h-screen">   
+                    <div className="flex row-span-3 bg-white max-h-[805px] rounded-xl m-2">
                         <div className='w-1/2 ml-10'>
-                            <h1 className='pt-10 text-2xl font-bold pl-5'>Select a date:</h1>
+                            <h1 
+                                className='pt-10 text-3xl font-semibold pl-5 pb-6 border-b border-black w-[80%]'
+                            >
+                                Select a date:
+                            </h1>
                             <DayPicker
                                 mode="single"
                                 selected={selected}
                                 onSelect={setSelected}
                                 footer={footer}
-                                className='flex justify-between items-center'
+                                className='flex justify-between items-center rdp'
                             /> 
                         </div>
-                        <div className='w-1/2 ml-48'>
-                            <h1 className="pt-10 text-2xl font-bold text-black pb-4">Select a time:</h1>
+                        <div className='w-1/2'>
+                            <h1 className="pt-10 text-3xl font-semibold text-black pl-5 pb-6 border-b border-black w-[80%]">Select a time:</h1>
                             <ul 
-                                className="flex flex-col justify-center max-w-[8rem] space-y-4 text-black"
-                                style={{ columnCount: 2 }}
+                                className="flex flex-col justify-center items-center max-w-[16rem] space-y-4 text-black pt-6"
                             >
                                 {timeSlots.map((timeSlot, index) => (
                                     <li
                                         key={index}
-                                        className={`cursor-pointer bg-white text-lg rounded-md h-8 px-2 text-center ${
+                                        className={`cursor-pointer bg-white text-lg rounded-md h-[35px] px-2 text-center ${
                                             selectedTime === timeSlot 
-                                            ? 'text-primaryGreen font-bold text-lg border-2 border-primaryGreen' 
+                                            ? 'text-white font-bold text-xl border-2 bg-primaryGreen border-primaryGreen' 
                                             : ''
                                         }`}
                                         onClick={() => handleTimeSelection(timeSlot)}
@@ -140,14 +162,14 @@ const CollectionScheduleHome = () => {
                             </ul>
                         </div>
                     </div>
-                    <div className="col-span-1 bg-darkGreen rounded-xl text-center m-2 pt-10 space-y-6">
+                    <div className="col-span-1 bg-paleGreen rounded-xl text-center m-2 pt-10 space-y-6 h-[300px]">
                         <h1 
-                            className="text-2xl font-bold text-white px-6"
+                            className="text-2xl font-bold text-black px-6"
                         >
                             Assign Collector
                         </h1>
                         <h2 
-                            className="text-lg text-gray-300 pb-4 px-6"
+                            className="text-lg text-black pb-4 px-6"
                         >
                             Select a Collector:
                         </h2>
@@ -166,10 +188,10 @@ const CollectionScheduleHome = () => {
                             ))}
                         </select>
                     </div>
-                    <div className="flex justify-center items-center bg-paleGreen col-span-2 rounded-xl text-center p-10 m-2 max-h-[330px] gap-5">
+                    <div className="col-span-1 row-span-2 flex justify-center items-center bg-darkGreen rounded-xl text-center p-10 m-2 max-h-[490px] gap-5">
                         <div className='w-1/3'>
-                            <h1 className='pb-2 text-xl font-bold'>Select Area/s for pickup:</h1>
-                            <div className='w-full h-56 rounded-xl bg-gray-900 overflow-y-scroll'>
+                            <h1 className='pb-6 text-xl text-white font-bold'>Select Area/s for pickup:</h1>
+                            <div className='w-full h-80 rounded-xl bg-white overflow-y-auto'>
                             {areas.map((area) => (
                                 <div key={area.id} className="area-item p-4">
                                 <input
@@ -179,7 +201,6 @@ const CollectionScheduleHome = () => {
                                     value={area.name}
                                     checked={selectedArea === area.id}
                                     onChange={handleAreaSelection}
-                                    className="relative -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primaryGreen checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
                                 />
                                 <label htmlFor={`area-${area.id}`}>
                                     <h2 className="text-lg text-white font-bold">{area.name}</h2>
@@ -190,8 +211,8 @@ const CollectionScheduleHome = () => {
                             </div>
                         </div>
                         <div className='w-1/3'>
-                            <h1 className='pb-2 text-xl font-bold'>Select disposal location:</h1>
-                            <div className='w-full h-56 rounded-xl bg-gray-900 overflow-y-scroll'>
+                            <h1 className='pb-6 text-xl font-bold text-white'>Select disposal location:</h1>
+                            <div className='w-full h-80 rounded-xl bg-white overflow-y-auto'>
                             {locations.map((location) => (
                                 <div key={location.id} className="location-item p-4">
                                 <input
@@ -201,7 +222,6 @@ const CollectionScheduleHome = () => {
                                     value={location.name}
                                     checked={selectedLocation === location.id}
                                     onChange={handleLocationSelection}
-                                    className="relative -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primaryGreen checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
                                 />
                                 <label htmlFor={`location-${location.id}`}>
                                     <h2 className="text-lg text-white font-bold">{location.name}</h2>
@@ -217,7 +237,20 @@ const CollectionScheduleHome = () => {
                                 type='submit'
                                 className="flex items-center justify-center px-6 w-32 h-12 text-white text-lg rounded-lg bg-gradient-to-r from-black to-primaryGreen shadow-right-bottom transition hover:scale-105 delay-150"
                             >
-                                Submit
+                                {isLoading ? (
+                                    <ThreeDots 
+                                        height="70"
+                                        width="70" 
+                                        radius="9"
+                                        color="#fff" 
+                                        ariaLabel="three-dots-loading"
+                                        wrapperStyle={{}}
+                                        wrapperClassName=""
+                                        visible={true}
+                                    /> 
+                                ) : (  
+                                    'Submit'
+                                )}
                             </button>
                         </div>
                     </div>
