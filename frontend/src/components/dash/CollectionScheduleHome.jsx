@@ -149,7 +149,7 @@ const CollectionScheduleHome = () => {
                                         key={index}
                                         className={`cursor-pointer text-lg rounded-md h-[35px] px-2 text-center ${
                                             selectedTime === timeSlot 
-                                            ? 'text-black font-bold text-xl border-2 bg-primaryGreen border-primaryGreen' 
+                                            ? 'text-white font-bold text-xl border-2 bg-primaryGreen border-primaryGreen' 
                                             : ''
                                         }`}
                                         onClick={() => handleTimeSelection(timeSlot)}
