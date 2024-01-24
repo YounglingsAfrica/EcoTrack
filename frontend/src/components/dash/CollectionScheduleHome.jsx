@@ -71,6 +71,12 @@ const CollectionScheduleHome = () => {
             await axios.post('/collection-schedule', combinedSubmission);
             console.log("Schedule sent!")
             toast.success("Schedule submitted! Please await confirmation.")
+
+            setSelected(null);
+            setSelectedTime('');
+            setSelectedCollector('');
+            setSelectedArea('');
+            setSelectedLocation('');
         } catch (error) {
             console.error('Error: ', error);
             toast.error("Error submitting schedule");
