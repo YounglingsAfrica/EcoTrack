@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from "react-hot-toast";
 import { UserContext } from '../../context/userContext';
@@ -8,20 +8,19 @@ import Eco from "../../assets/ecoeco.png";
 import X from "../../assets/x-mark.png";
 import Cookies from "js-cookie";
 import axios from "axios";
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsLoading, setData } from '../../redux/auth/authSlice';
 
 const Login = () => {
-    const [isLoading, setIsLoading] = useState(false);
+    const dispatch = useDispatch();
+    const { isLoading, data } = useSelector((state) => state.user);
     const { setUser } = useContext(UserContext);  // use the `setUser` function from the `UserContext`
     const navigate = useNavigate();
-    const [data, setData] = useState({
-        email: '',
-        password: '',
-    })
 
     const loginUser = async (e) => {
         e.preventDefault();
 
-        setIsLoading(true);
+        dispatch(setIsLoading(true));
 
         const { email, password } = data;
     
@@ -31,14 +30,13 @@ const Login = () => {
             if (response.data.error) {
                 toast.error(response.data.error);
             } else {
-                // Login was successful, now fetch the profile
                 Cookies.set('authToken', response.data.token);
                 const profileResponse = await axios.get("/profile", { withCredentials: true });
     
                 if (profileResponse.data) {
-                    // Set user data in the context
                     setUser(profileResponse.data);
                     toast.success(`Login Successful. Welcome Back ${profileResponse.data.name}`);
+                    dispatch(setData({ email: '', password: '' }))
                     navigate("/dashboard-b");
                 } else {
                     console.error('Failed to get profile');
@@ -48,7 +46,7 @@ const Login = () => {
         } catch (error) {
             console.log(error);
         }
-        setIsLoading(false);
+        dispatch(setIsLoading(false));
     };
 
     return (
@@ -72,7 +70,7 @@ const Login = () => {
                                     className="border border-gray-400 bg-red-50 h-10 py-1 px-2 w-80 rounded-xl focus:outline-primaryGreen" 
                                     value={data.email}
                                     required
-                                    onChange={(e) => setData({...data, email: e.target.value})}
+                                    onChange={(e) => dispatch(setData({...data, email: e.target.value}))}
                                 />
                             </div>
                             <div className="mt-5 flex justify-center">
@@ -82,7 +80,7 @@ const Login = () => {
                                     className="border border-gray-400 bg-red-50 h-10 py-1 px-2 w-80 rounded-xl focus:outline-primaryGreen" 
                                     value={data.password}
                                     required
-                                    onChange={(e) => setData({...data, password: e.target.value})}
+                                    onChange={(e) => dispatch(setData({...data, password: e.target.value}))}
                                 />
                             </div>
                             <div className="mt-5 flex justify-center">

@@ -17,6 +17,7 @@ const ConfirmEmail = () => {
             })
             .catch(err => {
                 setStatus("No Status");
+                console.log(err);
             })
     }, [id, token]);
 

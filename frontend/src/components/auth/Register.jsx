@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Logo from "../../assets/eco_logo.png";
@@ -6,34 +6,32 @@ import Eco from "../../assets/ecoeco.png";
 import X from "../../assets/x-mark.png";
 import { toast } from "react-hot-toast";
 import { ThreeDots } from "react-loader-spinner";
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsLoading, setData } from '../../redux/auth/authSlice';
 
 const SignUp = () => {
-    const [isLoading, setIsLoading] = useState(false);
-    // const navigate = useNavigate();
-    const [data, setData] = useState({
-        name: '',
-        email: '',
-        password: '',
-    });
+    const dispatch = useDispatch();
+    const { isLoading, data } = useSelector((state) => state.user);
 
     const registerUser = async (e) => {
         e.preventDefault();
 
-        setIsLoading(true);
+        dispatch(setIsLoading(true));
 
         const {name, email, password} = data
         try {
             const { data } = await axios.post("/signup", {
-                name, email, password
+                name, 
+                email, 
+                password
             })
             
             if (data.error) {
                 toast.error(data.error);
             } else {
-                setData({})
-                toast.success("Registration successful. Please verify your account, we've sent you an email. ")
-                // navigate("/login")
-                setIsLoading(false);
+                dispatch(setData({ name: '', email: '', password: '' }));
+                toast.success("Registration successful. Please verify your account before logging in, we've sent you an email.")
+                dispatch(setIsLoading(false));
             }
         } catch (error) {
             console.log(error);
@@ -74,7 +72,7 @@ const SignUp = () => {
                                     placeholder="Full Name" 
                                     className="border border-gray-400 bg-red-50 h-10 py-1 px-2 w-80 rounded-xl focus:outline-primaryGreen"
                                     value={data.name}
-                                    onChange={(e) => setData({...data, name: e.target.value})}
+                                    onChange={(e) => dispatch(setData({...data, name: e.target.value}))}
                                 />
                             </div>
                             <div className="mt-5 flex justify-center">
@@ -83,7 +81,7 @@ const SignUp = () => {
                                     placeholder="Email" 
                                     className="border border-gray-400 bg-red-50 h-10 py-1 px-2 w-80 rounded-xl focus:outline-primaryGreen" 
                                     value={data.email}
-                                    onChange={(e) => setData({...data, email: e.target.value})}
+                                    onChange={(e) => dispatch(setData({...data, email: e.target.value}))}
                                 />
                             </div>
                             <div className="mt-5 flex justify-center">
@@ -92,7 +90,7 @@ const SignUp = () => {
                                     placeholder="Password" 
                                     className="border border-gray-400 bg-red-50 h-10 py-1 px-2 w-80 rounded-xl focus:outline-primaryGreen" 
                                     value={data.password}
-                                    onChange={(e) => setData({...data, password: e.target.value})}
+                                    onChange={(e) => dispatch(setData({...data, password: e.target.value}))}
                                 />
                             </div>
                             <div className="mt-5 flex justify-center">
@@ -120,9 +118,9 @@ const SignUp = () => {
                                             wrapperClassName=""
                                             visible={true}
                                         /> 
-                                ) : (  
-                                    'Sign up'
-                                )}
+                                    ) : (  
+                                        'Sign up'
+                                    )}
                                 </button>
                             </div>
                             <div className="mt-6 flex justify-center">

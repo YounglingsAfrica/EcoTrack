@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import X from "../../assets/x-mark.png";
 import Logo from "../../assets/eco_logo.png";
@@ -7,16 +7,19 @@ import { useContext } from 'react';
 import { UserContext } from "../../context/userContext";
 import { toast } from "react-hot-toast";
 import { ThreeDots } from "react-loader-spinner";
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser, logoutUserSuccess, logoutUserFailure } from '../../redux/auth/authSlice';
 
 const Logout = () => {
-    const [isLoading, setIsLoading] = useState(false);
-    const {user, setUser} = useContext(UserContext);
+    const dispatch = useDispatch();
+    const { isLoading } = useSelector((state) => state.user);
+    const { user } = useContext(UserContext);
     const navigate = useNavigate();
     
     const handleLogout = async (e) => {
         e.preventDefault();
 
-        setIsLoading(true);
+        dispatch(logoutUser(true));
 
         try {
             const response = await fetch("/logout", {
@@ -25,13 +28,14 @@ const Logout = () => {
             });
     
             if (response.ok) {
-                setIsLoading(false);
+                dispatch(logoutUserSuccess());
                 toast.success(`${user?.name} has logged out.`)
-                setUser(null);
-                navigate("/")
+                navigate("/");
             } else {
-                console.error("Logout failed, please try again")
-                toast.error("Logout failed, please try again")
+                const error = await response.text();
+                dispatch(logoutUserFailure(error));
+                console.error('Logout failed, please try again');
+                toast.error('Logout failed, please try again');
             }
         } catch (error) {
             console.log(error)

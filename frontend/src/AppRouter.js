@@ -20,7 +20,8 @@ import RegulationsHome from "./components/dash/RegulationsHome";
 import Addresses from "./components/dash/Addresses";
 import CollectionScheduleHome from "./components/dash/CollectionScheduleHome";
 
-axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
+// axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
+axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
 
 const AppRouter = () => {
