@@ -8,7 +8,7 @@ import { UserContext } from "../../context/userContext";
 import { toast } from "react-hot-toast";
 import { ThreeDots } from "react-loader-spinner";
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutUser, logoutUserSuccess, logoutUserFailure } from '../../redux/auth/authSlice';
+import { logoutUser, logoutUserSuccess, logoutUserFailure, setIsLoading } from '../../redux/auth/authSlice';
 
 const Logout = () => {
     const dispatch = useDispatch();
@@ -36,7 +36,9 @@ const Logout = () => {
                 dispatch(logoutUserFailure(error));
                 console.error('Logout failed, please try again');
                 toast.error('Logout failed, please try again');
+                dispatch(setIsLoading(false))
             }
+            dispatch(setIsLoading(false));
         } catch (error) {
             console.log(error)
         }
