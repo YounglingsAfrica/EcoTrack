@@ -20,7 +20,7 @@ const Hero = () => {
                     <div className="mb-4 space-x-0 md:space-x-6 md:mb-8">
                         <a 
                             href="#subscriptions" 
-                            className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg sm:w-auto sm:mb-0 rounded-lg bg-gradient-to-r from-black to-primaryGreen text-white"
+                            className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg sm:w-auto sm:mb-0 rounded-lg bg-gradient-to-r from-gray-900 to-primaryGreen text-white"
                         >
                             Get Started
                             <svg 
@@ -34,7 +34,7 @@ const Hero = () => {
                         </a>
                         <a 
                             href="#about" 
-                            className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg sm:w-auto sm:mb-0 rounded-lg bg-gradient-to-r from-primaryGreen to-black text-white"
+                            className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg sm:w-auto sm:mb-0 rounded-lg bg-gradient-to-r from-primaryGreen to-gray-900 text-white"
                         >
                             Learn More
                             <svg 

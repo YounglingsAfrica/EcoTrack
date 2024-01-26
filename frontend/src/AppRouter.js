@@ -44,18 +44,18 @@ const AppRouter = () => {
                     <ProtectedRoute>
                         <Routes>
                             <Route index element={<DashHome />} />
-                            <Route path="logout" element={<Logout />} />
-                            <Route path="disposal" element={<Disposal />} />
                             <Route path="c-schedule" element={<CollectionScheduleHome />} />
+                            <Route path="recycling" element={<RecycleHome />} />
+                            <Route path="disposal" element={<Disposal />} />
                             <Route path="user-profile/*" element={
                                 <Routes>
                                     <Route index element={< UserProfile/>}/>
                                     <Route path="addresses" element={<Addresses />} />
                                 </Routes>
                             }/>
-                            <Route path="feedback" element={<FeedbackHome />} />
-                            <Route path="recycling" element={<RecycleHome />} />
                             <Route path="regulations" element={<RegulationsHome />} />
+                            <Route path="feedback" element={<FeedbackHome />} />
+                            <Route path="logout" element={<Logout />} />
                         </Routes>
                     </ProtectedRoute>
                 }/>
