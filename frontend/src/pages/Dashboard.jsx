@@ -25,6 +25,10 @@ const Dashboard = () => {
                 return "Regulations";
             case "/dashboard-b/feedback":
                 return "Feedback";
+            case "/dashboard-b/request-pickup":
+                return "Request Pickup";
+            case "/dashboard-b/reports-analytics":
+                return "Reports and Analytics";
             default:
                 return "Admin Dashboard";
         }
