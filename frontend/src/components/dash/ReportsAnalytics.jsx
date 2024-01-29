@@ -63,7 +63,7 @@ const ReportsAnalytics = () => {
             <Menu as="div" className="relative inline-block text-left">
                     <div>
                         <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-                        Overview
+                        Yearly Overview
                         <ChevronDownIcon className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
                         </Menu.Button>
                     </div>
@@ -88,7 +88,7 @@ const ReportsAnalytics = () => {
                                     'block px-4 py-2 text-sm'
                                 )}
                                 >
-                                Account settings
+                                2020
                                 </a>
                             )}
                             </Menu.Item>
@@ -101,7 +101,7 @@ const ReportsAnalytics = () => {
                                     'block px-4 py-2 text-sm'
                                 )}
                                 >
-                                Support
+                                2021
                                 </a>
                             )}
                             </Menu.Item>
@@ -114,7 +114,20 @@ const ReportsAnalytics = () => {
                                     'block px-4 py-2 text-sm'
                                 )}
                                 >
-                                License
+                                2022
+                                </a>
+                            )}
+                            </Menu.Item>
+                            <Menu.Item>
+                            {({ active }) => (
+                                <a
+                                href="/"
+                                className={classNames(
+                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                    'block px-4 py-2 text-sm'
+                                )}
+                                >
+                                2023
                                 </a>
                             )}
                             </Menu.Item>
@@ -128,7 +141,7 @@ const ReportsAnalytics = () => {
                                     'block w-full px-4 py-2 text-left text-sm'
                                     )}
                                 >
-                                    Sign out
+                                    2024
                                 </button>
                                 )}
                             </Menu.Item>
