@@ -1,6 +1,53 @@
 import { React, Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
+//import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+//import PieComponent from './PieComponent';
+
+/*const data = [
+    {
+      name: 'Page A',
+      uv: 4000,
+      pv: 2400,
+      amt: 2400,
+    },
+    {
+      name: 'Page B',
+      uv: 3000,
+      pv: 1398,
+      amt: 2210,
+    },
+    {
+      name: 'Page C',
+      uv: 2000,
+      pv: 9800,
+      amt: 2290,
+    },
+    {
+      name: 'Page D',
+      uv: 2780,
+      pv: 3908,
+      amt: 2000,
+    },
+    {
+      name: 'Page E',
+      uv: 1890,
+      pv: 4800,
+      amt: 2181,
+    },
+    {
+      name: 'Page F',
+      uv: 2390,
+      pv: 3800,
+      amt: 2500,
+    },
+    {
+      name: 'Page G',
+      uv: 3490,
+      pv: 4300,
+      amt: 2100,
+    },
+  ];*/
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -8,12 +55,12 @@ function classNames(...classes) {
 
 const ReportsAnalytics = () => {
     return(
-        <div className='h-full w-max pt-10 grid grid-cols-2 gap-4'>
-            <div className='border-dashed border-2 border-black bg-white cursor-pointer rounded-md h-[85vh] w-[40vh] ml-10 pt-2'>
-                <h1 className='text-black text-xl font-bold leading-[34px] flex justify-center items-center'>Reports</h1>
+        <div className=' mt-10 px-10 h-[80vh] grid grid-rows-6 grid-flow-col gap-4'>
+            <div className='row-span-6 bg-white rounded-md'>
+                <h1 className='text-lg  font-bold flex justify-center items-center mt-5'>Reports List</h1>
             </div>
-            <div className='flex flex-wrap justify-end pb-[15px] h-max w-max pr-6 pt-2 gap-4'>
-                <Menu as="div" className="relative inline-block text-left">
+            <div className='col-span-5 h-max w-max rounded-md'>
+            <Menu as="div" className="relative inline-block text-left">
                     <div>
                         <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
                         Overview
@@ -90,6 +137,17 @@ const ReportsAnalytics = () => {
                         </Menu.Items>
                     </Transition>
                     </Menu>
+            </div>
+            <div className='grid grid-rows-subgrid gap-4 row-span-5 col-span-5'>
+                <div className='row-start-1 bg-white rounded-md flex justify-center items-center'> G1</div>
+                <div className='row-start-1 bg-white rounded-md flex justify-center items-center'> G2</div>
+                <div className='row-start-1 bg-white rounded-md flex justify-center items-center'> G3</div>
+                <div className='row-start-2 bg-white rounded-md flex justify-center items-center'> G4</div>
+                <div className='row-start-2 bg-white rounded-md flex justify-center items-center'> G5</div>
+                <div className='row-start-2 bg-white rounded-md flex justify-center items-center'> G6</div>
+                <div className='row-start-3 bg-white rounded-md flex justify-center items-center'> G7</div>
+                <div className='row-start-3 bg-white rounded-md flex justify-center items-center'> G8</div>
+                <div className='row-start-3 bg-white rounded-md flex justify-center items-center'> G9</div>
             </div>
         </div>
     );
