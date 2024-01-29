@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BiSolidCube } from "react-icons/bi"
+import { useMediaQuery } from "react-responsive";
 
 const Header = () => {
     const headerRef = useRef(null);
     const menuRef = useRef(null);
     const [isOpen, setIsOpen] = useState(false);
+    const isMenuActive = useMediaQuery({ maxWidth: 1024 });
 
     const navLinks = [
         { href: '#home', label: 'Home' },
@@ -33,12 +35,14 @@ const Header = () => {
         window.addEventListener("scroll", () => {
             if (headerRef.current !== null) {
                 if (
-                    document.body.scrollTop > 80 ||
-                    document.documentElement.scrollTop > 80
+                    document.body.scrollTop > 0 ||
+                    document.documentElement.scrollTop > 0
                 ) {
                     headerRef.current.classList.add("sticky__header");
+
                 } else {
                     headerRef.current.classList.remove("sticky__header");
+
                 }
             }
         });
@@ -51,6 +55,9 @@ const Header = () => {
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
+        if (menuRef.current !== null) {
+            menuRef.current.classList.toggle("show__menu")
+        }
     };
 
     useEffect(() => {
@@ -74,13 +81,13 @@ const Header = () => {
                 <div className='flex items-center justify-between'>
                     {/* logo start */}
                     <div className="flex items-center gap-[10]">
-                        <div className="leading-[20px] pl-2">
+                        <div className="leading-[20px]">
                             <a href="/">
                                 <BiSolidCube 
                                     className='text-primaryGreen text-4xl font-thin cursor-pointer block sm:hidden' 
                                 />
-                                <h2 className="text-2xl text-white font-[600] hidden sm:block">
-                                    EcoTrack <span className='text-primaryGreen'>Solutions</span>
+                                <h2 className="text-2xl text-white font-[400] hidden sm:block">
+                                    EcoTrack <span className='text-primaryGreen font-extrabold'>Solutions</span>
                                 </h2>
                             </a>
                         </div>
@@ -89,19 +96,20 @@ const Header = () => {
                     {/* nav start */}
                     <div 
                         ref={menuRef}
-                        className={`${
+                        className={`menu ${
                             isOpen ? 'flex' : 'hidden'
-                        } lg:flex relative`}
+                        } lg:flex lg:mt-0`}
                     >
                         <ul             
-                            className='flex flex-col mt-4 font-medium lg:flex-row lg:space-x-16 lg:mt-0 right-0 top-0'
+                            className={`flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-20
+                            ${isMenuActive ? "bg-darkGreen" : ""}`}
                         >
                             {navLinks.map((item) => {
                                 return <li key={item.href}>
                                     <a
                                         onClick={handleNavItemClick}
                                         href={item.href}
-                                        className='text-white hover:text-primaryGreen font-[300]'
+                                        className='text-white hover:text-primaryGreen font-light menu'
                                     >
                                         {item.label}
                                     </a>
@@ -110,8 +118,8 @@ const Header = () => {
                         </ul>
                     </div>
                     {/* nav end */}
-                    {/* button start */}
-                    <div>
+                    {/* Signup button start */}
+                    <div className=''>
                         <Link to="/signup">
                             <button
                                 className='flex items-center justify-center px-6 w-auto h-10 text-white rounded-lg bg-gradient-to-r from-gray-900 to-primaryGreen text-sm md:text-md'
@@ -144,6 +152,7 @@ const Header = () => {
                             </path>
                         </svg>
                         <svg 
+                            id='mobile-menu-2'
                             className={`w-6 h-6 ${isOpen ? '' : 'hidden'}`}
                             fill="currentColor" 
                             viewBox="0 0 20 20" 
