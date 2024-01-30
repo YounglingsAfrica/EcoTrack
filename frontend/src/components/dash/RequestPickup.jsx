@@ -35,7 +35,7 @@ const RequestPickup = () => {
                 <h1 className='text-white text-xl font-bold leading-[34px]'>Request Waste Pickup</h1>
             </div>
             <div className='items-center w-full'>
-                <div className='bg-white rounded-2xl w-[125vh] grid grid-flow-col auto-cols-max'>
+                <div className='relative bg-white rounded-2xl w-[full] grid grid-flow-col auto-cols-max pl-20'>
                     <div className="ml-3">
                         <h1 className='text-sm font-bold p-1 mt-5'>Pickup Address:</h1>
                             <div className='text-left w-[50vh] p-2 flex-wrap mt-5'>
@@ -97,9 +97,10 @@ const RequestPickup = () => {
                                 </form>
                             </div>
                     </div>
-                    <div className="ml-3">
-                        <h1 className='text-sm font-bold p-1 ml-7 mt-5'>Select a Date:</h1>
+                    <div className="ms-20 flex flex-wrap justify-center">
+                        
                             <div className='text-left w-max p-2'>
+                                <h1 className='text-sm font-bold p-1 ml-7 mt-5'>Select a Date:</h1>
                                 <form>
                                     <DayPicker
                                         mode="single"
@@ -111,7 +112,7 @@ const RequestPickup = () => {
                                 </form>
                             </div>
                     </div>
-                    <div className="ml-3 pl-20">
+                    <div className="ms-20 pl-20">
                         <h1 className='text-sm font-bold p-1 mt-5'>Select a Time Slot:</h1>
                             <div className='mt-5 mb-10'>
                                 <form>
@@ -129,6 +130,11 @@ const RequestPickup = () => {
                                     </ul>
                                 </form>
                             </div>
+                    </div>
+                    <div>
+                        <button class="absolute bottom-4 right-4 px-4 py-2 mb-5 mr-5 rounded-md border border-primaryGreen text-sm font-semibold tracking-wide text-black bg-transparent overflow-hidden transition-all duration-200 ease-in hover:bg-primaryGreen hover:shadow-lg hover:text-white">
+                            Pick Up!
+                        </button>
                     </div>
                 </div>
             </div>
