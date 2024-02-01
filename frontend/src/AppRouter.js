@@ -19,8 +19,10 @@ import RecycleHome from "./components/dash/RecycleHome";
 import RegulationsHome from "./components/dash/RegulationsHome";
 import Addresses from "./components/dash/Addresses";
 import CollectionScheduleHome from "./components/dash/CollectionScheduleHome";
+import CollectionRoutes from "./components/dash/CollectionRoutes";
 
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
+// axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
 
 const AppRouter = () => {
@@ -47,6 +49,7 @@ const AppRouter = () => {
                             <Route path="c-schedule" element={<CollectionScheduleHome />} />
                             <Route path="recycling" element={<RecycleHome />} />
                             <Route path="disposal" element={<Disposal />} />
+                            <Route path="c-routes" element={<CollectionRoutes />} />
                             <Route path="user-profile/*" element={
                                 <Routes>
                                     <Route index element={< UserProfile/>}/>

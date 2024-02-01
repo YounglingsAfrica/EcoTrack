@@ -27,6 +27,8 @@ const Dashboard = () => {
                 return "Feedback";
             case "/dashboard-b/c-schedule":
                 return "Collection Schedule";
+            case "/dashboard-b/c-routes":
+                return "Collection Routes";
             default:
                 return "Admin Dashboard";
         }

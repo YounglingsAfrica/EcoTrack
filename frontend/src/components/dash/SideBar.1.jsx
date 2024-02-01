@@ -18,7 +18,7 @@ export const Menus = [
     { title: "Dashboard", route:"/dashboard-b" },
     { title: "Collection Schedule", route: "/dashboard-b/c-schedule", icon: <AiOutlineSchedule /> },
     { title: "Request Pickup", icon: <AiFillSchedule/> },
-    { title: "Collection Routes", icon: <LiaRouteSolid /> },
+    { title: "Collection Routes", route: "/dashboard-b/c-routes", icon: <LiaRouteSolid /> },
     { title: "Reports & Analytics", icon: <TbReportSearch />},
     { title: "Recycling Guide", route:"/dashboard-b/recycling", icon: <MdRecycling /> },
     { 
