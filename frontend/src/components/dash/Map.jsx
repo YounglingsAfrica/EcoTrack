@@ -30,7 +30,6 @@ const Map = () => {
       position: [-34.00122761918644, 18.483112917711814],
       popupContent: "<strong><h1>City Of Cape Town Recycling Drop-off Facility</h1></strong><br>40 Rosmead Ave, Wynberg, Cape Town, 7800<br>Recycling center<br>Closes 5pm"
     },
-    // Add more markers here
   ];
 
   return (
