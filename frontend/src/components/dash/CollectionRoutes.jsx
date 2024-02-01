@@ -9,7 +9,8 @@ const CollectionRoutes = () => {
     const [selectedRoute, setSelectedRoute] = useState(null);
 
     useEffect(() => {
-        axios.get('/collection-routes')
+        axios
+            .get('/collection-routes')
             .then((response) => {
                 setRoutes(response.data);
             })
