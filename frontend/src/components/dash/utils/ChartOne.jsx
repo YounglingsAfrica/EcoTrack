@@ -149,21 +149,21 @@ const options = {
         <div className="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap mt-4 text-white">
             <div className="flex flex-row w-full gap-3">
             <div className="flex min-w-47.5">
-                <span className="mt-1 mr-2 flex h-4 w-4 items-center justify-center rounded-full border-2 border-black/20">
-                    <span className="block h-2.5 w-full max-w-2.5 rounded-full bg-primaryGreen"></span>
+                <span className="mt-1 mr-2 flex h-5 w-5 items-center justify-center rounded-full border-2 p-1 border-primaryGreen">
+                    <span className="block h-2 w-4 rounded-full bg-primaryGreen"></span>
                 </span>
                 <div className="w-full">
                 <p className="font-semibold">Total Revenue</p>
-                <p className="text-sm font-medium">12.04.2022 - 12.05.2022</p>
+                <p className="text-sm font-medium">12.04.2024 - 12.05.2024</p>
                 </div>
             </div>
             <div className="flex min-w-47.5">
-                <span className="mt-1 mr-2 flex h-4 w-4 items-center justify-center rounded-full border-2 border-black/20">
-                <span className="block h-2.5 w-full max-w-2.5 rounded-full bg-recycleGreen"></span>
+                <span className="mt-1 mr-2 flex h-5 w-5 items-center justify-center rounded-full border-2 p-1 border-recycleGreen">
+                    <span className="block h-2 w-4 rounded-full bg-recycleGreen"></span>
                 </span>
                 <div className="w-full">
                 <p className="font-semibold text-secondary">Total Sales</p>
-                <p className="text-sm font-medium">12.04.2022 - 12.05.2022</p>
+                <p className="text-sm font-medium">12.04.2024 - 12.05.2024</p>
                 </div>
             </div>
             </div>

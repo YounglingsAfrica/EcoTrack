@@ -1,5 +1,5 @@
 import React from 'react';
-import Dash from "../../assets/dash2.png";
+import Dash from "../../assets/dashnew.png";
 
 const Hero = () => {
     return (

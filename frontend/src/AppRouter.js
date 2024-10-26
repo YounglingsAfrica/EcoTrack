@@ -21,8 +21,8 @@ import Addresses from "./components/dash/Addresses";
 import CollectionScheduleHome from "./components/dash/CollectionScheduleHome";
 import CollectionRoutes from "./components/dash/CollectionRoutes";
 
-axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
-// axios.defaults.baseURL = "http://localhost:8000";
+// axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
+axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
 
 const AppRouter = () => {

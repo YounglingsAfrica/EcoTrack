@@ -2,17 +2,18 @@ import React, { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
 
 const options = {
-    colors: ['#3C50E0', '#80CAEE'],
+    colors: ['#2ECC40', '#8BBC3A'],
     chart: {
-        fontFamily: 'Satoshi, sans-serif',
+        fontFamily: 'Outfit, sans-serif',
         type: 'bar',
         height: 335,
         stacked: true,
+        color: "#143601",
         toolbar: {
-        show: false,
+            show: true,
         },
         zoom: {
-        enabled: false,
+            enabled: false,
         },
     },
 
@@ -46,10 +47,11 @@ const options = {
         categories: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
     },
     legend: {
+        show: false,
         position: 'top',
         horizontalAlign: 'left',
-        fontFamily: 'Satoshi',
-        fontWeight: 500,
+        fontFamily: 'Outfit',
+        fontWeight: 600,
         fontSize: '14px',
 
         markers: {
@@ -59,17 +61,20 @@ const options = {
     fill: {
         opacity: 1,
     },
+    grid: {
+        borderColor: "#143601"
+    }
     };
 
     const ChartTwo = () => {
     const [state, setState] = useState({
         series: [
         {
-            name: 'Sales',
+            name: 'Disposals',
             data: [44, 55, 41, 67, 22, 43, 65],
         },
         {
-            name: 'Revenue',
+            name: 'Recycled Items',
             data: [13, 23, 20, 8, 13, 27, 15],
         },
         ],
@@ -86,22 +91,22 @@ const options = {
     }, []);;  
 
     return (
-        <div className="col-span-12 rounded-sm border border-stroke bg-white p-7.5 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4">
+        <div className="col-span-12 rounded-md border-2 border-white/20 bg-darkGreen/50 p-[36px] shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4">
         <div className="mb-4 justify-between gap-4 sm:flex">
             <div>
-            <h4 className="text-xl font-semibold text-black dark:text-white">
+            <h4 className="text-xl mr-2 font-semibold text-slate-50">
                 Profit this week
             </h4>
             </div>
             <div>
             <div className="relative z-20 inline-block">
                 <select
-                name="#"
-                id="#"
-                className="relative z-20 inline-flex appearance-none bg-transparent py-1 pl-3 pr-8 text-sm font-medium outline-none"
+                    name="#"
+                    id="#"
+                    className="relative z-20 inline-flex appearance-none bg-transparent py-1 pl-3 pr-8 text-sm font-medium outline-none text-primaryGreen"
                 >
-                <option value="" className='dark:bg-boxdark'>This Week</option>
-                <option value="" className='dark:bg-boxdark'>Last Week</option>
+                    <option value="" className='bg-black text-white'>This Week</option>
+                    <option value="" className='bg-black text-white'>Last Week</option>
                 </select>
                 <span className="absolute top-1/2 right-3 z-10 -translate-y-1/2">
                 <svg
@@ -132,6 +137,7 @@ const options = {
             <ReactApexChart
                 options={options}
                 series={state.series}
+                className=""
                 type="bar"
                 height={350}
             />

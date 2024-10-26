@@ -1,16 +1,24 @@
-import React from 'react';
-import CardDataStats from '../../components/dash/utils/CardDataStats';
-import ChartOne from '../../components/dash/utils/ChartOne';
-// import ChartTwo from '../../components/dash/utils/ChartTwo';
-import Map from '../../components/dash/Map';
-import TableOne from '../../components/dash/utils/TableOne';
+import React from "react";
+import CardDataStats from "../../components/dash/utils/CardDataStats";
+import ChartOne from "../../components/dash/utils/ChartOne";
+import ChartTwo from "../../components/dash/utils/ChartTwo";
+// import Map from "../../components/dash/Map";
+// import Map2 from "../../components/dash/Map2";
+import TableOne from "../../components/dash/utils/TableOne";
 
 const ECommerce = () => {
   return (
     <>
-      <h1 className='text-white ml-12 text-md font-semibold tracking-wide'>Reports & Analytics</h1>
+      <h1 className="text-white ml-12 text-md font-semibold tracking-wide">
+        Reports & Analytics
+      </h1>
       <div className="m-12 mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
-        <CardDataStats title="Total views" total="$3.456K" rate="0.43%" levelUp>
+        <CardDataStats
+          title="Collection Routes"
+          total="3,456"
+          rate="0.43%"
+          levelUp
+        >
           <svg
             className="fill-primaryGreen"
             width="30"
@@ -29,7 +37,7 @@ const ECommerce = () => {
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Total Profit" total="$45,2K" rate="4.35%" levelUp>
+        <CardDataStats title="Containers" total="45" rate="4.35%" levelUp>
           <svg
             className="fill-primaryGreen"
             width="30"
@@ -52,7 +60,7 @@ const ECommerce = () => {
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Total Product" total="2.450" rate="2.59%" levelUp>
+        <CardDataStats title="Distance (km)" total="2.450" rate="2.59%" levelUp>
           <svg
             className="fill-primaryGreen"
             width="30"
@@ -71,7 +79,12 @@ const ECommerce = () => {
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Total Users" total="3.456" rate="0.95%" levelDown>
+        <CardDataStats
+          title="Duration (hr)"
+          total="3,456"
+          rate="0.95%"
+          levelDown
+        >
           <svg
             className="fill-primaryGreen"
             width="30"
@@ -97,11 +110,15 @@ const ECommerce = () => {
       </div>
 
       <div className="m-12 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
-        <ChartOne />
-        <Map />
+        <div className="col-span-8">
+          <ChartOne />
+        </div>
+        <div className="col-span-4">
+          <ChartTwo />
+        </div>
         <div className="mt-6 col-span-12">
           <TableOne />
-        </div>  
+        </div>
       </div>
     </>
   );
